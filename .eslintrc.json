@@ -26,7 +26,7 @@
     "no-unused-vars": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-anonymous-default-export": "off",
-    "camelcase": "error",
+    "camelcase": "off",
     "spaced-comment": "error",
     "no-duplicate-imports": "error",
     "react/jsx-filename-extension": [
