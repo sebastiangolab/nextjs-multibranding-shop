@@ -2,19 +2,17 @@ import { AxiosWordpress } from "@/lib/axios";
 
 type GenericPageData = {
   id: number;
-  type: string;
-  slug: string;
   acf: {
     sections: number[];
   };
 };
 
-export const getGenericPageDataById = async (
-  slug: string,
+export const getGenericPageDataByUrl = async (
+  url: string
 ): Promise<GenericPageData | null> => {
   try {
     const { data } = await AxiosWordpress<GenericPageData[]>(
-      `/generic-page?slug=${slug}`
+      `/generic-page-by-url?url=${url}`
     );
 
     if (!Array.isArray(data) || data.length === 0) {
