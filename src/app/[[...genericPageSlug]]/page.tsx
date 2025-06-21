@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { notFound } from "next/navigation";
 import { getGenericPageDataByUrl } from "@/actions/getGenericPageDataByUrl";
 import { getGenericSectionsData } from "@/actions/getGenericSectionsData";
+import Sections from "@/components/Sections";
 
 type GenericPageProps = {
   params: Promise<{ genericPageSlug?: string[] }>;
@@ -24,7 +25,7 @@ const GenericPage = async ({
 
   console.log("sectionsData", sectionsData);
 
-  return <h1>Generic page</h1>;
+  return <Sections sectionsData={sectionsData} />;
 };
 
 export default GenericPage;
