@@ -23,7 +23,9 @@ const GenericPage = async ({
 
   const sectionsData = await getGenericSectionsData(pageData.acf.sections);
 
-  console.log("sectionsData", sectionsData);
+  if (!sectionsData) {
+    return <></>;
+  }
 
   return <Sections sectionsData={sectionsData} />;
 };
