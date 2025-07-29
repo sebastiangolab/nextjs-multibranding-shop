@@ -15,3 +15,11 @@ export const axiosWpCustomApi = axios.create({
     _embed: true,
   },
 });
+
+export const axiosWCApi = axios.create({
+  baseURL: `${process.env.WORDPRESS_API_URL}/wc/v3`,
+  params: {
+    consumer_key: process.env.WOOCOMMERCE_CONSUMER_KEY,
+    consumer_secret: process.env.WOOCOMMERCE_SECRET_KEY,
+  },
+});
