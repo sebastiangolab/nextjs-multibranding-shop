@@ -10,7 +10,6 @@ export const getMainMenuData = async (
     return data ?? [];
   } catch (error) {
     console.error("❌ Error fetching main menu data: ", error);
-
     return null;
   }
 };

@@ -15,14 +15,9 @@ export const getGenericPageDataByUrl = async (
       `/generic-page-by-url?url=${url}`
     );
 
-    if (!data) {
-      return null;
-    }
-
-    return data;
+    return data ?? null;
   } catch (error) {
     console.error("❌ Error fetching generic page: ", error);
-
     return null;
   }
 };

@@ -16,6 +16,10 @@ export const getGenericSectionsData = async (
       `/section?include=${formattedSectionsIds}`
     );
 
+    if (!Array.isArray(data)) {
+      return null;
+    }
+
     const normalizedSectionsData: SectionData[] = data.map((sectionData) => {
       const sectionType = sectionData.template
         .replace("templates/template-", "")
@@ -30,7 +34,6 @@ export const getGenericSectionsData = async (
     return normalizedSectionsData;
   } catch (error) {
     console.error("❌ Error fetching section data: ", error);
-
     return null;
   }
 };
