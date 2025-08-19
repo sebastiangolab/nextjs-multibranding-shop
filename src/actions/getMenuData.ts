@@ -1,7 +1,7 @@
 import { axiosWpCustomApi } from "@/lib/axios";
 import { MenuData, MenuType } from "@/types/menu";
 
-export const getMainMenuData = async (
+export const getMenuData = async (
   menuType: MenuType
 ): Promise<MenuData[] | null> => {
   try {
