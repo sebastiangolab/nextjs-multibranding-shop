@@ -1,11 +1,7 @@
 import axios from "axios";
 
-export const axiosWpApi = axios.create({
+export const axiosWpAcfApi = axios.create({
   baseURL: `${process.env.WORDPRESS_API_URL}/wp/v2`,
-  params: {
-    acf_format: "standard",
-    _embed: true,
-  },
 });
 
 export const axiosWpCustomApi = axios.create({

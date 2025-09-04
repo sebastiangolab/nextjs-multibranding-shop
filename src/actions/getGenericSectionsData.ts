@@ -1,4 +1,4 @@
-import { axiosWpApi } from "@/lib/axios";
+import { axiosWpAcfApi } from "@/lib/axios";
 import { SectionData, SectionType } from "@/types/sections";
 
 type ResponseSectionData = {
@@ -12,7 +12,7 @@ export const getGenericSectionsData = async (
   try {
     const formattedSectionsIds = genericPageSectionsIds.join(",");
 
-    const { data } = await axiosWpApi<ResponseSectionData[]>(
+    const { data } = await axiosWpAcfApi<ResponseSectionData[]>(
       `/section?include=${formattedSectionsIds}`
     );
 
