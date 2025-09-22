@@ -8,12 +8,22 @@ type GenericPageProps = {
   params: Promise<{ genericPageSlug?: string[] }>;
 };
 
+const ignoredPrefixes = ["/_next", "/.well-known"];
+const ignoredExtensions = [".json", ".js", ".css"];
+
 const GenericPage = async ({
   params,
 }: GenericPageProps): Promise<ReactElement<GenericPageProps>> => {
   const { genericPageSlug } = await params;
 
   const genericPageSlugPath = `/${genericPageSlug?.join("/") || ""}`;
+
+  if (
+    ignoredPrefixes.some((prefix) => genericPageSlugPath.startsWith(prefix)) ||
+    ignoredExtensions.some((ext) => genericPageSlugPath.endsWith(ext))
+  ) {
+    return <></>;
+  }
 
   const pageData = await getGenericPageDataByUrl(genericPageSlugPath);
 
