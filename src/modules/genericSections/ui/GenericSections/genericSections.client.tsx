@@ -8,11 +8,11 @@ import {
 import ImageWithTextSection from "../sections/ImageWithTextSection";
 import TextSection from "../sections/TextSection";
 
-type SectionsProps = { sectionsData: SectionData[] };
+type GenericSectionsProps = { sectionsData: SectionData[] };
 
-const SectionsElement = ({
+const GenericSections = ({
   sectionsData,
-}: SectionsProps): ReactElement<SectionsProps> => {
+}: GenericSectionsProps): ReactElement<GenericSectionsProps> => {
   const sectionsElements = sectionsData.map((sectionData, index) => {
     if (sectionData.type === GenericSectionType.IMAGE_WITH_TEXT_SECTION) {
       return (
@@ -36,4 +36,4 @@ const SectionsElement = ({
   return <>{sectionsElements}</>;
 };
 
-export default SectionsElement;
+export default GenericSections;

@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@shared/*": ["./src/shared/*"],
-      "@header": ["./src/modules/header"]
+      "@header": ["./src/modules/header"],
+      "@genericSections": ["./src/modules/genericSections"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
