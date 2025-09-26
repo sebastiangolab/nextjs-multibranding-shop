@@ -1,5 +1,5 @@
 // ===============================
-// Generic Page Module Exports
+// Generic Sections Module Exports
 // ===============================
 
 // Components
