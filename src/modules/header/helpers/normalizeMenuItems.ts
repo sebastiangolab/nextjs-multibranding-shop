@@ -1,4 +1,4 @@
-import { MenuData } from "@header/types";
+import { MenuData } from "../types";
 
 export const normalizeMenuItems = (items: MenuData[]): MenuData[] => {
   const normalizeItems = items.reduce<MenuData[]>((newItems, item) => {

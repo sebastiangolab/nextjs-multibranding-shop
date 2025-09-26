@@ -1,6 +1,6 @@
 import { axiosWpAcfApi, axiosWpCustomApi } from "@/lib/axios";
-import { normalizeMenuItems } from "@header/helpers/normalizeMenuItems";
-import { HeaderData, HeaderLogo, MenuData } from "@header/types";
+import { normalizeMenuItems } from "../helpers/normalizeMenuItems";
+import { HeaderData, HeaderLogo, MenuData } from "../types";
 
 type HeaderResponseData = {
   acf: {

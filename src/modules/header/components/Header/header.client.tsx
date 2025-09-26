@@ -4,8 +4,8 @@ import { ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
-import Menu from "@header/components/Menu";
-import { HeaderData } from "@header/types";
+import { HeaderData } from "../../types";
+import Menu from "../Menu";
 
 type HeaderClientProps = {
   data: HeaderData;
