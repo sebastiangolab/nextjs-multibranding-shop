@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
-import ImageWithTextSection from "@/sections/ImageWithTextSection";
-import TextSection from "@/sections/TextSection";
 import {
   GenericSectionType,
   ImageWithTextSectionProps,
   SectionData,
   TextSectionProps,
-} from "@/types/sections";
+} from "@shared/types/sections";
+import ImageWithTextSection from "@shared/ui/sections/ImageWithTextSection";
+import TextSection from "@shared/ui/sections/TextSection";
 
 type SectionsProps = { sectionsData: SectionData[] };
 

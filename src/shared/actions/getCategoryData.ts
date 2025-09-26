@@ -1,5 +1,5 @@
-import { axiosWCApi } from "@/lib/axios";
-import { CategoryData } from "@/types/products";
+import { axiosWCApi } from "@shared/lib/axios";
+import { CategoryData } from "@shared/types/products";
 
 export const getCategoryData = async (
   categorySlug: string

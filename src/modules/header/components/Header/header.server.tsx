@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { getHeaderData } from "@/modules/header/actions/getHeaderData";
+import { getHeaderData } from "../../actions/getHeaderData";
 import HeaderClient from "./header.client";
 
 const HeaderServer = async (): Promise<ReactElement | null> => {

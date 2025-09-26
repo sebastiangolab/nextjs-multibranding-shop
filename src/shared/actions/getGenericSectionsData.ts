@@ -1,5 +1,5 @@
-import { axiosWpAcfApi } from "@/lib/axios";
-import { SectionData, SectionType } from "@/types/sections";
+import { axiosWpAcfApi } from "@shared/lib/axios";
+import { SectionData, SectionType } from "@shared/types/sections";
 
 type ResponseSectionData = {
   template: string;

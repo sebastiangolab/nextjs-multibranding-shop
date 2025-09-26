@@ -1,4 +1,4 @@
-import { axiosWpCustomApi } from "@/lib/axios";
+import { axiosWpCustomApi } from "@shared/lib/axios";
 
 type GenericPageData = {
   id: number;

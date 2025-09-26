@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { notFound } from "next/navigation";
-import { getGenericPageDataByUrl } from "@/actions/getGenericPageDataByUrl";
-import { getGenericSectionsData } from "@/actions/getGenericSectionsData";
-import Sections from "@/components/Sections";
+import { getGenericPageDataByUrl } from "@shared/actions/getGenericPageDataByUrl";
+import { getGenericSectionsData } from "@shared/actions/getGenericSectionsData";
+import Sections from "@shared/ui/components/Sections";
 
 type GenericPageProps = {
   params: Promise<{ genericPageSlug?: string[] }>;

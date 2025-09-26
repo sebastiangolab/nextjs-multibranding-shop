@@ -1,5 +1,5 @@
-import { axiosWCApi } from "@/lib/axios";
-import { ProductData } from "@/types/products";
+import { axiosWCApi } from "@shared/lib/axios";
+import { ProductData } from "@shared/types/products";
 
 type ProductsRequestParams = {
   categoryId?: number;

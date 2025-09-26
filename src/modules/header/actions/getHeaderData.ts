@@ -1,4 +1,4 @@
-import { axiosWpAcfApi, axiosWpCustomApi } from "@/lib/axios";
+import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
 import { normalizeMenuItems } from "../helpers/normalizeMenuItems";
 import { HeaderData, HeaderLogo, MenuData } from "../types";
 

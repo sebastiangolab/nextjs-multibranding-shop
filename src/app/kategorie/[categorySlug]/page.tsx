@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { notFound } from "next/navigation";
-import { getCategoryData } from "@/actions/getCategoryData";
-import { getProductsData } from "@/actions/getProductsData";
+import { getCategoryData } from "@shared/actions/getCategoryData";
+import { getProductsData } from "@shared/actions/getProductsData";
 
 type CategoryPageProps = {
   params: Promise<{ categorySlug?: string }>;
