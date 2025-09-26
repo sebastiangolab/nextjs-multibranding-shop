@@ -4,13 +4,13 @@ import {
   ImageWithTextSectionProps,
   SectionData,
   TextSectionProps,
-} from "@shared/types/sections";
-import ImageWithTextSection from "@shared/ui/sections/ImageWithTextSection";
-import TextSection from "@shared/ui/sections/TextSection";
+} from "../../types";
+import ImageWithTextSection from "../sections/ImageWithTextSection";
+import TextSection from "../sections/TextSection";
 
 type SectionsProps = { sectionsData: SectionData[] };
 
-const Sections = ({
+const SectionsElement = ({
   sectionsData,
 }: SectionsProps): ReactElement<SectionsProps> => {
   const sectionsElements = sectionsData.map((sectionData, index) => {
@@ -36,4 +36,4 @@ const Sections = ({
   return <>{sectionsElements}</>;
 };
 
-export default Sections;
+export default SectionsElement;
