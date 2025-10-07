@@ -1,19 +1,19 @@
 import { ReactElement } from "react";
 import { notFound } from "next/navigation";
-import { getGenericPageDataByUrl } from "../../actions/getGenericPageDataByUrl";
-import { getGenericSectionsData } from "../../actions/getGenericSectionsData";
-import SectionsElement from "../GenericSections/genericSections.client";
+import { getGenericPageDataByUrl } from "./actions/getGenericPageDataByUrl";
+import { getGenericSectionsData } from "./actions/getGenericSectionsData";
+import GenericSections from "./components/GenericSections";
 
-export type GenericSectionsProps = {
+export type GenericPageViewProps = {
   params: Promise<{ genericPageSlug?: string[] }>;
 };
 
 const ignoredPrefixes = ["/_next", "/.well-known"];
 const ignoredExtensions = [".json", ".js", ".css"];
 
-const GenericSections = async ({
+const GenericPageView = async ({
   params,
-}: GenericSectionsProps): Promise<ReactElement<GenericSectionsProps>> => {
+}: GenericPageViewProps): Promise<ReactElement<GenericPageViewProps>> => {
   const { genericPageSlug } = await params;
 
   const genericPageSlugPath = `/${genericPageSlug?.join("/") || ""}`;
@@ -37,7 +37,7 @@ const GenericSections = async ({
     return <></>;
   }
 
-  return <SectionsElement sectionsData={sectionsData} />;
+  return <GenericSections sectionsData={sectionsData} />;
 };
 
-export default GenericSections;
+export default GenericPageView;

@@ -1,18 +1,22 @@
 import { ReactElement } from "react";
+import { SectionData } from "../../types";
 import {
   GenericSectionType,
   ImageWithTextSectionProps,
-  SectionData,
+  ProductsListSectionProps,
   TextSectionProps,
-} from "../../types";
+} from "../../types/sections";
 import ImageWithTextSection from "../sections/ImageWithTextSection";
+import ProductsListSection from "../sections/ProductsListSection";
 import TextSection from "../sections/TextSection";
 
-type GenericSectionsProps = { sectionsData: SectionData[] };
+export type GenericSectionsProps = {
+  sectionsData: SectionData[];
+};
 
-const GenericSections = ({
+const GenericSections = async ({
   sectionsData,
-}: GenericSectionsProps): ReactElement<GenericSectionsProps> => {
+}: GenericSectionsProps): Promise<ReactElement<GenericSectionsProps>> => {
   const sectionsElements = sectionsData.map((sectionData, index) => {
     if (sectionData.type === GenericSectionType.IMAGE_WITH_TEXT_SECTION) {
       return (
@@ -28,6 +32,15 @@ const GenericSections = ({
         <TextSection
           key={`${sectionData.type}-${index}`}
           {...(sectionData.fields as TextSectionProps)}
+        />
+      );
+    }
+
+    if (sectionData.type === GenericSectionType.PRODUCTS_LIST_SECTION) {
+      return (
+        <ProductsListSection
+          key={`${sectionData.type}-${index}`}
+          {...(sectionData.fields as ProductsListSectionProps)}
         />
       );
     }

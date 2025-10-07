@@ -1,11 +1,11 @@
 import { axiosWCApi } from "@shared/lib/axios";
-import { CategoryData } from "@shared/types/products";
+import { ProductsCategoryData } from "@shared/types/products";
 
 export const getCategoryData = async (
   categorySlug: string
-): Promise<CategoryData | null> => {
+): Promise<ProductsCategoryData | null> => {
   try {
-    const { data } = await axiosWCApi<CategoryData[]>(
+    const { data } = await axiosWCApi<ProductsCategoryData[]>(
       `/products/categories?slug=${categorySlug}`
     );
 

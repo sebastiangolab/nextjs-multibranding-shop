@@ -1,19 +1,17 @@
-"use client";
-
 import { ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
-import { HeaderData } from "../../types";
+import { getHeaderData } from "../../actions/getHeaderData";
 import Menu from "../Menu";
 
-type HeaderClientProps = {
-  data: HeaderData;
-};
+const Header = async (): Promise<ReactElement | null> => {
+  const data = await getHeaderData();
 
-export default function HeaderClient({
-  data,
-}: HeaderClientProps): ReactElement<HeaderClientProps> {
+  if (!data) {
+    return null;
+  }
+
   const { logoData, menuData } = data;
 
   return (
@@ -46,4 +44,6 @@ export default function HeaderClient({
       </div>
     </header>
   );
-}
+};
+
+export default Header;

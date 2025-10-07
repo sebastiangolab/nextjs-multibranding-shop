@@ -1,6 +1,7 @@
 export enum GenericSectionType {
   TEXT_SECTION = "text-section",
   IMAGE_WITH_TEXT_SECTION = "image-with-text-section",
+  PRODUCTS_LIST_SECTION = "products-list-section",
 }
 
 export type ImageWithTextSectionProps = {
@@ -14,9 +15,12 @@ export type TextSectionProps = {
   text: string;
 };
 
-export type SectionType = ImageWithTextSectionProps | TextSectionProps;
-
-export type SectionData = {
-  type: string;
-  fields: SectionType;
+export type ProductsListSectionProps = {
+  title?: string;
+  productsIds: number[];
 };
+
+export type SectionType =
+  | ImageWithTextSectionProps
+  | TextSectionProps
+  | ProductsListSectionProps;

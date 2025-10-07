@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@shared/ui/shadcn/navigation-menu";
+} from "@shared/lib/shadcn/navigation-menu";
 import { MenuData } from "../../types";
 
 type MenuProps = {

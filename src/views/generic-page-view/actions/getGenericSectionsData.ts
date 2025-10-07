@@ -1,5 +1,6 @@
 import { axiosWpAcfApi } from "@shared/lib/axios";
-import { SectionData, SectionType } from "../types";
+import { SectionData } from "../types";
+import { SectionType } from "../types/sections";
 
 type ResponseSectionData = {
   template: string;
@@ -30,6 +31,8 @@ export const getGenericSectionsData = async (
         fields: sectionData.acf,
       };
     });
+
+    console.log("normalizedSectionsData", normalizedSectionsData);
 
     return normalizedSectionsData;
   } catch (error) {

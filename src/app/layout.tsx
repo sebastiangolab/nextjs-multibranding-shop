@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { Header } from "@features/header";
 import "@shared/styles/globals.css";
 
 const roboto = Roboto({
@@ -21,7 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <div className="flex justify-center">
+          <div className="container mx-auto px-4">
+            <Header />
+
+            {children}
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

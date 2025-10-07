@@ -2,6 +2,7 @@ import { axiosWCApi } from "@shared/lib/axios";
 import { ProductData } from "@shared/types/products";
 
 type ProductsRequestParams = {
+  ids?: number[];
   categoryId?: number;
 };
 
@@ -11,6 +12,7 @@ export const getProductsData = async (
   try {
     const { data } = await axiosWCApi<ProductData[]>(`/products`, {
       params: {
+        include: params.ids?.join(","),
         category: params.categoryId,
       },
     });
