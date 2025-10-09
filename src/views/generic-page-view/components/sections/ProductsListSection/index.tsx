@@ -1,21 +1,17 @@
-import { getProductsData } from "@shared/actions/getProductsData";
-import ProductsList from "@shared/components/ProductsList";
+import { ProductsList } from "@features/products";
 import { ProductsListSectionProps } from "../../../types/sections";
+import Section from "../../Section";
 
 const ProductsListSection = async ({
   title,
   productsIds,
 }: ProductsListSectionProps) => {
-  const productsData = await getProductsData({
-    ids: productsIds,
-  });
-
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-8">
+    <Section>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6">{title}</h2>
 
-      <ProductsList products={productsData} />
-    </section>
+      <ProductsList productsIds={productsIds} />
+    </Section>
   );
 };
 

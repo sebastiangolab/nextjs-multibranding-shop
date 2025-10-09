@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getCategoryData } from "@shared/actions/getCategoryData";
-import { getProductsData } from "@shared/actions/getProductsData";
+import { getCategoryData } from "@features/products/actions/getCategoryData";
+import { getProductsData } from "@features/products/actions/getProductsData";
 
 interface CategoryPageProps {
   params: Promise<{ categorySlug?: string }>;
@@ -25,8 +25,6 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   const productsData = await getProductsData({
     categoryId: categoryData.id,
   });
-
-  console.log("produkty", productsData);
 
   return <div>CategoryPage</div>;
 };

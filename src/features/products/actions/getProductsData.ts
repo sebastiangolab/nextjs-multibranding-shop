@@ -1,5 +1,5 @@
 import { axiosWCApi } from "@shared/lib/axios";
-import { ProductData } from "@shared/types/products";
+import { ProductData } from "../types";
 
 interface ProductsRequestParams {
   ids?: number[];
