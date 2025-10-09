@@ -1,6 +1,6 @@
 import { axiosWpCustomApi } from "@shared/lib/axios";
 
-type GenericPageData = {
+interface GenericPageData {
   id: number;
   acf: {
     sections: number[];

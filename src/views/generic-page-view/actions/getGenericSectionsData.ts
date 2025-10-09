@@ -2,10 +2,10 @@ import { axiosWpAcfApi } from "@shared/lib/axios";
 import { SectionData } from "../types";
 import { SectionType } from "../types/sections";
 
-type ResponseSectionData = {
+interface ResponseSectionData {
   template: string;
   acf: SectionType;
-};
+}
 
 export const getGenericSectionsData = async (
   genericPageSectionsIds: number[]

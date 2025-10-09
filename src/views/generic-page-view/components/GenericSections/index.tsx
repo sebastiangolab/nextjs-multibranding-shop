@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { SectionData } from "../../types";
 import {
   GenericSectionType,
@@ -10,13 +9,11 @@ import ImageWithTextSection from "../sections/ImageWithTextSection";
 import ProductsListSection from "../sections/ProductsListSection";
 import TextSection from "../sections/TextSection";
 
-export type GenericSectionsProps = {
+interface GenericSectionsProps {
   sectionsData: SectionData[];
-};
+}
 
-const GenericSections = async ({
-  sectionsData,
-}: GenericSectionsProps): Promise<ReactElement<GenericSectionsProps>> => {
+const GenericSections = async ({ sectionsData }: GenericSectionsProps) => {
   const sectionsElements = sectionsData.map((sectionData, index) => {
     if (sectionData.type === GenericSectionType.IMAGE_WITH_TEXT_SECTION) {
       return (

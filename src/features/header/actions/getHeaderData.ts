@@ -2,15 +2,15 @@ import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
 import { normalizeMenuItems } from "../helpers/normalizeMenuItems";
 import { HeaderData, HeaderLogo, MenuData } from "../types";
 
-type HeaderResponseData = {
+interface HeaderResponseData {
   acf: {
     logo: HeaderLogo;
   };
-}[];
+}
 
 export const getHeaderData = async (): Promise<HeaderData | null> => {
   try {
-    const { data: headerData } = await axiosWpAcfApi<HeaderResponseData>(
+    const { data: headerData } = await axiosWpAcfApi<HeaderResponseData[]>(
       'theme-setting?slug="header"',
     );
 

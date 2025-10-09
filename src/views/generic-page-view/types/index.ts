@@ -1,6 +1,6 @@
 import { SectionType } from "./sections";
 
-export type SectionData = {
+export interface SectionData {
   type: string;
   fields: SectionType;
-};
+}

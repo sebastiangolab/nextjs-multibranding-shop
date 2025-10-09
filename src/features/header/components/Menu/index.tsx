@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -11,11 +11,11 @@ import {
 } from "@shared/lib/shadcn/navigation-menu";
 import { MenuData } from "../../types";
 
-type MenuProps = {
+interface MenuProps {
   data: MenuData[];
-};
+}
 
-const Menu = ({ data }: MenuProps): ReactElement<MenuProps> => {
+const Menu = ({ data }: MenuProps) => {
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList>

@@ -1,11 +1,10 @@
-import { ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
 import { getHeaderData } from "../../actions/getHeaderData";
 import Menu from "../Menu";
 
-const Header = async (): Promise<ReactElement | null> => {
+const Header = async () => {
   const data = await getHeaderData();
 
   if (!data) {

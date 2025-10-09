@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button } from "@shared/lib/shadcn/button";
 import {
@@ -9,13 +9,11 @@ import {
 } from "@shared/lib/shadcn/card";
 import { ProductData } from "@shared/types/products";
 
-type ProductsListProps = {
+interface ProductsListProps {
   products: ProductData[] | null;
-};
+}
 
-const ProductsList = ({
-  products,
-}: ProductsListProps): ReactElement<ProductsListProps> => {
+const ProductsList = ({ products }: ProductsListProps) => {
   if (products === null) {
     return <p>Brak produktów</p>;
   }

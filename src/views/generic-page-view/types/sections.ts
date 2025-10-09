@@ -4,21 +4,21 @@ export enum GenericSectionType {
   PRODUCTS_LIST_SECTION = "products-list-section",
 }
 
-export type ImageWithTextSectionProps = {
+export interface ImageWithTextSectionProps {
   title?: string;
   text: string;
   image: number;
-};
+}
 
-export type TextSectionProps = {
+export interface TextSectionProps {
   title?: string;
   text: string;
-};
+}
 
-export type ProductsListSectionProps = {
+export interface ProductsListSectionProps {
   title?: string;
   productsIds: number[];
-};
+}
 
 export type SectionType =
   | ImageWithTextSectionProps

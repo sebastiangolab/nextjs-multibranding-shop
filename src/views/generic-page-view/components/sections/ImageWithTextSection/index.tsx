@@ -1,6 +1,4 @@
-import { ReactElement } from "react";
-
-const ImageWithTextSection = (): ReactElement => {
+const ImageWithTextSection = () => {
   return <div>ImageWithTextSection</div>;
 };
 

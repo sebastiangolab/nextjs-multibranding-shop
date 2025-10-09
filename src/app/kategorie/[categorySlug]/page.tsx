@@ -1,15 +1,13 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { notFound } from "next/navigation";
 import { getCategoryData } from "@shared/actions/getCategoryData";
 import { getProductsData } from "@shared/actions/getProductsData";
 
-type CategoryPageProps = {
+interface CategoryPageProps {
   params: Promise<{ categorySlug?: string }>;
-};
+}
 
-const CategoryPage = async ({
-  params,
-}: CategoryPageProps): Promise<ReactElement<CategoryPageProps>> => {
+const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { categorySlug } = await params;
 
   if (!categorySlug) {

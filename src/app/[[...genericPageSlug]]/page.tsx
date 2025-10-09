@@ -1,13 +1,8 @@
-import { ReactElement } from "react";
 import GenericPageView, {
   GenericPageViewProps,
 } from "@views/generic-page-view";
 
-type GenericPageProps = GenericPageViewProps;
-
-const GenericPage = async ({
-  params,
-}: GenericPageProps): Promise<ReactElement<GenericPageProps>> => {
+const GenericPage = async ({ params }: GenericPageViewProps) => {
   return <GenericPageView params={params} />;
 };
 
