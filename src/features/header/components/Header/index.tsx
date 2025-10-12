@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, User } from "lucide-react";
+import { User } from "lucide-react";
 import { getHeaderData } from "../../actions/getHeaderData";
+import CartButton from "../CartButton";
 import Menu from "../Menu";
 
 const Header = async () => {
@@ -34,10 +35,7 @@ const Header = async () => {
           <span>Zaloguj się</span>
         </Link>
 
-        <Link href="/koszyk" className="flex items-center gap-1">
-          <ShoppingCart className="h-5 w-5" />
-          <span>Koszyk</span>
-        </Link>
+        <CartButton />
       </div>
     </header>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactElement } from "react";
 import Image from "next/image";
 import { Button } from "@shared/lib/shadcn/button";
@@ -7,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@shared/lib/shadcn/card";
+import { useCartStore } from "@shared/store/cartStore";
 import { ProductData } from "../../types";
 
 interface ProductCardProps {
@@ -14,7 +17,9 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ data }: ProductCardProps): ReactElement => {
-  const { images, name, price } = data;
+  const { images, name, price, id } = data;
+
+  const { addItem } = useCartStore();
 
   return (
     <Card className="flex flex-col pt-0">
@@ -41,7 +46,9 @@ const ProductCard = ({ data }: ProductCardProps): ReactElement => {
 
         <div className="text-lg font-semibold pb-2.5">Cena: {price} zł</div>
 
-        <Button size="lg">Do koszyka</Button>
+        <Button size="lg" onClick={() => addItem(id)}>
+          Do koszyka
+        </Button>
       </CardContent>
     </Card>
   );

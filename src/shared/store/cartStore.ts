@@ -1,12 +1,9 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { CartProductItem } from "../types";
 
 interface CartStore {
   items: CartProductItem[];
-
-  // Computed values
-  totalItems: number;
 
   // Actions
   addItem: (productId: number, quantity?: number) => void;
@@ -15,6 +12,7 @@ interface CartStore {
   clearCart: () => void;
   hasItem: (productId: number) => boolean;
   getItemQuantity: (productId: number) => number;
+  getTotalItemsQuantity: () => number;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -22,14 +20,10 @@ export const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
 
-      get totalItems() {
-        return get().items.reduce((sum, item) => sum + item.quantity, 0);
-      },
-
-      addItem: (productId: number, quantity = 1) => {
+      addItem: (productId: number, quantity: number | undefined = 1) => {
         set((state) => {
           const existingItem = state.items.find(
-            (item) => item.productId === productId,
+            (item) => item.productId === productId
           );
 
           if (existingItem) {
@@ -37,7 +31,7 @@ export const useCartStore = create<CartStore>()(
               items: state.items.map((item) =>
                 item.productId === productId
                   ? { ...item, quantity: item.quantity + quantity }
-                  : item,
+                  : item
               ),
             };
           }
@@ -62,7 +56,7 @@ export const useCartStore = create<CartStore>()(
 
         set((state) => ({
           items: state.items.map((item) =>
-            item.productId === productId ? { ...item, quantity } : item,
+            item.productId === productId ? { ...item, quantity } : item
           ),
         }));
       },
@@ -79,9 +73,14 @@ export const useCartStore = create<CartStore>()(
         const item = get().items.find((item) => item.productId === productId);
         return item?.quantity || 0;
       },
+
+      getTotalItemsQuantity: () => {
+        return get().items.reduce((sum, item) => sum + item.quantity, 0);
+      },
     }),
     {
-      name: "cart-storage", // localStorage key
-    },
-  ),
+      name: "cart-storage", // sessionStorage key
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
 );
