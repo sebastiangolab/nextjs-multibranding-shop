@@ -3,12 +3,21 @@ export interface ProductsCategoryData {
   count: number;
   name: string;
   slug: string;
+  parent: string;
+  subcategories: ProductsCategoryData[];
 }
 
 export interface ProductImage {
   id: number;
   src: string;
   alt: string;
+}
+
+export interface ProductAttribute {
+  id: number;
+  name: string;
+  slug: string;
+  options: string[];
 }
 
 export interface ProductData {
@@ -18,4 +27,5 @@ export interface ProductData {
   price: string;
   categories: ProductsCategoryData[];
   images: ProductImage[];
+  attributes: ProductAttribute[];
 }
