@@ -2,13 +2,13 @@
 
 import React, { ReactElement } from "react";
 import Image from "next/image";
-import { Button } from "@shared/lib/shadcn/button";
+import { Button } from "@shared/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@shared/lib/shadcn/card";
+} from "@shared/shadcn/ui/card";
 import { useCartStore } from "@shared/store/cartStore";
 import { ProductData } from "../../types";
 

@@ -10,7 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@shared/lib/shadcn/ui/breadcrumb";
+} from "@shared/shadcn/ui/breadcrumb";
 
 interface BreadcrumbWithDataProps {
   currentPageLabel: string;
