@@ -1,9 +1,8 @@
 import { axiosWCApi } from "@shared/lib/axios";
-import { ProductsCategoryData } from "../../../features/products/types";
 import { normalizeProductsCategoryData } from "../helpers/normalizeProductsCategoryData";
-import { ProductsCategoryResponseData } from "../types";
+import { ProductsCategoryData, ProductsCategoryResponseData } from "../types";
 
-export const getCategoryData = async (
+export const getProductsCategoryData = async (
   categorySlug: string
 ): Promise<ProductsCategoryData | null> => {
   try {

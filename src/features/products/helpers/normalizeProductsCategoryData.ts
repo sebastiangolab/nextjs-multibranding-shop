@@ -1,5 +1,4 @@
-import { ProductsCategoryData } from "@features/products/types";
-import { ProductsCategoryResponseData } from "../types";
+import { ProductsCategoryData, ProductsCategoryResponseData } from "../types";
 
 export const normalizeProductsCategoryData = (
   category: ProductsCategoryResponseData,

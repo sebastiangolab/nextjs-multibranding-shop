@@ -2,11 +2,11 @@ import React from "react";
 import { getProductsData } from "../../actions/getProductsData";
 import ProductCard from "../ProductCard";
 
-interface ProductsListProps {
+interface ProductsGridProps {
   productsIds: number[];
 }
 
-const ProductsList = async ({ productsIds }: ProductsListProps) => {
+const ProductsGrid = async ({ productsIds }: ProductsGridProps) => {
   const productsData = await getProductsData({
     ids: productsIds,
   });
@@ -24,4 +24,4 @@ const ProductsList = async ({ productsIds }: ProductsListProps) => {
   );
 };
 
-export default ProductsList;
+export default ProductsGrid;

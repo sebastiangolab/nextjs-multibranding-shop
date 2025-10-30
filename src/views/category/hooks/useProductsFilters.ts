@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
-import { ProductData } from "@features/products/types";
+import { useMemo, useState } from "react";
+import { ProductData } from "@features/products";
 
 export enum FilterType {
   ATTRIBUTE = "attribute",

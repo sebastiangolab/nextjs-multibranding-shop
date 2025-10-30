@@ -1,4 +1,4 @@
-import { ProductsList } from "@features/products";
+import { ProductsGrid } from "@features/products";
 import { ProductsListSectionProps } from "../../../types/sections";
 import Section from "../../Section";
 
@@ -10,7 +10,7 @@ const ProductsListSection = async ({
     <Section>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6">{title}</h2>
 
-      <ProductsList productsIds={productsIds} />
+      <ProductsGrid productsIds={productsIds} />
     </Section>
   );
 };

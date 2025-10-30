@@ -7,6 +7,11 @@ export interface ProductsCategoryData {
   subcategories: ProductsCategoryData[];
 }
 
+export interface ProductsCategoryResponseData
+  extends Omit<ProductsCategoryData, "subcategories"> {
+  subcategories: number[];
+}
+
 export interface ProductImage {
   id: number;
   src: string;

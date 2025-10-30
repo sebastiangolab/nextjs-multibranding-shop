@@ -2,13 +2,9 @@
 
 import React, { ReactElement } from "react";
 import Image from "next/image";
+import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@shared/shadcn/ui/card";
+import { Card, CardContent } from "@shared/shadcn/ui/card";
 import { useCartStore } from "@shared/store/cartStore";
 import { ProductData } from "../../types";
 
@@ -22,33 +18,45 @@ const ProductCard = ({ data }: ProductCardProps): ReactElement => {
   const { addItem } = useCartStore();
 
   return (
-    <Card className="flex flex-col pt-0">
-      <CardHeader className="p-0">
-        <div className="relative w-full h-56 bg-muted rounded-t-md overflow-hidden">
-          {images && images[0] ? (
-            <Image
-              src={images[0].src}
-              alt={images[0].alt}
-              width={500}
-              height={300}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-sm text-muted-foreground">
-              Brak zdjęcia
-            </div>
-          )}
-        </div>
-      </CardHeader>
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0">
+      <div className="aspect-4/3 bg-muted relative overflow-hidden">
+        {images && images[0] ? (
+          <Image
+            src={images[0].src}
+            alt={images[0].alt}
+            width={500}
+            height={300}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-sm text-muted-foreground">
+            Brak zdjęcia
+          </div>
+        )}
 
-      <CardContent className="flex-1 flex flex-col justify-between">
-        <CardTitle className="text-2xl font-semibold pb-2.5">{name}</CardTitle>
-
-        <div className="text-lg font-semibold pb-2.5">Cena: {price} zł</div>
-
-        <Button size="lg" onClick={() => addItem(id)}>
-          Do koszyka
+        <Button
+          size="icon"
+          variant="outline"
+          className="absolute top-2 right-2 h-8 w-8 bg-white/80 hover:bg-white"
+        >
+          <Heart className="h-4 w-4" />
         </Button>
+      </div>
+
+      <CardContent className="px-4 pb-6 pt-0">
+        <div className="space-y-2">
+          <h3 className="font-semibold text-foreground line-clamp-2 mb-2">
+            {name}
+          </h3>
+
+          <div className="flex items-center justify-between">
+            <p className="text-xl font-bold text-foreground">{price} zł</p>
+
+            <Button onClick={() => addItem(id)} size="icon">
+              <ShoppingCart className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
