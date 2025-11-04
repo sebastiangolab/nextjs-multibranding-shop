@@ -32,8 +32,6 @@ export const getGenericSectionsData = async (
       };
     });
 
-    console.log("normalizedSectionsData", normalizedSectionsData);
-
     return normalizedSectionsData;
   } catch (error) {
     console.error("❌ Error fetching section data: ", error);

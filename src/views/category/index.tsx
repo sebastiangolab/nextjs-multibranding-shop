@@ -24,10 +24,14 @@ const CategoryView = async ({ params }: CategoryPageProps) => {
     categoryId: categoryData.id,
   });
 
+  if (!productsData) {
+    notFound();
+  }
+
   return (
     <CategoryViewClient
       categoryData={categoryData}
-      productsData={productsData ?? []}
+      productsData={productsData}
     />
   );
 };

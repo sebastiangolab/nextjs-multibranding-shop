@@ -1,36 +1,12 @@
 import { useMemo, useState } from "react";
 import { ProductData } from "@features/products";
+import { Attribute, AttributeFilterData, PriceFilterData } from "../types";
+import { getPriceFilter } from "../helpers/getPriceFilter";
+import { getAttributeFilters } from "../helpers/getAttributeFilters";
 
-export enum FilterType {
-  ATTRIBUTE = "attribute",
-  PRICE = "price",
-}
-
-interface FilterBase {
-  type: FilterType;
-  name: string;
-}
-
-export interface AttributeFilterData extends FilterBase {
-  id: string;
-  type: FilterType.ATTRIBUTE;
-  slug: string;
-  options: string[];
-}
-
-export interface PriceFilterData extends FilterBase {
-  type: FilterType.PRICE;
-}
-
-export type FilterData = AttributeFilterData | PriceFilterData;
-
-interface Attribute {
-  id: string;
-  values: string[];
-}
-
-export interface ProductsFiltersHookResults {
-  filtersElementsData: FilterData[];
+interface ProductsFiltersHookResults {
+  priceFilterData: PriceFilterData | null;
+  attributesFiltersData: AttributeFilterData[];
   selectedFiltersValues: {
     minPrice: number | null;
     maxPrice: number | null;
@@ -38,47 +14,14 @@ export interface ProductsFiltersHookResults {
   };
   hasSelectedFilters: boolean;
   setPriceFilterValues: (min: number | null, max: number | null) => void;
-  setActiveAttributes: (attributes: Attribute[]) => void;
+  changeActiveAttribute: (
+    attributeId: string,
+    option: string,
+    isChecked: boolean
+  ) => void;
+  getIsCheckedAttributeOption: (attributeId: string, option: string) => boolean;
   clearAllFiltersValues: () => void;
 }
-
-const getAttributeFilters = (
-  products: ProductData[]
-): AttributeFilterData[] => {
-  const attributes = products.flatMap((product) => product.attributes || []);
-
-  const attributesFilters: AttributeFilterData[] = attributes.reduce(
-    (prevAttributes, currentAttribute) => {
-      let existingAttribute = prevAttributes.find(
-        (filter) => filter.id.toString() === currentAttribute.id.toString()
-      );
-
-      if (existingAttribute) {
-        existingAttribute.options.push(...currentAttribute.options);
-        existingAttribute.options = [...new Set(existingAttribute.options)]; // Remove duplicates
-
-        const attributesWithoutExisting = prevAttributes.filter(
-          (attr) => attr.id !== existingAttribute.id
-        );
-
-        return [...attributesWithoutExisting, existingAttribute];
-      }
-
-      const normalizeAttribute: AttributeFilterData = {
-        id: currentAttribute.id.toString(),
-        type: FilterType.ATTRIBUTE,
-        name: currentAttribute.name,
-        slug: currentAttribute.slug,
-        options: currentAttribute.options,
-      };
-
-      return [...prevAttributes, normalizeAttribute];
-    },
-    [] as AttributeFilterData[]
-  );
-
-  return attributesFilters;
-};
 
 export function useProductsFilters(
   products: ProductData[]
@@ -92,13 +35,50 @@ export function useProductsFilters(
     maxPriceValue !== null ||
     activeAttributes.length > 0;
 
-  console.log("minPriceValue:", minPriceValue);
-  console.log("maxPriceValue:", maxPriceValue);
-  console.log("hasSelectedFilters:", hasSelectedFilters);
-
   const setPriceFilterValues = (min: number | null, max: number | null) => {
     setMinPriceValue(min);
     setMaxPriceValue(max);
+  };
+
+  const changeActiveAttribute = (
+    attributeId: string,
+    option: string,
+    isChecked: boolean
+  ) => {
+    const otherAttributes = activeAttributes.filter(
+      (activeAttribute) => activeAttribute.attributeId !== attributeId
+    );
+
+    const currentAttribute = activeAttributes.find(
+      (activeAttribute) => activeAttribute.attributeId === attributeId
+    );
+
+    const currentOptions = currentAttribute?.activeOptions ?? [];
+
+    const updatedOptions = isChecked
+      ? [...currentOptions, option]
+      : currentOptions.filter((currentOption) => currentOption !== option);
+
+    if (updatedOptions.length === 0) {
+      setActiveAttributes(otherAttributes);
+      return;
+    }
+
+    setActiveAttributes([
+      ...otherAttributes,
+      { attributeId, activeOptions: updatedOptions },
+    ]);
+  };
+
+  const getIsCheckedAttributeOption = (
+    attributeId: string,
+    option: string
+  ): boolean => {
+    return (
+      activeAttributes
+        .find((activeAttribute) => activeAttribute.attributeId === attributeId)
+        ?.activeOptions.includes(option) ?? false
+    );
   };
 
   const clearAllFiltersValues = () => {
@@ -107,29 +87,19 @@ export function useProductsFilters(
     setActiveAttributes([]);
   };
 
-  const filtersElementsData = useMemo(() => {
-    const filtersElements = [] as FilterData[];
+  const priceFilterData =
+    products.length > 0
+      ? useMemo(() => getPriceFilter(products), [products])
+      : null;
 
-    if (products.length === 0) {
-      return filtersElements;
-    }
-
-    // Price filter
-    filtersElements.push({
-      type: FilterType.PRICE,
-      name: "Cena",
-    });
-
-    // Attributes filters
-    const attributesFilters = getAttributeFilters(products);
-
-    filtersElements.push(...attributesFilters);
-
-    return filtersElements;
-  }, [products]);
+  const attributesFiltersData = useMemo(
+    () => getAttributeFilters(products),
+    [products]
+  );
 
   return {
-    filtersElementsData,
+    priceFilterData,
+    attributesFiltersData,
     selectedFiltersValues: {
       minPrice: minPriceValue,
       maxPrice: maxPriceValue,
@@ -137,7 +107,8 @@ export function useProductsFilters(
     },
     hasSelectedFilters,
     setPriceFilterValues,
-    setActiveAttributes,
+    changeActiveAttribute,
+    getIsCheckedAttributeOption,
     clearAllFiltersValues,
   };
 }
