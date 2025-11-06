@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Header } from "@features/header";
 import "@shared/styles/globals.css";
+import { Providers } from "./providers";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body className={roboto.className}>
         <div className="flex justify-center">
           <div className="container mx-auto px-4">
-            <Header />
+            <Providers>
+              <Header />
 
-            {children}
+              {children}
+            </Providers>
           </div>
         </div>
       </body>

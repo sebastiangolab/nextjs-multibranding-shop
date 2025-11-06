@@ -5,10 +5,12 @@ import { useDebounce } from "use-debounce";
 import InputWithLabel from "@shared/components/InputWithLabel";
 import { Label } from "@shared/shadcn/ui/label";
 import { Slider } from "@shared/shadcn/ui/slider";
+import { ProductsFiltersHookResults } from "../../types";
 
 interface PriceFilterProps {
   maxPrice: number;
-  setPriceFilterValues: (min: number | null, max: number | null) => void;
+  setPriceFilterValues: ProductsFiltersHookResults["setPriceFilterValues"];
+  hasSelectedFilters: ProductsFiltersHookResults["hasSelectedFilters"];
 }
 
 type PriceRange = [number | null, number | null];
@@ -16,6 +18,7 @@ type PriceRange = [number | null, number | null];
 export const PriceFilter = ({
   maxPrice,
   setPriceFilterValues,
+  hasSelectedFilters,
 }: PriceFilterProps) => {
   const [priceRange, setPriceRange] = useState<PriceRange>([null, null]);
   const [priceRangeValues] = useDebounce(priceRange, 500);
@@ -42,8 +45,20 @@ export const PriceFilter = ({
       return;
     }
 
-    setPriceFilterValues(priceRangeValues[0], priceRangeValues[1]);
+    const min = priceRangeValues[0] === 0 ? null : priceRangeValues[0];
+    const max = priceRangeValues[1] === maxPrice ? null : priceRangeValues[1];
+
+    setPriceFilterValues(min, max);
   }, [priceRangeValues]);
+
+  useEffect(() => {
+    if (
+      !hasSelectedFilters &&
+      (priceRange[0] !== null || priceRange[1] !== null)
+    ) {
+      setPriceRange([null, null]);
+    }
+  }, [hasSelectedFilters]);
 
   return (
     <div className="space-y-4">

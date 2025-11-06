@@ -1,22 +1,37 @@
 "use client";
 
-import { ProductData, ProductsCategoryData } from "@features/products";
-import { Separator } from "@shared/shadcn/ui/separator";
+import {
+  ProductData,
+  ProductsCategoryData,
+  getProductsData,
+} from "@features/products";
 import { useProductsFilters } from "../../hooks/useProductsFilters";
-import { AttributeFilters } from "../AttributeFilters";
 import CategoryHeader from "../CategoryHeader";
-import { PriceFilter } from "../PriceFilter";
-import { SubcategoryMenu } from "../SubcategoryMenu";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { CategoryContent } from "../CategoryContent";
+import { CategorySidebar } from "../CategorySidebar";
+import { MobileFiltersSheet } from "../MobileFiltersSheet";
+import { MobileSubcategoriesSheet } from "../MobileSubcategoriesSheet";
+import { LoadingOverlay } from "@shared/components/LoadingOverlay";
+import { convertAttributesDataToParams } from "@views/category/helpers/convertAttributesDataToParams";
 
 type CategoryViewClientProps = {
   categoryData: ProductsCategoryData;
-  productsData: ProductData[];
+  allProductsData: ProductData[];
 };
 
 const CategoryViewClient = ({
   categoryData,
-  productsData,
+  allProductsData,
 }: CategoryViewClientProps) => {
+  const [paginationPage, setPaginationPage] = useState<number>(1);
+
+  const [isMobileFilterSheetOpen, setIsMobileFilterSheetOpen] =
+    useState<boolean>(false);
+  const [isMobileSubcategoriesSheetOpen, setIsMobileSubcategoriesSheetOpen] =
+    useState<boolean>(false);
+
   const {
     priceFilterData,
     attributesFiltersData,
@@ -24,52 +39,96 @@ const CategoryViewClient = ({
     hasSelectedFilters,
     setPriceFilterValues,
     changeActiveAttribute,
-    getIsCheckedAttributeOption,
+    checkIsActiveAttributeOption,
     clearAllFiltersValues,
-  } = useProductsFilters(productsData);
+  } = useProductsFilters(allProductsData);
 
-  const asideContentElement = (
-    <div className="space-y-6">
-      <div>
-        <h3 className="font-semibold text-foreground mb-4">Kategorie</h3>
+  const { data, isLoading, isFetching, isSuccess, isPlaceholderData } =
+    useQuery({
+      queryKey: [
+        "category-products",
+        categoryData.id,
+        selectedFiltersValues,
+        paginationPage,
+      ],
+      queryFn: async () =>
+        await getProductsData({
+          categoryId: categoryData.id,
+          page: paginationPage,
+          min_price: selectedFiltersValues.minPrice,
+          max_price: selectedFiltersValues.maxPrice,
+          attributes:
+            selectedFiltersValues.attributes.length > 0
+              ? convertAttributesDataToParams(selectedFiltersValues.attributes)
+              : undefined,
+        }),
+      placeholderData: keepPreviousData,
+    });
 
-        <SubcategoryMenu categoriesData={categoryData.subcategories} />
-      </div>
+  const paginationTotalPages = data?.totalPages || 1;
+  const totalProducts = data?.totalProducts || 0;
 
-      <Separator />
+  useEffect(() => {
+    if (hasSelectedFilters && paginationPage !== 1) {
+      setPaginationPage(1);
+    }
+  }, [selectedFiltersValues]);
 
-      <div className="space-y-6">
-        <h3 className="font-semibold text-foreground">Filtry</h3>
-
-        {priceFilterData ? (
-          <PriceFilter
-            maxPrice={priceFilterData.maxPrice}
-            setPriceFilterValues={setPriceFilterValues}
-          />
-        ) : null}
-
-        {attributesFiltersData.length > 0 ? (
-          <AttributeFilters
-            attributes={attributesFiltersData}
-            changeActiveAttribute={changeActiveAttribute}
-            getIsCheckedAttributeOption={getIsCheckedAttributeOption}
-          />
-        ) : null}
-      </div>
-    </div>
-  );
+  const sharedProductsFiltersData = {
+    hasSelectedFilters,
+    clearAllFiltersValues,
+    priceFilterData,
+    setPriceFilterValues,
+    attributesFiltersData,
+    changeActiveAttribute,
+    checkIsActiveAttributeOption,
+  };
 
   return (
     <>
+      {isFetching && isPlaceholderData && <LoadingOverlay />}
+
+      {/* Mobile Filters Sheet */}
+      <MobileFiltersSheet
+        isMobileFilterSheetOpen={isMobileFilterSheetOpen}
+        setIsMobileFilterSheetOpen={setIsMobileFilterSheetOpen}
+        productsFiltersData={sharedProductsFiltersData}
+        totalProducts={totalProducts}
+      />
+
+      {/* Mobile Subcategories Sheet */}
+      <MobileSubcategoriesSheet
+        isMobileSubcategoriesSheetOpen={isMobileSubcategoriesSheetOpen}
+        setIsMobileSubcategoriesSheetOpen={setIsMobileSubcategoriesSheetOpen}
+        subcategories={categoryData.subcategories}
+      />
+
       <CategoryHeader title={categoryData?.name} />
 
       <div className="container mx-auto py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-8">
-          <aside className="lg:sticky lg:top-8 lg:self-start">
-            {asideContentElement}
+        <div className="grid grid-cols-1 md:grid-cols-[30%_70%] lg:grid-cols-[20%_80%] gap-10">
+          {/* Desktop Sidebar */}
+          <aside className="hidden md:block md:sticky md:top-8 md:self-start">
+            <CategorySidebar
+              subcategories={categoryData.subcategories}
+              productsFiltersData={sharedProductsFiltersData}
+            />
           </aside>
 
-          <main>{/* <CategoryContent /> */}</main>
+          <main>
+            <CategoryContent
+              paginationTotalPages={paginationTotalPages}
+              paginationPage={paginationPage}
+              setPaginationPage={setPaginationPage}
+              isLoading={isLoading}
+              isSuccess={isSuccess}
+              products={data?.products ?? []}
+              setIsMobileFilterSheetOpen={setIsMobileFilterSheetOpen}
+              setIsMobileSubcategoriesSheetOpen={
+                setIsMobileSubcategoriesSheetOpen
+              }
+            />
+          </main>
         </div>
       </div>
     </>

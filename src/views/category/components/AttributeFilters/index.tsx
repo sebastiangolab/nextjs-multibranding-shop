@@ -8,46 +8,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/shadcn/ui/accordion";
-import { AttributeFilterData } from "../../types";
+import { ProductsFiltersHookResults } from "../../types";
 
 interface AttributeFiltersProps {
-  attributes: AttributeFilterData[];
-  changeActiveAttribute: (
-    attributeId: string,
-    option: string,
-    isChecked: boolean
-  ) => void;
-  getIsCheckedAttributeOption: (attributeId: string, option: string) => boolean;
+  attributes: ProductsFiltersHookResults["attributesFiltersData"];
+  changeActiveAttribute: ProductsFiltersHookResults["changeActiveAttribute"];
+  checkIsActiveAttributeOption: ProductsFiltersHookResults["checkIsActiveAttributeOption"];
 }
 
 export const AttributeFilters = ({
   attributes,
   changeActiveAttribute,
-  getIsCheckedAttributeOption,
+  checkIsActiveAttributeOption,
 }: AttributeFiltersProps) => {
-  const getAttributeOptions = (attribute: AttributeFilterData) => (
-    <div className="space-y-3">
-      {attribute.options.map((option) => (
-        <div key={option} className="flex items-center space-x-2">
-          <Checkbox
-            id={`${attribute.id}-${option}`}
-            checked={getIsCheckedAttributeOption(attribute.id, option)}
-            onCheckedChange={(checked) =>
-              changeActiveAttribute(attribute.id, option, !!checked)
-            }
-          />
-
-          <Label
-            htmlFor={`${attribute.id}-${option}`}
-            className="text-sm font-normal cursor-pointer pt-px"
-          >
-            {option}
-          </Label>
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <Accordion
       type="multiple"
@@ -60,7 +33,33 @@ export const AttributeFilters = ({
             {attribute.name}
           </AccordionTrigger>
 
-          <AccordionContent>{getAttributeOptions(attribute)}</AccordionContent>
+          <AccordionContent>
+            <div className="space-y-3">
+              {attribute.options.map((option) => (
+                <div key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`${attribute.id}-${option}`}
+                    checked={checkIsActiveAttributeOption(attribute.id, option)}
+                    onCheckedChange={(checked) =>
+                      changeActiveAttribute(
+                        attribute.id,
+                        attribute.slug,
+                        option,
+                        !!checked
+                      )
+                    }
+                  />
+
+                  <Label
+                    htmlFor={`${attribute.id}-${option}`}
+                    className="text-sm font-normal cursor-pointer pt-px"
+                  >
+                    {option}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>

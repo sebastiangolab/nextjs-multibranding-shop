@@ -25,6 +25,7 @@ export const getAttributeFilters = (
 
       const normalizeAttribute: AttributeFilterData = {
         id: currentAttribute.id.toString(),
+        slug: currentAttribute.slug,
         name: currentAttribute.name,
         options: currentAttribute.options,
       };

@@ -20,18 +20,18 @@ const CategoryView = async ({ params }: CategoryPageProps) => {
     notFound();
   }
 
-  const productsData = await getProductsData({
+  const productsResponse = await getProductsData({
     categoryId: categoryData.id,
   });
 
-  if (!productsData) {
+  if (!productsResponse) {
     notFound();
   }
 
   return (
     <CategoryViewClient
       categoryData={categoryData}
-      productsData={productsData}
+      allProductsData={productsResponse.products}
     />
   );
 };

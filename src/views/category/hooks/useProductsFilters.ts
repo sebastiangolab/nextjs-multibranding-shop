@@ -1,27 +1,8 @@
 import { useMemo, useState } from "react";
 import { ProductData } from "@features/products";
-import { Attribute, AttributeFilterData, PriceFilterData } from "../types";
+import { Attribute, ProductsFiltersHookResults } from "../types";
 import { getPriceFilter } from "../helpers/getPriceFilter";
 import { getAttributeFilters } from "../helpers/getAttributeFilters";
-
-interface ProductsFiltersHookResults {
-  priceFilterData: PriceFilterData | null;
-  attributesFiltersData: AttributeFilterData[];
-  selectedFiltersValues: {
-    minPrice: number | null;
-    maxPrice: number | null;
-    attributes: Attribute[];
-  };
-  hasSelectedFilters: boolean;
-  setPriceFilterValues: (min: number | null, max: number | null) => void;
-  changeActiveAttribute: (
-    attributeId: string,
-    option: string,
-    isChecked: boolean
-  ) => void;
-  getIsCheckedAttributeOption: (attributeId: string, option: string) => boolean;
-  clearAllFiltersValues: () => void;
-}
 
 export function useProductsFilters(
   products: ProductData[]
@@ -35,6 +16,16 @@ export function useProductsFilters(
     maxPriceValue !== null ||
     activeAttributes.length > 0;
 
+  const priceFilterData =
+    products.length > 0
+      ? useMemo(() => getPriceFilter(products), [products])
+      : null;
+
+  const attributesFiltersData = useMemo(
+    () => getAttributeFilters(products),
+    [products]
+  );
+
   const setPriceFilterValues = (min: number | null, max: number | null) => {
     setMinPriceValue(min);
     setMaxPriceValue(max);
@@ -42,6 +33,7 @@ export function useProductsFilters(
 
   const changeActiveAttribute = (
     attributeId: string,
+    attributeSlug: string,
     option: string,
     isChecked: boolean
   ) => {
@@ -66,11 +58,11 @@ export function useProductsFilters(
 
     setActiveAttributes([
       ...otherAttributes,
-      { attributeId, activeOptions: updatedOptions },
+      { attributeId, attributeSlug, activeOptions: updatedOptions },
     ]);
   };
 
-  const getIsCheckedAttributeOption = (
+  const checkIsActiveAttributeOption = (
     attributeId: string,
     option: string
   ): boolean => {
@@ -87,16 +79,6 @@ export function useProductsFilters(
     setActiveAttributes([]);
   };
 
-  const priceFilterData =
-    products.length > 0
-      ? useMemo(() => getPriceFilter(products), [products])
-      : null;
-
-  const attributesFiltersData = useMemo(
-    () => getAttributeFilters(products),
-    [products]
-  );
-
   return {
     priceFilterData,
     attributesFiltersData,
@@ -108,7 +90,7 @@ export function useProductsFilters(
     hasSelectedFilters,
     setPriceFilterValues,
     changeActiveAttribute,
-    getIsCheckedAttributeOption,
+    checkIsActiveAttributeOption,
     clearAllFiltersValues,
   };
 }
