@@ -1,25 +1,26 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+
+import { HeaderData } from "../../types";
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
+  NavigationMenu as NavigationMenuShadcn,
   NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
   NavigationMenuTrigger,
+  NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@shared/shadcn/ui/navigation-menu";
-import { MenuData } from "../../types";
+import Link from "next/link";
 
-interface MenuProps {
-  data: MenuData[];
+interface NavigationMenuProps {
+  menuData: HeaderData["menuData"];
 }
 
-const Menu = ({ data }: MenuProps) => {
+export const NavigationMenu = ({ menuData }: NavigationMenuProps) => {
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenuShadcn viewport={false}>
       <NavigationMenuList>
-        {data.map((menuItem) => {
+        {menuData.map((menuItem) => {
           if (
             Array.isArray(menuItem.childrens) &&
             menuItem.childrens.length > 0
@@ -55,8 +56,6 @@ const Menu = ({ data }: MenuProps) => {
           );
         })}
       </NavigationMenuList>
-    </NavigationMenu>
+    </NavigationMenuShadcn>
   );
 };
-
-export default Menu;

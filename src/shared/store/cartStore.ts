@@ -4,6 +4,7 @@ import { CartProductItem } from "../types";
 
 interface CartStore {
   items: CartProductItem[];
+  quantity: number;
 
   // Actions
   addItem: (productId: number, quantity?: number) => void;
@@ -12,13 +13,13 @@ interface CartStore {
   clearCart: () => void;
   hasItem: (productId: number) => boolean;
   getItemQuantity: (productId: number) => number;
-  getTotalItemsQuantity: () => number;
 }
 
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      quantity: 0,
 
       addItem: (productId: number, quantity: number | undefined = 1) => {
         set((state) => {
@@ -33,19 +34,27 @@ export const useCartStore = create<CartStore>()(
                   ? { ...item, quantity: item.quantity + quantity }
                   : item
               ),
+              quantity: state.quantity + quantity,
             };
           }
 
           return {
             items: [...state.items, { productId, quantity }],
+            quantity: state.quantity + quantity,
           };
         });
       },
 
       removeItem: (productId: number) => {
-        set((state) => ({
-          items: state.items.filter((item) => item.productId !== productId),
-        }));
+        set((state) => {
+          const item = state.items.find((item) => item.productId === productId);
+          const quantityToRemove = item?.quantity || 0;
+
+          return {
+            items: state.items.filter((item) => item.productId !== productId),
+            quantity: state.quantity - quantityToRemove,
+          };
+        });
       },
 
       updateQuantity: (productId: number, quantity: number) => {
@@ -54,15 +63,22 @@ export const useCartStore = create<CartStore>()(
           return;
         }
 
-        set((state) => ({
-          items: state.items.map((item) =>
-            item.productId === productId ? { ...item, quantity } : item
-          ),
-        }));
+        set((state) => {
+          const item = state.items.find((item) => item.productId === productId);
+          const oldQuantity = item?.quantity || 0;
+          const quantityDiff = quantity - oldQuantity;
+
+          return {
+            items: state.items.map((item) =>
+              item.productId === productId ? { ...item, quantity } : item
+            ),
+            quantity: state.quantity + quantityDiff,
+          };
+        });
       },
 
       clearCart: () => {
-        set({ items: [] });
+        set({ items: [], quantity: 0 });
       },
 
       hasItem: (productId: number) => {
@@ -71,11 +87,8 @@ export const useCartStore = create<CartStore>()(
 
       getItemQuantity: (productId: number) => {
         const item = get().items.find((item) => item.productId === productId);
-        return item?.quantity || 0;
-      },
 
-      getTotalItemsQuantity: () => {
-        return get().items.reduce((sum, item) => sum + item.quantity, 0);
+        return item?.quantity || 0;
       },
     }),
     {

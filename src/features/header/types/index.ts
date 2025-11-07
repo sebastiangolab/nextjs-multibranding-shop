@@ -6,11 +6,6 @@ export interface HeaderLogo {
   height: number;
 }
 
-export interface HeaderData {
-  logoData: HeaderLogo;
-  menuData: MenuData[];
-}
-
 export interface MenuData {
   id: number;
   title: string;
@@ -18,4 +13,9 @@ export interface MenuData {
   parent: string;
   order: number;
   childrens?: MenuData[];
+}
+
+export interface HeaderData {
+  logoData: HeaderLogo;
+  menuData: MenuData[];
 }

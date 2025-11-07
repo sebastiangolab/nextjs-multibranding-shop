@@ -4,5 +4,5 @@
 
 // Components ----------------------------------------------
 
-// Main Header component
-export { default as Header } from "./components/Header";
+// Header component
+export { default as Header } from "./components/Header/Header.server";
