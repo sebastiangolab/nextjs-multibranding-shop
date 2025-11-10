@@ -1,6 +1,6 @@
 "use client";
 
-import { HeaderData } from "../../types";
+import { MenuItem } from "../../types";
 import {
   NavigationMenu as NavigationMenuShadcn,
   NavigationMenuList,
@@ -13,14 +13,14 @@ import {
 import Link from "next/link";
 
 interface NavigationMenuProps {
-  menuData: HeaderData["menuData"];
+  menuDataItems: MenuItem[];
 }
 
-export const NavigationMenu = ({ menuData }: NavigationMenuProps) => {
+export const NavigationMenu = ({ menuDataItems }: NavigationMenuProps) => {
   return (
     <NavigationMenuShadcn viewport={false}>
       <NavigationMenuList>
-        {menuData.map((menuItem) => {
+        {menuDataItems.map((menuItem) => {
           if (
             Array.isArray(menuItem.childrens) &&
             menuItem.childrens.length > 0

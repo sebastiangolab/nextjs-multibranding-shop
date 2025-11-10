@@ -10,14 +10,14 @@ import {
 } from "@shared/shadcn/ui/sheet";
 import { Menu } from "lucide-react";
 import { SidebarNavigationMenu } from "../SidebarNavigationMenu";
-import { HeaderData } from "../../types";
+import { MenuItem } from "../../types";
 
 interface SidebarNavigationButtonProps {
-  menuData: HeaderData["menuData"];
+  menuDataItems: MenuItem[];
 }
 
 const SidebarNavigationButton = ({
-  menuData,
+  menuDataItems,
 }: SidebarNavigationButtonProps) => {
   return (
     <Sheet>
@@ -33,7 +33,7 @@ const SidebarNavigationButton = ({
         </SheetHeader>
 
         <div className="mt-2">
-          <SidebarNavigationMenu menuData={menuData} />
+          <SidebarNavigationMenu menuDataItems={menuDataItems} />
         </div>
       </SheetContent>
     </Sheet>

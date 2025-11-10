@@ -1,21 +1,21 @@
 "use client";
 
-import { HeaderData } from "../../types";
+import { MenuItem } from "../../types";
 import { LinkButton } from "@shared/components/LinkButton";
 import { Accordion } from "@shared/shadcn/ui/accordion";
 import SidebarMenuDropdownItem from "../SidebarMenuDropdownItem";
 
 interface SidebarNavigationMenuProps {
-  menuData: HeaderData["menuData"];
+  menuDataItems: MenuItem[];
 }
 
 export const SidebarNavigationMenu = ({
-  menuData,
+  menuDataItems,
 }: SidebarNavigationMenuProps) => {
   return (
     <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
       <Accordion type="single" collapsible className="w-full">
-        {menuData.map((menuItem) =>
+        {menuDataItems.map((menuItem) =>
           menuItem.childrens && menuItem.childrens.length > 0 ? (
             // Item with accordion
             <SidebarMenuDropdownItem key={menuItem.id} menuItem={menuItem} />

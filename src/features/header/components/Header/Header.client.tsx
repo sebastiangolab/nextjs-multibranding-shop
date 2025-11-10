@@ -33,12 +33,16 @@ const HeaderClient = ({ data }: HeaderProps) => {
       className="shadow-sm bg-background md:sticky md:top-0 md:z-50"
     >
       <div className="container mx-auto">
-        <MainBar isSticky={isSticky} logoData={logoData} menuData={menuData} />
+        <MainBar
+          isSticky={isSticky}
+          logoData={logoData}
+          menuDataItems={menuData.items}
+        />
 
         {/* Navigation Row - Hidden on mobile or when isSticky */}
         <div className={`${isSticky ? "hidden" : "hidden md:block"} pb-1 px-4`}>
           <div className="-ml-3">
-            <NavigationMenu menuData={menuData} />
+            <NavigationMenu menuDataItems={menuData.items} />
           </div>
         </div>
       </div>

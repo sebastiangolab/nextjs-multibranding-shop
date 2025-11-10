@@ -2,16 +2,16 @@ import React from "react";
 import Logo from "../Logo";
 import UserActions from "../UserActions";
 import SearchBar from "../SearchBar";
-import { HeaderData } from "../../types";
+import { HeaderData, MenuItem } from "../../types";
 import SidebarNavigationButton from "../SidebarNavigationButton";
 
 interface MainBarProps {
   isSticky: boolean;
   logoData: HeaderData["logoData"];
-  menuData: HeaderData["menuData"];
+  menuDataItems: MenuItem[];
 }
 
-const MainBar = ({ isSticky, logoData, menuData }: MainBarProps) => {
+const MainBar = ({ isSticky, logoData, menuDataItems }: MainBarProps) => {
   return (
     <div className={`transition-all ${isSticky ? "py-1" : "py-4"} px-4`}>
       {/* Mobile Layout */}
@@ -23,7 +23,7 @@ const MainBar = ({ isSticky, logoData, menuData }: MainBarProps) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <SidebarNavigationButton menuData={menuData} />
+          <SidebarNavigationButton menuDataItems={menuDataItems} />
 
           <SearchBar />
         </div>
@@ -32,7 +32,9 @@ const MainBar = ({ isSticky, logoData, menuData }: MainBarProps) => {
       {/* Desktop Layout */}
       <div className="hidden md:grid md:grid-cols-3 gap-4 items-center">
         <div className="flex justify-start items-center gap-2">
-          {isSticky && <SidebarNavigationButton menuData={menuData} />}
+          {isSticky && (
+            <SidebarNavigationButton menuDataItems={menuDataItems} />
+          )}
 
           <Logo data={logoData} />
         </div>

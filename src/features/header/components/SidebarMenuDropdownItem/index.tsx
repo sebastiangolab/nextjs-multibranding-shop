@@ -1,4 +1,4 @@
-import { MenuData } from "../../types";
+import { MenuItem } from "../../types";
 import { LinkButton } from "@shared/components/LinkButton";
 import {
   AccordionContent,
@@ -7,7 +7,7 @@ import {
 } from "@shared/shadcn/ui/accordion";
 
 interface AccordionMenuItemProps {
-  menuItem: MenuData;
+  menuItem: MenuItem;
 }
 
 const SidebarMenuDropdownItem = ({ menuItem }: AccordionMenuItemProps) => {

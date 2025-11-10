@@ -1,7 +1,7 @@
-import { MenuData } from "../types";
+import { MenuItem, MenuResponseItem } from "../types";
 
-export const normalizeMenuItems = (items: MenuData[]): MenuData[] => {
-  const normalizeItems = items.reduce<MenuData[]>((newItems, item) => {
+export const normalizeMenuItems = (items: MenuResponseItem[]): MenuItem[] => {
+  const normalizeItems = items.reduce<MenuItem[]>((newItems, item) => {
     if (item.parent === "0") {
       return [...newItems, item];
     }
