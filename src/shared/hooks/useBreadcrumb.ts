@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   href: string;
   isCurrentPage?: boolean;
@@ -17,7 +17,11 @@ const formatPathSegmentLabel = (pathSegment: string): string => {
     .join(" ");
 };
 
-export const useBreadcrumb = (currentPageLabel: string): BreadcrumbItem[] => {
+export const useBreadcrumb = (
+  currentPageLabel: string,
+  categoriesItems?: BreadcrumbItem[],
+  isCategoryCurrentPage?: boolean
+): BreadcrumbItem[] => {
   const pathname = usePathname();
 
   const pathSegments = pathname.split("/").filter(Boolean);
@@ -31,6 +35,29 @@ export const useBreadcrumb = (currentPageLabel: string): BreadcrumbItem[] => {
     isCurrentPage: pathSegments.length === 0,
   });
 
+  // Add category items if provided
+  if (categoriesItems && categoriesItems.length > 0) {
+    items.push({
+      label: "Kategorie",
+      href: "/kategorie",
+    });
+
+    categoriesItems.forEach((item) => {
+      items.push(item);
+    });
+
+    // Add current page if it's not a category page
+    if (!isCategoryCurrentPage) {
+      items.push({
+        label: currentPageLabel,
+        href: pathname,
+        isCurrentPage: true,
+      });
+    }
+
+    return items;
+  }
+
   // If we are on the home page, return only it
   if (pathSegments.length === 0) {
     return items;
@@ -38,6 +65,7 @@ export const useBreadcrumb = (currentPageLabel: string): BreadcrumbItem[] => {
 
   // Generate elements for each path segment
   let currentPath = "";
+
   pathSegments.forEach((pathSegment, index) => {
     currentPath += `/${pathSegment}`;
 

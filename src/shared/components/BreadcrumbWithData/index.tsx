@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Fragment } from "react";
 import { SlashIcon } from "lucide-react";
 import { useBreadcrumb } from "@shared/hooks/useBreadcrumb";
 import {
@@ -11,16 +11,27 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@shared/shadcn/ui/breadcrumb";
+import { BreadcrumbItem as BreadcrumbItemType } from "@shared/hooks/useBreadcrumb";
 
 interface BreadcrumbWithDataProps {
   currentPageLabel: string;
+  categoryItems?: BreadcrumbItemType[];
+  isCategoryCurrentPage?: boolean;
 }
 
-const BreadcrumbWithData = ({ currentPageLabel }: BreadcrumbWithDataProps) => {
-  const breadcrumbItemsData = useBreadcrumb(currentPageLabel);
+const BreadcrumbWithData = ({
+  currentPageLabel,
+  categoryItems,
+  isCategoryCurrentPage,
+}: BreadcrumbWithDataProps) => {
+  const breadcrumbItemsData = useBreadcrumb(
+    currentPageLabel,
+    categoryItems,
+    isCategoryCurrentPage
+  );
 
   const breadcrumbItems = breadcrumbItemsData.map((item) => (
-    <React.Fragment key={item.href}>
+    <Fragment key={item.href}>
       <BreadcrumbItem>
         {item.isCurrentPage ? (
           <BreadcrumbPage>{item.label}</BreadcrumbPage>
@@ -34,7 +45,7 @@ const BreadcrumbWithData = ({ currentPageLabel }: BreadcrumbWithDataProps) => {
           <SlashIcon />
         </BreadcrumbSeparator>
       ) : null}
-    </React.Fragment>
+    </Fragment>
   ));
 
   return (
