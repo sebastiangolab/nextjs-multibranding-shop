@@ -15,11 +15,11 @@ interface ProductCardProps {
 const ProductCard = ({ data }: ProductCardProps): ReactElement => {
   const { images, name, price, id } = data;
 
-  const { addItem } = useCartStore();
+  const { addItemToCart } = useCartStore();
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0">
-      <div className="aspect-4/3 bg-muted relative overflow-hidden">
+      <div className="aspect-1/1 bg-muted relative overflow-hidden">
         {images && images[0] ? (
           <Image
             src={images[0].src}
@@ -52,7 +52,7 @@ const ProductCard = ({ data }: ProductCardProps): ReactElement => {
           <div className="flex items-center justify-between">
             <p className="text-xl font-bold text-foreground">{price} zł</p>
 
-            <Button onClick={() => addItem(id)} size="icon">
+            <Button onClick={() => addItemToCart(id)} size="icon">
               <ShoppingCart className="h-4 w-4" />
             </Button>
           </div>

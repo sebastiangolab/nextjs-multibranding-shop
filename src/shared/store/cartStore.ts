@@ -7,12 +7,10 @@ interface CartStore {
   quantity: number;
 
   // Actions
-  addItem: (productId: number, quantity?: number) => void;
-  removeItem: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
+  addItemToCart: (productId: number, quantity?: number) => void;
+  removeItemFromCart: (productId: number) => void;
+  updateProductQuantityInCart: (productId: number, quantity: number) => void;
   clearCart: () => void;
-  hasItem: (productId: number) => boolean;
-  getItemQuantity: (productId: number) => number;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -21,7 +19,7 @@ export const useCartStore = create<CartStore>()(
       items: [],
       quantity: 0,
 
-      addItem: (productId: number, quantity: number | undefined = 1) => {
+      addItemToCart: (productId: number, quantity: number | undefined = 1) => {
         set((state) => {
           const existingItem = state.items.find(
             (item) => item.productId === productId
@@ -45,7 +43,7 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
-      removeItem: (productId: number) => {
+      removeItemFromCart: (productId: number) => {
         set((state) => {
           const item = state.items.find((item) => item.productId === productId);
           const quantityToRemove = item?.quantity || 0;
@@ -57,9 +55,9 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
-      updateQuantity: (productId: number, quantity: number) => {
+      updateProductQuantityInCart: (productId: number, quantity: number) => {
         if (quantity <= 0) {
-          get().removeItem(productId);
+          get().removeItemFromCart(productId);
           return;
         }
 
@@ -79,16 +77,6 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => {
         set({ items: [], quantity: 0 });
-      },
-
-      hasItem: (productId: number) => {
-        return get().items.some((item) => item.productId === productId);
-      },
-
-      getItemQuantity: (productId: number) => {
-        const item = get().items.find((item) => item.productId === productId);
-
-        return item?.quantity || 0;
       },
     }),
     {
