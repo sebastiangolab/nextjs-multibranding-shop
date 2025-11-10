@@ -1,49 +1,31 @@
 "use client";
 
-import { LinkButton } from "@shared/components/LinkButton";
-import { Badge } from "@shared/shadcn/ui/badge";
 import { useCartStore } from "@shared/store/cartStore";
+import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { Heart, ShoppingCart } from "lucide-react";
+import UserActionButton from "../UserActionButton";
 
 const UserActions = () => {
   const { quantity } = useCartStore();
+  const { productsIds } = useFavoritesStore();
 
   return (
     <div className="flex items-center gap-2 justify-end">
       {/* Favorites Button */}
-      <LinkButton
-        variant="ghost"
-        size="sm"
-        className="flex flex-col items-center gap-1 h-auto py-2"
+      <UserActionButton
+        label="Ulubione"
         href="/favorites"
-      >
-        <Heart className="size-5" />
+        icon={<Heart className="size-5" />}
+        quantity={productsIds.length}
+      />
 
-        <span className="text-xs">Ulubione</span>
-      </LinkButton>
-
-      {/* Cart Button with Badge */}
-      <LinkButton
-        variant="ghost"
-        size="sm"
-        className="flex flex-col items-center gap-1 h-auto py-2 relative"
+      {/* Cart Button */}
+      <UserActionButton
+        label="Koszyk"
         href="/cart"
-      >
-        <div className="relative">
-          <ShoppingCart className="size-5" />
-
-          {quantity > 0 && (
-            <Badge
-              variant="default"
-              className="absolute -top-2 -right-2.5 min-h-4 min-w-4 flex items-center justify-center p-0 text-[0.625rem] rounded-sm"
-            >
-              {quantity}
-            </Badge>
-          )}
-        </div>
-
-        <span className="text-xs">Koszyk</span>
-      </LinkButton>
+        icon={<ShoppingCart className="size-5" />}
+        quantity={quantity}
+      />
     </div>
   );
 };
