@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ProductData,
-  ProductsCategoryData,
-  getProductsData,
-} from "@features/products";
+import { ProductData, getProductsData } from "@features/products";
 import { useProductsFilters } from "../../hooks/useProductsFilters";
 import CategoryHeader from "../CategoryHeader";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
@@ -15,9 +11,10 @@ import { MobileFiltersSheet } from "../MobileFiltersSheet";
 import { MobileSubcategoriesSheet } from "../MobileSubcategoriesSheet";
 import { LoadingOverlay } from "@shared/components/LoadingOverlay";
 import { convertAttributesDataToParams } from "@views/category/helpers/convertAttributesDataToParams";
+import { ProductsCategoryFullData } from "@shared/types";
 
 type CategoryViewClientProps = {
-  categoryData: ProductsCategoryData;
+  categoryData: ProductsCategoryFullData;
   allProductsData: ProductData[];
 };
 

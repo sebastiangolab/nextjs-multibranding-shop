@@ -1,14 +1,17 @@
-import { ProductsCategoryData, ProductsCategoryResponseData } from "../types";
+import {
+  ProductsCategoryFullData,
+  ProductsCategoryResponseData,
+} from "@shared/types";
 
 export const normalizeProductsCategoryData = (
   category: ProductsCategoryResponseData,
   allCategories: ProductsCategoryResponseData[]
-): ProductsCategoryData => {
+): ProductsCategoryFullData => {
   const subcategories = allCategories.filter((subCategory) => {
     return subCategory.parent.toString() === category.id.toString();
   });
 
-  const normalizedSubcategories: ProductsCategoryData[] = subcategories.map(
+  const normalizedSubcategories: ProductsCategoryFullData[] = subcategories.map(
     (subCategory) => {
       return {
         ...subCategory,

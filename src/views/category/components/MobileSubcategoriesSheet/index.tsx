@@ -1,13 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { SubcategoryMenu } from "../SubcategoryMenu";
 import { Button } from "@shared/shadcn/ui/button";
-import { ProductsCategoryData } from "@features/products";
 import { BottomSheet } from "@shared/components/BottomSheet";
+import { ProductsCategoryFullData } from "@shared/types";
 
 interface MobileSubcategoriesSheetProps {
   isMobileSubcategoriesSheetOpen: boolean;
   setIsMobileSubcategoriesSheetOpen: Dispatch<SetStateAction<boolean>>;
-  subcategories: ProductsCategoryData[];
+  subcategories: ProductsCategoryFullData[];
 }
 
 export const MobileSubcategoriesSheet = ({

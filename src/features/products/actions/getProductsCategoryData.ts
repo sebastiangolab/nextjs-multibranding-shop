@@ -1,10 +1,13 @@
 import { axiosWCApi } from "@shared/lib/axios";
 import { normalizeProductsCategoryData } from "../helpers/normalizeProductsCategoryData";
-import { ProductsCategoryData, ProductsCategoryResponseData } from "../types";
+import {
+  ProductsCategoryFullData,
+  ProductsCategoryResponseData,
+} from "@shared/types";
 
 export const getProductsCategoryData = async (
   categorySlug: string
-): Promise<ProductsCategoryData | null> => {
+): Promise<ProductsCategoryFullData | null> => {
   try {
     const { data: allCategories } =
       await axiosWCApi<ProductsCategoryResponseData[]>(`/products/categories`);

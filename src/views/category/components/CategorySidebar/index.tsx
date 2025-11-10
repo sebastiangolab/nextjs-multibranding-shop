@@ -3,12 +3,12 @@ import { SubcategoryMenu } from "../SubcategoryMenu";
 import { Separator } from "@shared/shadcn/ui/separator";
 import { PriceFilter } from "../PriceFilter";
 import { AttributeFilters } from "../AttributeFilters";
-import { ProductsCategoryData } from "@features/products";
 import { ProductsFiltersElementData } from "../../types";
 import { ClearFiltersButton } from "../ClearFiltersButton";
+import { ProductsCategoryFullData } from "@shared/types";
 
 interface CategorySidebarProps {
-  subcategories: ProductsCategoryData[];
+  subcategories: ProductsCategoryFullData[];
   productsFiltersData: ProductsFiltersElementData;
 }
 

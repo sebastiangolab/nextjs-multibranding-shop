@@ -1,8 +1,8 @@
-import { ProductsCategoryData } from "@features/products";
 import { LinkButton } from "@shared/components/LinkButton";
+import { ProductsCategoryFullData } from "@shared/types";
 
 interface SubcategoryMenuProps {
-  categoriesData: ProductsCategoryData[];
+  categoriesData: ProductsCategoryFullData[];
 }
 
 export const SubcategoryMenu = ({ categoriesData }: SubcategoryMenuProps) => {
