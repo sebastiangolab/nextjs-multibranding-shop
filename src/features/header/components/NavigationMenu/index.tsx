@@ -1,6 +1,5 @@
 "use client";
 
-import { MenuItem } from "../../types";
 import {
   NavigationMenu as NavigationMenuShadcn,
   NavigationMenuList,
@@ -10,6 +9,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@shared/shadcn/ui/navigation-menu";
+import { MenuItem } from "@shared/types";
 import Link from "next/link";
 
 interface NavigationMenuProps {

@@ -1,4 +1,4 @@
-import { MenuItem, MenuResponseItem } from "../types";
+import { MenuItem, MenuResponseItem } from "@shared/types";
 
 export const normalizeMenuItems = (items: MenuResponseItem[]): MenuItem[] => {
   const normalizeItems = items.reduce<MenuItem[]>((newItems, item) => {

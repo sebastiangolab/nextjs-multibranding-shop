@@ -1,10 +1,10 @@
-import { MenuItem } from "../../types";
 import { LinkButton } from "@shared/components/LinkButton";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/shadcn/ui/accordion";
+import { MenuItem } from "@shared/types";
 
 interface AccordionMenuItemProps {
   menuItem: MenuItem;

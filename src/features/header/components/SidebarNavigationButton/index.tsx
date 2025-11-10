@@ -10,7 +10,7 @@ import {
 } from "@shared/shadcn/ui/sheet";
 import { Menu } from "lucide-react";
 import { SidebarNavigationMenu } from "../SidebarNavigationMenu";
-import { MenuItem } from "../../types";
+import { MenuItem } from "@shared/types";
 
 interface SidebarNavigationButtonProps {
   menuDataItems: MenuItem[];

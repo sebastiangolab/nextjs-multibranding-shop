@@ -1,6 +1,7 @@
 import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
-import { normalizeMenuItems } from "../helpers/normalizeMenuItems";
-import { HeaderData, HeaderLogo, MenuResponseData } from "../types";
+import { HeaderData, HeaderLogo } from "../types";
+import { MenuResponseData } from "@shared/types";
+import { normalizeMenuItems } from "@shared/helpers/menuHelpers";
 
 interface HeaderResponseData {
   acf: {
@@ -27,7 +28,7 @@ export const getHeaderData = async (): Promise<HeaderData | null> => {
       },
     };
   } catch (error) {
-    console.error("❌ Error fetching main menu data: ", error);
+    console.error("❌ Error fetching header data: ", error);
     return null;
   }
 };

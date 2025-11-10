@@ -1,9 +1,9 @@
 "use client";
 
-import { MenuItem } from "../../types";
 import { LinkButton } from "@shared/components/LinkButton";
 import { Accordion } from "@shared/shadcn/ui/accordion";
 import SidebarMenuDropdownItem from "../SidebarMenuDropdownItem";
+import { MenuItem } from "@shared/types";
 
 interface SidebarNavigationMenuProps {
   menuDataItems: MenuItem[];

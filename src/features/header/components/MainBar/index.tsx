@@ -2,8 +2,9 @@ import React from "react";
 import Logo from "../Logo";
 import UserActions from "../UserActions";
 import SearchBar from "../SearchBar";
-import { HeaderData, MenuItem } from "../../types";
+import { HeaderData } from "../../types";
 import SidebarNavigationButton from "../SidebarNavigationButton";
+import { MenuItem } from "@shared/types";
 
 interface MainBarProps {
   isSticky: boolean;
