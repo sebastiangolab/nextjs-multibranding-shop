@@ -7,6 +7,7 @@ import { getSingleProductData } from "./actions/getSingleProductData";
 import { getProductDeepestCategory } from "./actions/getProductDeepestCategory";
 import { getCategoriesBreadcrumbItems } from "@shared/actions/getCategoriesBreadcrumbItems";
 import TopRow from "./components/TopRow";
+import BasicContainer from "@shared/components/BasicContainer";
 
 interface SingleProductViewProps {
   params: Promise<{ productSlug?: string }>;
@@ -37,27 +38,29 @@ export const SingleProductView = async (params: SingleProductViewProps) => {
     await getCategoriesBreadcrumbItems(productCategory);
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="flex flex-col gap-10 lg:gap-16">
-        <div>
-          <TopRow
-            productId={productData.id}
-            productName={productData.name}
-            breadcrumbCategoryItems={breadcrumbCategoryItems}
+    <BasicContainer>
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col gap-10 lg:gap-16">
+          <div>
+            <TopRow
+              productId={productData.id}
+              productName={productData.name}
+              breadcrumbCategoryItems={breadcrumbCategoryItems}
+            />
+
+            <ProductMain productData={productData} />
+          </div>
+
+          {productData.description ? (
+            <ProductDescription description={productData.description} />
+          ) : null}
+
+          <RelatedProducts
+            currentProductId={productData.id}
+            categoryId={productCategory.id}
           />
-
-          <ProductMain productData={productData} />
         </div>
-
-        {productData.description ? (
-          <ProductDescription description={productData.description} />
-        ) : null}
-
-        <RelatedProducts
-          currentProductId={productData.id}
-          categoryId={productCategory.id}
-        />
       </div>
-    </div>
+    </BasicContainer>
   );
 };
