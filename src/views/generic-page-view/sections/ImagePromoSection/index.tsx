@@ -1,0 +1,31 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import Section from "../../components/Section";
+import { ImagePromoSectionProps } from "../../types";
+
+export const ImagePromoSection = ({
+  image,
+  url,
+  linkTitle,
+  isFullWidth = false,
+}: ImagePromoSectionProps) => {
+  return (
+    <Section isFullWidth={isFullWidth}>
+      <Link
+        href={url}
+        className="block relative w-full h-[360px] overflow-hidden rounded-lg group"
+        title={linkTitle}
+      >
+        <Image
+          src={image.url}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          className="w-full h-auto object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </Link>
+    </Section>
+  );
+};

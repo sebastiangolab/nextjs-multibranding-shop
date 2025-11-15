@@ -1,13 +1,17 @@
-import { SectionData } from "../../types";
+import { ImagePromoSection } from "../../sections/ImagePromoSection";
+import ImageWithTextSection from "../../sections/ImageWithTextSection";
+import ProductsListSection from "../../sections/ProductsListSection";
+import SliderSection from "../../sections/SliderSection";
+import TextSection from "../../sections/TextSection";
 import {
   GenericSectionType,
+  ImagePromoSectionProps,
   ImageWithTextSectionProps,
   ProductsListSectionProps,
+  SectionData,
+  SliderSectionProps,
   TextSectionProps,
-} from "../../types/sections";
-import ImageWithTextSection from "../sections/ImageWithTextSection";
-import ProductsListSection from "../sections/ProductsListSection";
-import TextSection from "../sections/TextSection";
+} from "../../types";
 
 interface GenericSectionsProps {
   sectionsData: SectionData[];
@@ -38,6 +42,26 @@ const GenericSections = async ({ sectionsData }: GenericSectionsProps) => {
         <ProductsListSection
           key={`${sectionData.type}-${index}`}
           {...(sectionData.fields as ProductsListSectionProps)}
+        />
+      );
+    }
+
+    if (sectionData.type === GenericSectionType.SLIDER_SECTION) {
+      console.log("Rendering SliderSection with data:", sectionData.fields);
+
+      return (
+        <SliderSection
+          key={`${sectionData.type}-${index}`}
+          {...(sectionData.fields as SliderSectionProps)}
+        />
+      );
+    }
+
+    if (sectionData.type === GenericSectionType.IMAGE_PROMO_SECTION) {
+      return (
+        <ImagePromoSection
+          key={`${sectionData.type}-${index}`}
+          {...(sectionData.fields as ImagePromoSectionProps)}
         />
       );
     }

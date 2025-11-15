@@ -1,10 +1,10 @@
 import { axiosWpAcfApi } from "@shared/lib/axios";
-import { SectionData } from "../types";
-import { SectionType } from "../types/sections";
+import { normalizeSectionData } from "../helpers/normalizeSectionHelpers";
+import { GenericSectionType, SectionData, SectionResponseData } from "../types";
 
 interface ResponseSectionData {
   template: string;
-  acf: SectionType;
+  acf: SectionResponseData;
 }
 
 export const getGenericSectionsData = async (
@@ -13,9 +13,12 @@ export const getGenericSectionsData = async (
   try {
     const formattedSectionsIds = genericPageSectionsIds.join(",");
 
-    const { data } = await axiosWpAcfApi<ResponseSectionData[]>(
-      `/section?include=${formattedSectionsIds}`
-    );
+    const { data } = await axiosWpAcfApi<ResponseSectionData[]>(`/section`, {
+      params: {
+        include: formattedSectionsIds,
+        orderby: "include",
+      },
+    });
 
     if (!Array.isArray(data)) {
       return null;
@@ -24,11 +27,11 @@ export const getGenericSectionsData = async (
     const normalizedSectionsData: SectionData[] = data.map((sectionData) => {
       const sectionType = sectionData.template
         .replace("templates/template-", "")
-        .replace(".php", "");
+        .replace(".php", "") as GenericSectionType;
 
       return {
         type: sectionType,
-        fields: sectionData.acf,
+        fields: normalizeSectionData(sectionType, sectionData.acf),
       };
     });
 

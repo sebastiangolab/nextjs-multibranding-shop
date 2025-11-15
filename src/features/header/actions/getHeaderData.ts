@@ -1,11 +1,11 @@
-import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
-import { HeaderData, HeaderLogo } from "../types";
-import { MenuResponseData } from "@shared/types";
 import { normalizeMenuItems } from "@shared/helpers/menuHelpers";
+import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
+import { Image, MenuResponseData } from "@shared/types";
+import { HeaderData } from "../types";
 
 interface HeaderResponseData {
   acf: {
-    logo: HeaderLogo;
+    logo: Image;
   };
 }
 

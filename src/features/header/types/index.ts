@@ -1,14 +1,6 @@
-import { MenuData } from "@shared/types";
-
-export interface HeaderLogo {
-  id: number;
-  url: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import { Image, MenuData } from "@shared/types";
 
 export interface HeaderData {
-  logoData: HeaderLogo;
+  logoData: Image;
   menuData: MenuData;
 }

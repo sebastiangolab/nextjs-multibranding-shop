@@ -1,6 +1,10 @@
-export interface CartProductItem {
-  productId: number;
-  quantity: number;
+// Global
+export interface Image {
+  id: number;
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 // Products Category shared types

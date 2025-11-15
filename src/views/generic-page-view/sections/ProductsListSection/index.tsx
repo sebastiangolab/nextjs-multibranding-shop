@@ -1,6 +1,7 @@
 import { getProductsData, ProductsGrid } from "@features/products";
-import { ProductsListSectionProps } from "../../../types/sections";
-import Section from "../../Section";
+import Section from "../../components/Section";
+import { ProductsListSectionProps } from "../../types";
+import SectionTitleH2 from "../../components/SectionTitleH2";
 
 const ProductsListSection = async ({
   title,
@@ -12,9 +13,9 @@ const ProductsListSection = async ({
 
   return (
     <Section>
-      <h2 className="text-2xl md:text-3xl font-semibold mb-6">{title}</h2>
+      <SectionTitleH2>{title}</SectionTitleH2>
 
-      <ProductsGrid products={productsResponse?.products} />
+      <ProductsGrid products={productsResponse?.products} isSectionVariant />
     </Section>
   );
 };
