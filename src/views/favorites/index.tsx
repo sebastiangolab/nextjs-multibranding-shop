@@ -58,7 +58,7 @@ const FavoritesView = () => {
 
   return (
     <BasicContainer>
-      <h1 className="text-3xl font-bold">Ulubione</h1>
+      <h1 className="text-3xl font-bold mb-6">Ulubione</h1>
 
       {isLoading ? <ProductsGridSkeleton count={productsIds.length} /> : null}
 
@@ -70,9 +70,9 @@ const FavoritesView = () => {
 
       {!isLoading && displayedProducts.length > 0 ? (
         <>
-          <ProductsGrid products={displayedProducts} />
+          <ProductsGrid products={displayedProducts} isSectionVariant />
 
-          <Button size="lg" onClick={clearFavorites}>
+          <Button size="lg" className="mt-6" onClick={clearFavorites}>
             Usuń wszystkie z ulubionych
           </Button>
         </>

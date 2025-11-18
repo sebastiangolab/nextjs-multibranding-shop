@@ -10,17 +10,17 @@ import {
   PaginationPrevious,
 } from "@shared/shadcn/ui/pagination";
 
-interface ProductsPaginationProps {
+interface PaginationProps {
   currentPage: number;
   totalPages: number;
   setPaginationPage: (page: number) => void;
 }
 
-export const ProductsPagination = ({
+export const CustomPagination = ({
   currentPage,
   totalPages,
   setPaginationPage,
-}: ProductsPaginationProps) => {
+}: PaginationProps) => {
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPaginationPage(newPage);

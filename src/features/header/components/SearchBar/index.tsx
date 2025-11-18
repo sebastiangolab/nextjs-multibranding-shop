@@ -78,10 +78,13 @@ export const SearchBar = () => {
     const fetchProducts = async () => {
       setIsLoading(true);
 
-      const products = await getSearchedProductsData(debouncedSearchQuery, 5);
+      const results = await getSearchedProductsData({
+        phrase: debouncedSearchQuery,
+        perPage: 5,
+      });
 
-      if (products) {
-        setProducts(products);
+      if (results) {
+        setProducts(results.products);
         setIsResultsDropdownOpen(true);
       }
 

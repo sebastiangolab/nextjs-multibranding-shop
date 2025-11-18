@@ -3,7 +3,7 @@ import {
   ProductsGrid,
   ProductsGridSkeleton,
 } from "@features/products";
-import { ProductsPagination } from "../ProductsPagination";
+import { CustomPagination } from "@shared/components/Pagination";
 import { Button } from "@shared/shadcn/ui/button";
 import { Filter, Menu } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
@@ -55,7 +55,7 @@ export const CategoryContent = ({
         </div>
 
         {paginationTotalPages > 1 ? (
-          <ProductsPagination
+          <CustomPagination
             currentPage={paginationPage}
             totalPages={paginationTotalPages}
             setPaginationPage={setPaginationPage}
