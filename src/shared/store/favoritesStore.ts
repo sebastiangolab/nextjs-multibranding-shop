@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -16,11 +17,17 @@ export const useFavoritesStore = create<FavoritesStore>()(
 
       toggleFavoriteProduct: (productId: number) => {
         set((state) => {
-          if (state.productsIds.includes(productId)) {
+          const isFavorite = state.productsIds.includes(productId);
+
+          if (isFavorite) {
+            toast.info("Usunięto z ulubionych");
+
             return {
               productsIds: state.productsIds.filter((id) => id !== productId),
             };
           }
+
+          toast.success("Dodano do ulubionych");
 
           return {
             productsIds: [...state.productsIds, productId],
@@ -29,12 +36,14 @@ export const useFavoritesStore = create<FavoritesStore>()(
       },
 
       clearFavorites: () => {
+        toast.success("Usunięto wszystkie produkty z ulubionych");
+
         set({ productsIds: [] });
       },
     }),
     {
-      name: "favorites-storage", // sessionStorage key
-      storage: createJSONStorage(() => sessionStorage),
+      name: "favorites-storage", // localStorage key
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

@@ -30,8 +30,10 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
   );
 
   const handleAddToCart = () => {
-    addItemToCart(id, quantity);
-    openModal(productData, quantity);
+    addItemToCart(id, quantity, () => {
+      openModal(productData, quantity);
+    });
+
     setQuantity(1);
   };
 

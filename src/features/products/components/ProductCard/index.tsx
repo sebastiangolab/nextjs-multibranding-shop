@@ -8,6 +8,7 @@ import { Button } from "@shared/shadcn/ui/button";
 import { Card, CardContent } from "@shared/shadcn/ui/card";
 import { useCartStore } from "@shared/store/cartStore";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
+import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { ProductData } from "../../types";
 
 interface ProductCardProps {
@@ -19,16 +20,24 @@ const ProductCard = ({ data }: ProductCardProps) => {
 
   const { addItemToCart } = useCartStore();
   const { openModal } = useAddToCartModalStore();
+  const { toggleFavoriteProduct, productsIds } = useFavoritesStore();
 
-  const handleAddToCart = () => {
-    addItemToCart(id);
-    openModal(data);
-  };
+  const isFavorite = productsIds.includes(id);
 
   const handleAddToCartButtonClick = (event: MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    handleAddToCart();
+
+    addItemToCart(id, 1, () => {
+      openModal(data);
+    });
+  };
+
+  const handleToggleFavorite = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    toggleFavoriteProduct(id);
   };
 
   return (
@@ -53,8 +62,11 @@ const ProductCard = ({ data }: ProductCardProps) => {
             size="icon"
             variant="outline"
             className="absolute top-2 right-2 h-8 w-8 bg-white/80 hover:bg-white"
+            onClick={handleToggleFavorite}
           >
-            <Heart className="h-4 w-4" />
+            <Heart
+              className={`h-4 w-4 ${isFavorite ? "fill-destructive text-destructive" : ""}`}
+            />
           </Button>
         </div>
 

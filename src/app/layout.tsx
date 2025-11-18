@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { Header } from "@features/header";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
+import { Toaster } from "@shared/shadcn/ui/sonner";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -34,6 +35,7 @@ export default function RootLayout({
           <Footer />
 
           <AddToCartModal />
+          <Toaster />
         </Providers>
       </body>
     </html>

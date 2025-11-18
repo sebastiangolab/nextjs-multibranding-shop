@@ -11,7 +11,11 @@ interface CartStore {
   quantity: number;
 
   // Actions
-  addItemToCart: (productId: number, quantity?: number) => void;
+  addItemToCart: (
+    productId: number,
+    quantity?: number,
+    onSuccess?: () => void
+  ) => void;
   removeItemFromCart: (productId: number) => void;
   updateProductQuantityInCart: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -23,7 +27,11 @@ export const useCartStore = create<CartStore>()(
       items: [],
       quantity: 0,
 
-      addItemToCart: (productId: number, quantity: number | undefined = 1) => {
+      addItemToCart: (
+        productId: number,
+        quantity: number | undefined = 1,
+        onSuccess?: () => void
+      ) => {
         set((state) => {
           const existingItem = state.items.find(
             (item) => item.productId === productId
@@ -45,6 +53,9 @@ export const useCartStore = create<CartStore>()(
             quantity: state.quantity + quantity,
           };
         });
+
+        // Run callback after adding item
+        onSuccess?.();
       },
 
       removeItemFromCart: (productId: number) => {
@@ -84,8 +95,8 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: "cart-storage", // sessionStorage key
-      storage: createJSONStorage(() => sessionStorage),
+      name: "cart-storage", // localStorage key
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
