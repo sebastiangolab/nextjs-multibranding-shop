@@ -46,7 +46,7 @@ const SearchViewClient = ({
     setPaginationPage(newPage);
 
     router.push(
-      `/search?q=${encodeURIComponent(searchPhrase)}&page=${newPage}`,
+      `/szukaj?q=${encodeURIComponent(searchPhrase)}&page=${newPage}`,
       {
         scroll: true,
       }

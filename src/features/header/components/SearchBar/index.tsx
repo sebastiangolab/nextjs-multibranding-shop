@@ -35,7 +35,7 @@ export const SearchBar = () => {
     event.preventDefault();
 
     if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+      window.location.href = `/szukaj?q=${encodeURIComponent(searchQuery)}`;
     }
   };
 
@@ -195,7 +195,7 @@ export const SearchBar = () => {
 
                 {searchQuery && (
                   <Link
-                    href={`/search?q=${encodeURIComponent(searchQuery)}`}
+                    href={`/szukaj?q=${encodeURIComponent(searchQuery)}`}
                     onClick={() => setIsResultsDropdownOpen(false)}
                     className="block p-3 text-center text-sm text-primary hover:bg-accent border-t font-medium"
                   >
