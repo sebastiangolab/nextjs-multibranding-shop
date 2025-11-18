@@ -11,6 +11,7 @@ interface SliderBottomNavigationProps {
   isPlaying: boolean;
   setIsPlaying: Dispatch<SetStateAction<boolean>>;
   navButtonsRef: MutableRefObject<(HTMLButtonElement | null)[]>;
+  navContainerRef: MutableRefObject<HTMLDivElement | null>;
 }
 
 const SliderBottomNavigation = ({
@@ -20,12 +21,16 @@ const SliderBottomNavigation = ({
   isPlaying,
   setIsPlaying,
   navButtonsRef,
+  navContainerRef,
 }: SliderBottomNavigationProps) => {
   return (
     <div className="absolute bottom-4 left-0 right-0 z-10 flex justify-center px-2">
       <div className="inline-flex items-center gap-2 px-3 py-2 bg-background/80 backdrop-blur-sm rounded-lg max-w-full">
         {/* Slide Navigation Tabs - Scrollable */}
-        <div className="flex items-center gap-1 overflow-x-auto max-w-[calc(100vw-8rem)] scroll-smooth snap-x snap-mandatory scrollbar-hide">
+        <div
+          ref={navContainerRef}
+          className="flex items-center gap-1 overflow-x-auto max-w-[calc(100vw-8rem)] scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        >
           {slides.map((slide, index) => (
             <Button
               key={slide.label}
