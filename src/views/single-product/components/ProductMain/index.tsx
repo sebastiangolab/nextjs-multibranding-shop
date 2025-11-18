@@ -9,6 +9,7 @@ import { Heart, Mail, RotateCcw, ShoppingCart, Truck } from "lucide-react";
 import { QuantitySelector } from "../ProductQuantitySelector";
 import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
+import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 
 interface ProductMainProps {
   productData: ProductData;
@@ -18,6 +19,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
   const [quantity, setQuantity] = useState(1);
 
   const { addItemToCart } = useCartStore();
+  const { openModal } = useAddToCartModalStore();
   const { productsIds, toggleFavoriteProduct } = useFavoritesStore();
 
   const { id, images, name, brands, sku, shortDescription, price } =
@@ -29,6 +31,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
 
   const handleAddToCart = () => {
     addItemToCart(id, quantity);
+    openModal(productData, quantity);
     setQuantity(1);
   };
 

@@ -5,6 +5,7 @@ import "@shared/styles/globals.css";
 import { Providers } from "./providers";
 import { Header } from "@features/header";
 import { Footer } from "@features/footer";
+import AddToCartModal from "@shared/components/AddToCartModal";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -31,6 +32,8 @@ export default function RootLayout({
           <div>{children}</div>
 
           <Footer />
+
+          <AddToCartModal />
         </Providers>
       </body>
     </html>

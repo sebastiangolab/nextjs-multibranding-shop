@@ -6,6 +6,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
 import { Card, CardContent } from "@shared/shadcn/ui/card";
 import { useCartStore } from "@shared/store/cartStore";
+import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { ProductData } from "../../types";
 
 interface ProductCardProps {
@@ -16,6 +17,12 @@ const ProductCard = ({ data }: ProductCardProps): ReactElement => {
   const { images, name, price, id } = data;
 
   const { addItemToCart } = useCartStore();
+  const { openModal } = useAddToCartModalStore();
+
+  const handleAddToCart = () => {
+    addItemToCart(id);
+    openModal(data);
+  };
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0">
@@ -52,7 +59,7 @@ const ProductCard = ({ data }: ProductCardProps): ReactElement => {
           <div className="flex items-center justify-between">
             <p className="text-xl font-bold text-foreground">{price} zł</p>
 
-            <Button onClick={() => addItemToCart(id)} size="icon">
+            <Button onClick={handleAddToCart} size="icon">
               <ShoppingCart className="h-4 w-4" />
             </Button>
           </div>
