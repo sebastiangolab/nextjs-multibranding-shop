@@ -21,6 +21,7 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const navButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const navContainerRef = useRef<HTMLDivElement>(null);
 
   // Update active slide on carousel change
   useEffect(() => {
@@ -37,15 +38,24 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
     };
   }, [carouselApi]);
 
-  // Scroll to active slider navigation button
+  // Scroll navigation button into view (horizontal only, doesn't affect page scroll)
   useEffect(() => {
     const activeButton = navButtonsRef.current[activeSlide];
+    const navContainer = navContainerRef.current;
 
-    if (activeButton) {
-      activeButton.scrollIntoView({
+    if (activeButton && navContainer) {
+      const buttonLeft = activeButton.offsetLeft;
+      const buttonWidth = activeButton.offsetWidth;
+      const containerWidth = navContainer.offsetWidth;
+      const currentScroll = navContainer.scrollLeft;
+
+      // Calculate target scroll position to center the button
+      const targetScroll = buttonLeft - containerWidth / 2 + buttonWidth / 2;
+
+      // Smooth scroll using scrollTo
+      navContainer.scrollTo({
+        left: targetScroll,
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, [activeSlide]);
@@ -78,7 +88,7 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
         }}
       >
         <CarouselContent>
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <CarouselItem key={slide.label}>
               <Link
                 href={slide.url}
@@ -90,6 +100,8 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
                   alt={slide.image.alt || slide.label}
                   fill
                   className="object-cover object-center"
+                  priority={index === 0}
+                  sizes="100vw"
                 />
               </Link>
             </CarouselItem>
@@ -105,6 +117,7 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           navButtonsRef={navButtonsRef}
+          navContainerRef={navContainerRef}
         />
       </Carousel>
     </Section>
