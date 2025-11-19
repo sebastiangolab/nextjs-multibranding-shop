@@ -2,7 +2,8 @@ import { axiosWCApi } from "@shared/lib/axios";
 import { ProductData } from "../types";
 
 interface SearchedProductsRequestParams {
-  phrase: string;
+  includeIds?: number[];
+  phrase?: string;
   page?: number;
   perPage?: number;
 }
@@ -13,7 +14,7 @@ interface SearchProductsDataActionResult {
   totalProducts: number;
 }
 
-const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 1;
+const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 24;
 
 export const getSearchedProductsData = async (
   params: SearchedProductsRequestParams
@@ -21,6 +22,7 @@ export const getSearchedProductsData = async (
   try {
     const response = await axiosWCApi<ProductData[]>("/products", {
       params: {
+        include: params.includeIds?.join(","),
         search: params.phrase,
         page: params.page,
         per_page: params.page

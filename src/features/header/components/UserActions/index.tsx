@@ -14,7 +14,7 @@ const UserActions = () => {
       {/* Favorites Button */}
       <UserActionButton
         label="Ulubione"
-        href="/favorites"
+        href="/ulubione"
         icon={<Heart className="size-5" />}
         quantity={productsIds.length}
       />
@@ -22,7 +22,7 @@ const UserActions = () => {
       {/* Cart Button */}
       <UserActionButton
         label="Koszyk"
-        href="/cart"
+        href="/koszyk"
         icon={<ShoppingCart className="size-5" />}
         quantity={quantity}
       />
