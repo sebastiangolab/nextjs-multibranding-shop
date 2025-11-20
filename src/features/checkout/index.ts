@@ -15,3 +15,4 @@ export { useCheckoutStore } from "./store/useCheckoutStore";
 export { CheckoutStep } from "./types";
 export type { DeliveryFormData } from "./schemas/deliveryFormSchema";
 export type { DeliveryMethodData } from "./types";
+export type { CartTableProduct } from "./types";

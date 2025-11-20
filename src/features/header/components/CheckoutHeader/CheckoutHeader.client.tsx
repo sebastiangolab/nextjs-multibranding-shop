@@ -1,38 +1,61 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CreditCard, ShoppingCart, Truck } from "lucide-react";
 import { LinkButton } from "@/shared/components/LinkButton";
 import Logo from "../Logo";
 import { HeaderData } from "../../types";
+import { CheckoutStep } from "@/features/checkout";
 
 const CHECKOUT_STEPS = [
-  { id: 1, label: "Koszyk", path: "/koszyk" },
-  { id: 2, label: "Dostawa", path: "/dostawa" },
-  { id: 3, label: "Płatność", path: "/platnosc" },
+  {
+    id: CheckoutStep.CART,
+    label: "Koszyk",
+    path: "/koszyk",
+    icon: ShoppingCart,
+  },
+  {
+    id: CheckoutStep.DELIVERY,
+    label: "Dostawa",
+    path: "/dostawa",
+    icon: Truck,
+  },
+  {
+    id: CheckoutStep.PAYMENT,
+    label: "Płatność",
+    path: "/platnosc",
+    icon: CreditCard,
+  },
 ];
 
 interface CheckoutHeaderProps {
   logoData: HeaderData["logoData"];
-  currentStep?: number;
+  currentStep: CheckoutStep;
 }
 
 const CheckoutHeaderClient = ({
   logoData,
-  currentStep = 1,
+  currentStep,
 }: CheckoutHeaderProps) => {
+  const currentStepIndex = CHECKOUT_STEPS.findIndex(
+    (step) => step.id === currentStep
+  );
+
   return (
-    <header className="border-b bg-white top-0 z-40">
+    <header className="border-b bg-white top-0 z-40 px-4">
       <div className="flex items-center justify-between container mx-auto py-4">
         {/* Logo */}
         <Logo data={logoData} />
 
         {/* Checkout steps */}
         <div className="hidden md:flex items-center gap-2 lg:gap-4 flex-1 justify-center px-4">
-          {CHECKOUT_STEPS.map((step, index) => (
-            <div key={step.id} className="flex items-center">
-              <div className="flex items-center gap-2">
-                <div
-                  className={`
+          {CHECKOUT_STEPS.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+              <div key={step.id} className="flex items-center">
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`
                       w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
                       ${
                         step.id === currentStep
@@ -42,12 +65,12 @@ const CheckoutHeaderClient = ({
                             : "bg-muted text-muted-foreground"
                       }
                     `}
-                >
-                  {step.id < currentStep ? "✓" : step.id}
-                </div>
+                  >
+                    <Icon className="w-4 h-4" />
+                  </div>
 
-                <span
-                  className={`
+                  <span
+                    className={`
                       text-sm font-medium hidden lg:block
                       ${
                         step.id === currentStep
@@ -57,21 +80,22 @@ const CheckoutHeaderClient = ({
                             : "text-muted-foreground"
                       }
                     `}
-                >
-                  {step.label}
-                </span>
-              </div>
+                  >
+                    {step.label}
+                  </span>
+                </div>
 
-              {index < CHECKOUT_STEPS.length - 1 && (
-                <div
-                  className={`
+                {index < CHECKOUT_STEPS.length - 1 && (
+                  <div
+                    className={`
                       w-8 lg:w-12 h-0.5 mx-2
                       ${step.id < currentStep ? "bg-green-600" : "bg-muted"}
                     `}
-                />
-              )}
-            </div>
-          ))}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Button "Back to shopping" */}
@@ -107,8 +131,8 @@ const CheckoutHeaderClient = ({
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-2">
-          Krok {currentStep} z {CHECKOUT_STEPS.length}:{" "}
-          {CHECKOUT_STEPS[currentStep - 1]?.label}
+          Krok {currentStepIndex + 1} z {CHECKOUT_STEPS.length}:{" "}
+          {CHECKOUT_STEPS[currentStepIndex]?.label}
         </p>
       </div>
     </header>

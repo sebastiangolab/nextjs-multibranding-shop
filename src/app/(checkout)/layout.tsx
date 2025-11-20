@@ -11,6 +11,6 @@ export const metadata = {
   },
 };
 
-export default function GenericPageLayout({ children }: LayoutProps) {
+export default async function CheckoutLayout({ children }: LayoutProps) {
   return <div className="min-h-[80vh] bg-muted/50">{children}</div>;
 }

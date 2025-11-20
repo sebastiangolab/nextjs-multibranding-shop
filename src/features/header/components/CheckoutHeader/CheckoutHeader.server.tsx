@@ -1,8 +1,9 @@
+import { CheckoutStep } from "@/features/checkout";
 import { getHeaderData } from "../../actions/getHeaderData";
 import CheckoutHeaderClient from "./CheckoutHeader.client";
 
 interface CheckoutHeaderProps {
-  currentStep?: number;
+  currentStep: CheckoutStep;
 }
 
 const CheckoutHeader = async ({ currentStep }: CheckoutHeaderProps) => {
