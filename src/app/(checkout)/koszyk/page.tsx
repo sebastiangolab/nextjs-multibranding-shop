@@ -1,4 +1,6 @@
+import { CheckoutStep } from "@/features/checkout";
 import { CheckoutHeader } from "@/features/header";
+import CheckoutLayout from "@/shared/layouts/CheckoutLayout";
 import CartView from "@/views/cart";
 import type { Metadata } from "next";
 
@@ -10,11 +12,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function CartPage() {
+const CartPage = () => {
   return (
-    <>
-      <CheckoutHeader currentStep={1} />
+    <CheckoutLayout>
+      <CheckoutHeader currentStep={CheckoutStep.CART} />
+
       <CartView />
-    </>
+    </CheckoutLayout>
   );
-}
+};
+
+export default CartPage;
