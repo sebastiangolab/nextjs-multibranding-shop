@@ -1,20 +1,28 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useCartStore } from "@/shared/store/cartStore";
 import BasicContainer from "@/shared/components/BasicContainer";
 import { CartTable } from "./components/CartTable";
-import { CartSummary } from "./components/CartSummary";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getSearchedProductsData, ProductData } from "@/features/products";
 import { CartTableProduct } from "./types";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  CheckoutStep,
+  CheckoutSummary,
+  useCheckoutStore,
+} from "@/features/checkout";
 
 const CartView = () => {
+  const router = useRouter();
   const { items: cartItems } = useCartStore();
+  const { updateSummaryProductsPrice } = useCheckoutStore();
 
   const productIds = cartItems.map((item) => item.productId);
 
+  // Fetch products data based on cart item IDs
   const { data, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ["cart-products", productIds],
     queryFn: async () =>
@@ -26,6 +34,7 @@ const CartView = () => {
 
   const productsData = data?.products || [];
 
+  // Combine products data with their quantities from the cart
   const productsWithQuantity: CartTableProduct[] = useMemo(
     () =>
       productsData.map((product: ProductData) => {
@@ -41,7 +50,8 @@ const CartView = () => {
     [productsData, cartItems]
   );
 
-  const subtotal = useMemo(
+  // Calculate total price of products in the cart
+  const productsTotalPrice = useMemo(
     () =>
       productsWithQuantity.reduce(
         (sum, product) => sum + parseFloat(product.price) * product.quantity,
@@ -50,11 +60,21 @@ const CartView = () => {
     [productsWithQuantity]
   );
 
+  // Calculate total number of items in the cart
   const totalItemsCount = useMemo(
     () =>
       productsWithQuantity.reduce((sum, product) => sum + product.quantity, 0),
     [productsWithQuantity]
   );
+
+  const handleProceedToDelivery = () => {
+    router.push("/dostawa");
+  };
+
+  // Synchronize cart total products price in checkout store
+  useEffect(() => {
+    updateSummaryProductsPrice(productsTotalPrice);
+  }, [productsTotalPrice, updateSummaryProductsPrice]);
 
   return (
     <BasicContainer className="py-8">
@@ -73,10 +93,11 @@ const CartView = () => {
 
         {isSuccess ? (
           <div>
-            <CartSummary
-              subtotal={subtotal}
-              itemsCount={totalItemsCount}
+            <CheckoutSummary
+              step={CheckoutStep.CART}
               isLoading={isLoading || isFetching}
+              buttonOnClick={handleProceedToDelivery}
+              isDisabled={totalItemsCount === 0}
             />
           </div>
         ) : null}
