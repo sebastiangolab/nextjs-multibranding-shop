@@ -7,8 +7,8 @@ import { Button } from "@/shared/shadcn/ui/button";
 import { Input } from "@/shared/shadcn/ui/input";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { ChangeEvent } from "react";
-import { CartTableProduct } from "../../types";
 import { LinkButton } from "@/shared/components/LinkButton";
+import { CartTableProduct } from "@/features/checkout";
 
 interface CartTableProps {
   products: CartTableProduct[];

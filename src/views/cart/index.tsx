@@ -6,10 +6,10 @@ import BasicContainer from "@/shared/components/BasicContainer";
 import { CartTable } from "./components/CartTable";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getSearchedProductsData, ProductData } from "@/features/products";
-import { CartTableProduct } from "./types";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
+  CartTableProduct,
   CheckoutStep,
   CheckoutSummary,
   useCheckoutStore,

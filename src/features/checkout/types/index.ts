@@ -1,3 +1,4 @@
+import { ProductData } from "@/features/products";
 import { ReactNode } from "react";
 
 export enum CheckoutStep {
@@ -15,4 +16,8 @@ export interface DeliveryMethodData {
   price: number;
   isFree?: boolean;
   icon?: ReactNode;
+}
+
+export interface CartTableProduct extends ProductData {
+  quantity: number;
 }
