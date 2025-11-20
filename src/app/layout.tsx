@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "@shared/styles/globals.css";
 import { Providers } from "./providers";
-import { Header } from "@features/header";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   description: "page description",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
@@ -28,8 +27,6 @@ export default function RootLayout({
     <html lang="pl">
       <body className={roboto.className}>
         <Providers>
-          <Header />
-
           <div>{children}</div>
 
           <Footer />
