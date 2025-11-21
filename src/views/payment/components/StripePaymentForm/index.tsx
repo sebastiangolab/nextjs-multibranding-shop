@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   PaymentElement,
   useStripe,
@@ -16,10 +16,12 @@ interface StripePaymentFormProps {
 export const StripePaymentForm = ({ onReady }: StripePaymentFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
+  const hasNotifiedReady = useRef(false);
 
-  // Notify parents when Stripe is ready
+  // Notify parent when Stripe is ready (only once)
   useEffect(() => {
-    if (stripe && elements && onReady) {
+    if (stripe && elements && onReady && !hasNotifiedReady.current) {
+      hasNotifiedReady.current = true;
       onReady(stripe, elements);
     }
   }, [stripe, elements, onReady]);

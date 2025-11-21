@@ -1,17 +1,22 @@
 import { axiosStripeApi } from "@shared/lib/axios";
-import { MetadataParam } from "@stripe/stripe-js";
 import { StripePaymentIntentData } from "../type";
+import { CartProductItem } from "@/shared/types";
+import { DeliveryFormData, DeliveryMethodData } from "@/features/checkout";
 
 export const createStripePaymentIntent = async (
   total: number,
-  metadata: MetadataParam
+  cartItems: CartProductItem[],
+  deliveryFormData: DeliveryFormData,
+  deliveryMethod: DeliveryMethodData
 ): Promise<StripePaymentIntentData | null> => {
   try {
     const { data } = await axiosStripeApi.post<StripePaymentIntentData>(
       "/create-payment-intent",
       {
         amount: total,
-        metadata,
+        cartItems,
+        deliveryFormData,
+        deliveryMethod,
       }
     );
 
@@ -20,7 +25,7 @@ export const createStripePaymentIntent = async (
       paymentIntentId: data.paymentIntentId,
     };
   } catch (error) {
-    console.error("❌ Error create payment intent: ", error);
+    console.error("❌ Error create payment intent:", error);
     return null;
   }
 };

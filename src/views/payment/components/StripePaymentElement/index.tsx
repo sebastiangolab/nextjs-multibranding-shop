@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { loadStripe, Stripe, StripeElements } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useCartStore } from "@/shared/store/cartStore";
@@ -27,38 +27,48 @@ const StripePaymentElement = ({
   const { items: cartItems } = useCartStore();
 
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const hasInitialized = useRef(false);
 
-  // Create payment intent on mount
+  // Create payment intent on mount (ONLY ONCE)
   useEffect(() => {
+    // Prevent multiple initializations
+    if (hasInitialized.current || clientSecret) {
+      return;
+    }
+
     const total = summaryProductsPrice + (deliveryMethodData?.price || 0);
 
     const handleCreateStripePaymentIntent = async () => {
-      const metadata = {
-        customerEmail: deliveryFormData?.email || "unknown",
-        customerName: `${deliveryFormData?.firstName} ${deliveryFormData?.lastName}`,
-        itemsCount: cartItems.length,
-      };
+      // Validate required data
+      if (
+        total === 0 ||
+        !deliveryFormData ||
+        !deliveryMethodData ||
+        cartItems.length === 0
+      ) {
+        console.error("Missing required data for payment intent");
+        return;
+      }
 
-      const data = await createStripePaymentIntent(total, metadata);
+      hasInitialized.current = true;
+
+      const data = await createStripePaymentIntent(
+        total,
+        cartItems,
+        deliveryFormData,
+        deliveryMethodData
+      );
 
       if (!data || !data.clientSecret) {
-        onError("Nie udało się zainicjować płatności");
+        console.error("Failed to create payment intent");
         return;
       }
 
       setClientSecret(data.clientSecret);
     };
 
-    if (total > 0) {
-      handleCreateStripePaymentIntent();
-    }
-  }, [
-    summaryProductsPrice,
-    deliveryMethodData,
-    deliveryFormData,
-    cartItems.length,
-    onError,
-  ]);
+    handleCreateStripePaymentIntent();
+  }, []);
 
   // Render loading state if clientSecret is not ready
   if (!clientSecret) {

@@ -45,3 +45,9 @@ export interface MenuItem extends MenuResponseItem {
 export interface MenuData extends Omit<MenuResponseData, "items"> {
   items: MenuItem[];
 }
+
+// Cart shared types
+export interface CartProductItem {
+  productId: number;
+  quantity: number;
+}
