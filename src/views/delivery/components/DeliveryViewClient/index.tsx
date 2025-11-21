@@ -25,6 +25,7 @@ const DeliveryViewClient = ({ deliveriesMethods }: DeliveryViewClientProps) => {
     useCheckoutStore();
 
   const [buttonError, setButtonError] = useState<string>("");
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
   // Validate form on any change when there is an existing error
   const handleFormChange = async () => {
@@ -32,6 +33,7 @@ const DeliveryViewClient = ({ deliveriesMethods }: DeliveryViewClientProps) => {
       const isValid = await formRef.current.validateForm();
       if (isValid) {
         setButtonError("");
+        setButtonDisabled(false);
       }
     }
   };
@@ -49,6 +51,7 @@ const DeliveryViewClient = ({ deliveriesMethods }: DeliveryViewClientProps) => {
       router.push("/platnosc");
     } else {
       setButtonError("Uzupełnij wymagane pola");
+      setButtonDisabled(true);
 
       // scroll to top of the page to show the errors
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -79,6 +82,7 @@ const DeliveryViewClient = ({ deliveriesMethods }: DeliveryViewClientProps) => {
             step={CheckoutStep.DELIVERY}
             buttonOnClick={handleProceedToPayment}
             errorMessage={buttonError}
+            isDisabled={buttonDisabled}
           />
         </div>
       </div>

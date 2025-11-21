@@ -23,3 +23,7 @@ export const axiosWCApi = axios.create({
     consumer_secret: process.env.NEXT_PUBLIC_WOOCOMMERCE_SECRET_KEY,
   },
 });
+
+export const axiosStripeApi = axios.create({
+  baseURL: `/api/stripe`,
+});

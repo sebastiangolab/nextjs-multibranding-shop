@@ -134,7 +134,7 @@ const CheckoutSummary = ({
             className="w-full"
             size="lg"
             onClick={buttonOnClick}
-            disabled={isLoading || !!errorMessage || isDisabled}
+            disabled={isLoading || isDisabled}
           >
             {config.buttonIcon}
             {config.buttonText}

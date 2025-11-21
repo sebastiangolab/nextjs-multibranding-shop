@@ -1,0 +1,94 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { loadStripe, Stripe, StripeElements } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { useCartStore } from "@/shared/store/cartStore";
+import { useCheckoutStore } from "@/features/checkout";
+import { StripePaymentForm } from "../StripePaymentForm";
+import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
+
+// Initialize Stripe
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_BRAND1_STRIPE_PUBLISHABLE_KEY!
+);
+
+interface StripePaymentElementProps {
+  onStripeReady: (stripe: Stripe, elements: StripeElements) => void;
+  onError: (errorMessage: string) => void;
+}
+
+const StripePaymentElement = ({
+  onStripeReady,
+  onError,
+}: StripePaymentElementProps) => {
+  const { summaryProductsPrice, deliveryMethodData, deliveryFormData } =
+    useCheckoutStore();
+  const { items: cartItems } = useCartStore();
+
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+  // Create payment intent on mount
+  useEffect(() => {
+    const total = summaryProductsPrice + (deliveryMethodData?.price || 0);
+
+    const handleCreateStripePaymentIntent = async () => {
+      const metadata = {
+        customerEmail: deliveryFormData?.email || "unknown",
+        customerName: `${deliveryFormData?.firstName} ${deliveryFormData?.lastName}`,
+        itemsCount: cartItems.length,
+      };
+
+      const data = await createStripePaymentIntent(total, metadata);
+
+      if (!data || !data.clientSecret) {
+        onError("Nie udało się zainicjować płatności");
+        return;
+      }
+
+      setClientSecret(data.clientSecret);
+    };
+
+    if (total > 0) {
+      handleCreateStripePaymentIntent();
+    }
+  }, [
+    summaryProductsPrice,
+    deliveryMethodData,
+    deliveryFormData,
+    cartItems.length,
+    onError,
+  ]);
+
+  // Render loading state if clientSecret is not ready
+  if (!clientSecret) {
+    return (
+      <div className="bg-white rounded-lg border p-6">
+        <p className="text-center text-gray-500">
+          Ładowanie formularza płatności...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <Elements
+      stripe={stripePromise}
+      options={{
+        clientSecret,
+        appearance: {
+          theme: "stripe",
+          variables: {
+            colorPrimary: "#000",
+          },
+        },
+      }}
+    >
+      <StripePaymentForm
+        onReady={(stripe, elements) => onStripeReady(stripe, elements)}
+      />
+    </Elements>
+  );
+};
+
+export default StripePaymentElement;
