@@ -69,7 +69,7 @@ export const deliveryFormSchema = z
     voivodeship: z.string().min(1, "Wybierz województwo"),
 
     // Billing address
-    differentBillingAddress: z.boolean(),
+    isDifferentBillingAddress: z.boolean(),
 
     billingStreet: z.string(),
     billingHouseNumber: z.string(),
@@ -83,7 +83,7 @@ export const deliveryFormSchema = z
   })
   .superRefine((data, ctx) => {
     // Billing address validation when different from delivery
-    if (data.differentBillingAddress) {
+    if (data.isDifferentBillingAddress) {
       if (!data.billingStreet || data.billingStreet.length < 3) {
         ctx.addIssue({
           code: "custom",
