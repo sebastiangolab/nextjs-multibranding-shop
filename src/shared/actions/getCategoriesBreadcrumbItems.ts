@@ -25,9 +25,7 @@ export const getCategoriesBreadcrumbItems = async (
       break;
     }
 
-    current = allCategories.find(
-      (category) => category.id === parseInt(current!.parent)
-    );
+    current = allCategories.find((category) => category.id === current!.parent);
   }
 
   // Now build breadcrumbs with the accumulating path

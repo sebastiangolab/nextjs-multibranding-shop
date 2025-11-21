@@ -113,7 +113,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
 
           {/* Additional info */}
           <div className="flex flex-col gap-6 text-sm border-t mt-3 pt-6 max-lg:pb-6 max-lg:border-b">
-            <div>
+            {/* <div>
               <div className={commonAdditionalInfoIconWrapperClasses}>
                 <Truck className={commonAdditionalInfoIconClasses} /> Darmowa
                 dostawa
@@ -137,7 +137,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
                 Produkty dostępne natychmiast wysyłamy tego samego dnia przy
                 zamówieniu do godz. 14:00.
               </p>
-            </div>
+            </div> */}
 
             <div>
               <div className={commonAdditionalInfoIconWrapperClasses}>

@@ -26,13 +26,19 @@ export const CategorySidebar = ({
     checkIsActiveAttributeOption,
   } = productsFiltersData;
 
+  const isSubcategoriesAvailable = subcategories && subcategories.length > 0;
+
   return (
     <div className="space-y-6">
-      <h3 className="font-semibold text-foreground mb-4">Podkategorie</h3>
+      {isSubcategoriesAvailable ? (
+        <>
+          <h3 className="font-semibold text-foreground mb-4">Podkategorie</h3>
 
-      <SubcategoryMenu categoriesData={subcategories} />
+          <SubcategoryMenu categoriesData={subcategories} />
 
-      <Separator />
+          <Separator />
+        </>
+      ) : null}
 
       <div className="space-y-6">
         <h3 className="font-semibold text-foreground">Filtry</h3>

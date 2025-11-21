@@ -3,15 +3,16 @@ import { notFound } from "next/navigation";
 import { getProductsCategoryData, getProductsData } from "@features/products";
 import CategoryViewClient from "./components/CategoryViewClient";
 import BasicContainer from "@shared/components/BasicContainer";
+import { getCategoriesBreadcrumbItems } from "@/shared/actions/getCategoriesBreadcrumbItems";
 
 interface CategoryPageProps {
-  params: Promise<{ categorySlug?: string }>;
+  params: Promise<{ categorySlug?: string[] }>;
 }
 
 const CategoryView = async ({ params }: CategoryPageProps) => {
   const { categorySlug } = await params;
 
-  if (!categorySlug) {
+  if (!categorySlug || categorySlug.length === 0) {
     notFound();
   }
 
@@ -29,11 +30,15 @@ const CategoryView = async ({ params }: CategoryPageProps) => {
     notFound();
   }
 
+  const breadcrumbCategoryItems =
+    await getCategoriesBreadcrumbItems(categoryData);
+
   return (
     <BasicContainer>
       <CategoryViewClient
         categoryData={categoryData}
         allProductsData={productsResponse.products}
+        breadcrumbCategoryItems={breadcrumbCategoryItems}
       />
     </BasicContainer>
   );

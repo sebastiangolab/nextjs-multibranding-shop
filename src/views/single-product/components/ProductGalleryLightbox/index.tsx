@@ -38,8 +38,8 @@ const ProductGalleryLightbox = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-auto w-auto">
-        <DialogTitle>{productName}</DialogTitle>
+      <DialogContent className="max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] h-auto p-2 sm:p-4">
+        <DialogTitle className="sr-only">{productName}</DialogTitle>
 
         <Carousel
           setApi={setApi}
@@ -47,6 +47,7 @@ const ProductGalleryLightbox = ({
             startIndex: selectedImageIndex,
             loop: true,
           }}
+          className="w-full"
         >
           <CarouselContent>
             {images.map((image, index) => (
@@ -54,19 +55,32 @@ const ProductGalleryLightbox = ({
                 key={index}
                 className="flex items-center justify-center"
               >
-                <Image src={image.src} alt={image.alt} fill />
+                <div className="relative w-full h-[80vh] sm:h-[85vh]">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-scale-down"
+                  />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="left-4" />
-          <CarouselNext className="right-4" />
+          {images.length > 1 && (
+            <>
+              <CarouselPrevious className="left-2 sm:left-4" />
+              <CarouselNext className="right-2 sm:right-4" />
+            </>
+          )}
         </Carousel>
 
         {/* Image Counter in Lightbox */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm z-10">
-          {selectedImageIndex + 1} / {images.length}
-        </div>
+        {images.length > 1 && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm z-10">
+            {selectedImageIndex + 1} / {images.length}
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

@@ -13,7 +13,7 @@ export interface ProductsCategoryFullData {
   count: number;
   name: string;
   slug: string;
-  parent: string;
+  parent: number;
   subcategories: ProductsCategoryFullData[];
 }
 

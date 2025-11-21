@@ -47,8 +47,6 @@ const GenericSections = async ({ sectionsData }: GenericSectionsProps) => {
     }
 
     if (sectionData.type === GenericSectionType.SLIDER_SECTION) {
-      console.log("Rendering SliderSection with data:", sectionData.fields);
-
       return (
         <SliderSection
           key={`${sectionData.type}-${index}`}

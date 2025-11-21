@@ -46,6 +46,12 @@ export const useBreadcrumb = (
       items.push(item);
     });
 
+    if (isCategoryCurrentPage) {
+      return items.map((item, index) =>
+        index === items.length - 1 ? { ...item, isCurrentPage: true } : item
+      );
+    }
+
     // Add current page if it's not a category page
     if (!isCategoryCurrentPage) {
       items.push({

@@ -6,7 +6,7 @@ import {
 } from "@shared/types";
 
 export const getProductsCategoryData = async (
-  categorySlug: string
+  categorySlug: string[]
 ): Promise<ProductsCategoryFullData | null> => {
   try {
     const { data: allCategories } =
@@ -16,13 +16,31 @@ export const getProductsCategoryData = async (
       return null;
     }
 
-    const category = allCategories.find((cat) => cat.slug === categorySlug);
+    // Validate category hierarchy path
+    let currentParentId = 0;
 
-    if (!category) {
-      return null;
+    for (let i = 0; i < categorySlug.length; i++) {
+      const slug = categorySlug[i];
+
+      const category = allCategories.find(
+        (cat) => cat.slug === slug && cat.parent === currentParentId
+      );
+
+      if (!category) {
+        // Category not found or parent mismatch
+        return null;
+      }
+
+      // If this is the last segment, return the normalized category
+      if (i === categorySlug.length - 1) {
+        return normalizeProductsCategoryData(category, allCategories);
+      }
+
+      // Update parent ID for next iteration
+      currentParentId = category.id;
     }
 
-    return normalizeProductsCategoryData(category, allCategories);
+    return null;
   } catch (error) {
     console.error("❌ Error fetching category data: ", error);
     return null;

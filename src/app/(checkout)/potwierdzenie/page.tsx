@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ConfirmationView } from "@/views/confirmation";
+import { Header } from "@/features/header";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,5 +10,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function ConfirmationPage() {
-  return <ConfirmationView />;
+  return (
+    <>
+      <Header />
+      <ConfirmationView />
+    </>
+  );
 }

@@ -12,15 +12,18 @@ import { MobileSubcategoriesSheet } from "../MobileSubcategoriesSheet";
 import { LoadingOverlay } from "@shared/components/LoadingOverlay";
 import { convertAttributesDataToParams } from "@views/category/helpers/convertAttributesDataToParams";
 import { ProductsCategoryFullData } from "@shared/types";
+import { BreadcrumbItem } from "@/shared/hooks/useBreadcrumb";
 
 type CategoryViewClientProps = {
   categoryData: ProductsCategoryFullData;
   allProductsData: ProductData[];
+  breadcrumbCategoryItems: BreadcrumbItem[];
 };
 
 const CategoryViewClient = ({
   categoryData,
   allProductsData,
+  breadcrumbCategoryItems,
 }: CategoryViewClientProps) => {
   const [paginationPage, setPaginationPage] = useState<number>(1);
 
@@ -81,6 +84,9 @@ const CategoryViewClient = ({
     checkIsActiveAttributeOption,
   };
 
+  const isSubcategoriesAvailable =
+    categoryData.subcategories && categoryData.subcategories.length > 0;
+
   return (
     <>
       {isFetching && isPlaceholderData && <LoadingOverlay />}
@@ -94,13 +100,18 @@ const CategoryViewClient = ({
       />
 
       {/* Mobile Subcategories Sheet */}
-      <MobileSubcategoriesSheet
-        isMobileSubcategoriesSheetOpen={isMobileSubcategoriesSheetOpen}
-        setIsMobileSubcategoriesSheetOpen={setIsMobileSubcategoriesSheetOpen}
-        subcategories={categoryData.subcategories}
-      />
+      {isSubcategoriesAvailable ? (
+        <MobileSubcategoriesSheet
+          isMobileSubcategoriesSheetOpen={isMobileSubcategoriesSheetOpen}
+          setIsMobileSubcategoriesSheetOpen={setIsMobileSubcategoriesSheetOpen}
+          subcategories={categoryData.subcategories}
+        />
+      ) : null}
 
-      <CategoryHeader title={categoryData?.name} />
+      <CategoryHeader
+        title={categoryData?.name}
+        breadcrumbCategoryItems={breadcrumbCategoryItems}
+      />
 
       <div className="container mx-auto py-8">
         <div className="grid grid-cols-1 md:grid-cols-[30%_70%] lg:grid-cols-[20%_80%] gap-10">

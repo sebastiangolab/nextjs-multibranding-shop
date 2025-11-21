@@ -1,10 +1,9 @@
 "use client";
 
-import { Button } from "@/shared/shadcn/ui/button";
 import { Edit, Loader, ShoppingBag } from "lucide-react";
-import Link from "next/link";
 import { SummaryOrderProductsList } from "./SummaryOrderProductsList";
 import { useCartProducts, useCheckoutStore } from "@/features/checkout";
+import { LinkButton } from "@/shared/components/LinkButton";
 
 export const OrderSummary = () => {
   const { deliveryFormData, deliveryMethodData } = useCheckoutStore();
@@ -36,12 +35,10 @@ export const OrderSummary = () => {
                   Produkty ({productsWithQuantity.length})
                 </h4>
 
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/koszyk">
-                    <Edit className="w-3 h-3 mr-1" />
-                    Edytuj
-                  </Link>
-                </Button>
+                <LinkButton variant="ghost" size="sm" href="/koszyk">
+                  <Edit className="w-3 h-3 mr-1" />
+                  Edytuj
+                </LinkButton>
               </div>
 
               <SummaryOrderProductsList products={productsWithQuantity} />
@@ -54,12 +51,10 @@ export const OrderSummary = () => {
                   Dane kontaktowe
                 </h4>
 
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/koszyk/dostawa">
-                    <Edit className="w-3 h-3 mr-1" />
-                    Edytuj
-                  </Link>
-                </Button>
+                <LinkButton variant="ghost" size="sm" href="/dostawa">
+                  <Edit className="w-3 h-3 mr-1" />
+                  Edytuj
+                </LinkButton>
               </div>
 
               <div className="text-sm text-gray-600 space-y-1">
@@ -80,12 +75,10 @@ export const OrderSummary = () => {
                   Adres dostawy
                 </h4>
 
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/koszyk/dostawa">
-                    <Edit className="w-3 h-3 mr-1" />
-                    Edytuj
-                  </Link>
-                </Button>
+                <LinkButton variant="ghost" size="sm" href="/dostawa">
+                  <Edit className="w-3 h-3 mr-1" />
+                  Edytuj
+                </LinkButton>
               </div>
 
               <div className="text-sm text-gray-600">
@@ -111,12 +104,10 @@ export const OrderSummary = () => {
                     Adres rozliczeniowy
                   </h4>
 
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href="/koszyk/dostawa">
-                      <Edit className="w-3 h-3 mr-1" />
-                      Edytuj
-                    </Link>
-                  </Button>
+                  <LinkButton variant="ghost" size="sm" href="/dostawa">
+                    <Edit className="w-3 h-3 mr-1" />
+                    Edytuj
+                  </LinkButton>
                 </div>
 
                 <div className="text-sm text-gray-600">
@@ -146,12 +137,10 @@ export const OrderSummary = () => {
                   Metoda dostawy
                 </h4>
 
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/koszyk/dostawa">
-                    <Edit className="w-3 h-3 mr-1" />
-                    Edytuj
-                  </Link>
-                </Button>
+                <LinkButton variant="ghost" size="sm" href="/dostawa">
+                  <Edit className="w-3 h-3 mr-1" />
+                  Edytuj
+                </LinkButton>
               </div>
 
               <div className="text-sm">

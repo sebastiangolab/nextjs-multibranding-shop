@@ -47,10 +47,10 @@ export const NavigationMenu = ({ menuDataItems }: NavigationMenuProps) => {
           return (
             <NavigationMenuItem key={menuItem.id}>
               <NavigationMenuLink
-                href={menuItem.url}
                 className={navigationMenuTriggerStyle()}
+                asChild
               >
-                {menuItem.title}
+                <Link href={menuItem.url}>{menuItem.title}</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           );
