@@ -19,8 +19,8 @@ export const axiosWcCustomApi = axios.create({
 export const axiosWCApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wc/v3`,
   params: {
-    consumer_key: process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_KEY,
-    consumer_secret: process.env.NEXT_PUBLIC_WOOCOMMERCE_SECRET_KEY,
+    consumer_key: process.env.WC_CONSUMER_KEY,
+    consumer_secret: process.env.WC_SECRET_KEY,
   },
 });
 

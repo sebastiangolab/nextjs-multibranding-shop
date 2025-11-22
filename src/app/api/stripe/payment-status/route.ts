@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.BRAND1_STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function GET(req: NextRequest) {
   try {
@@ -23,12 +23,12 @@ export async function GET(req: NextRequest) {
       orderId: paymentIntent.metadata.woo_order_id || undefined,
       orderProcessed: paymentIntent.metadata.order_processed === "true",
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching payment status:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error.message || "Failed to fetch payment status",
+        error: error || "Failed to fetch payment status",
       },
       { status: 500 }
     );

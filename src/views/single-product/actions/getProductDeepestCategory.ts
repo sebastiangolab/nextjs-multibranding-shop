@@ -36,7 +36,7 @@ export const getProductDeepestCategory = async (
 
       while (current.parent) {
         const parent = allCategories.find(
-          (category) => category.id === parseInt(current.parent)
+          (category) => category.id === current.parent
         );
 
         if (!parent) {

@@ -18,7 +18,7 @@ interface DeliveryMethodResponseData {
   };
 }
 
-const ID_ZONE = 2; // Przykładowe ID strefy dostaw, dostosuj według potrzeb
+const ID_ZONE = Number(process.env.WOOCOMMERCE_DELIVERIES_ZONE_ID) || 2;
 
 export const getDeliveriesMethods = async (): Promise<
   DeliveryMethodData[] | null

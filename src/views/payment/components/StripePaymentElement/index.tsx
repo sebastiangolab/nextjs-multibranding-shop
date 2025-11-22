@@ -8,15 +8,15 @@ import { useCheckoutStore } from "@/features/checkout";
 import { StripePaymentForm } from "../StripePaymentForm";
 import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
 
-// Initialize Stripe
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_BRAND1_STRIPE_PUBLISHABLE_KEY!
-);
-
 interface StripePaymentElementProps {
   onStripeReady: (stripe: Stripe, elements: StripeElements) => void;
   onError: (errorMessage: string) => void;
 }
+
+// Initialize Stripe once outside component
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const StripePaymentElement = ({
   onStripeReady,
@@ -71,7 +71,7 @@ const StripePaymentElement = ({
   }, []);
 
   // Render loading state if clientSecret is not ready
-  if (!clientSecret) {
+  if (!clientSecret || !stripePromise) {
     return (
       <div className="bg-white rounded-lg border p-6">
         <p className="text-center text-gray-500">

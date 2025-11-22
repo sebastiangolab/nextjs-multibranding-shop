@@ -3,9 +3,9 @@ import Stripe from "stripe";
 import { createWooCommerceOrder } from "@/features/checkout/actions/createWooCommerceOrder";
 import { updateWooCommerceOrderStatus } from "@/features/checkout/actions/updateWooCommerceOrderStatus";
 
-const stripe = new Stripe(process.env.BRAND1_STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-const webhookSecret = process.env.BRAND1_STRIPE_WEBHOOK_SECRET!;
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 /**
  * Helper: Create WooCommerce order from PaymentIntent metadata

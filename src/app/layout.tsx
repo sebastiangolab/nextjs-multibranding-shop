@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
+import { generateThemeCSS } from "@/config/brands";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -18,13 +19,18 @@ export const metadata: Metadata = {
   description: "page description",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const themeCSS = generateThemeCSS();
+
   return (
     <html lang="pl">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
+      </head>
       <body className={roboto.className}>
         <Providers>
           <div>{children}</div>
