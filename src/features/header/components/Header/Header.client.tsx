@@ -13,7 +13,7 @@ const HeaderClient = ({ data }: HeaderProps) => {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
-  const { logoData, menuData } = data;
+  const { logoData, logoDarkModeData, menuData } = data;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +36,7 @@ const HeaderClient = ({ data }: HeaderProps) => {
         <MainBar
           isSticky={isSticky}
           logoData={logoData}
+          logoDarkData={logoDarkModeData}
           menuDataItems={menuData.items}
         />
 

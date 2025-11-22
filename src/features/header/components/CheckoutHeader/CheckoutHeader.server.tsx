@@ -14,7 +14,11 @@ const CheckoutHeader = async ({ currentStep }: CheckoutHeaderProps) => {
   }
 
   return (
-    <CheckoutHeaderClient logoData={data.logoData} currentStep={currentStep} />
+    <CheckoutHeaderClient
+      logoData={data.logoData}
+      logoDarkData={data.logoDarkModeData}
+      currentStep={currentStep}
+    />
   );
 };
 

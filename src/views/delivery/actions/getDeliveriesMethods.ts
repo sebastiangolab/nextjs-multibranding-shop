@@ -1,4 +1,4 @@
-import { getBrandConfig } from "@/config/brands";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { DeliveryMethodData } from "@/features/checkout";
 import { axiosWCApi } from "@shared/lib/axios";
 

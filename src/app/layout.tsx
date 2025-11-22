@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
-import { generateThemeCSS } from "@/config/brands";
+import { generateThemeCSS } from "@/config/brands/generateThemeCSS";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -27,7 +27,7 @@ export default function RootLayout({
   const themeCSS = generateThemeCSS();
 
   return (
-    <html lang="pl">
+    <html lang="pl" suppressHydrationWarning>
       <head>
         {/* Script that gives access to read the page in tweakcn.com editor */}
         <script src="https://tweakcn.com/live-preview.min.js"></script>

@@ -6,6 +6,7 @@ import { HeaderData } from "../types";
 interface HeaderResponseData {
   acf: {
     logo: Image;
+    logo_dark_mode: Image;
   };
 }
 
@@ -22,6 +23,7 @@ export const getHeaderData = async (): Promise<HeaderData | null> => {
 
     return {
       logoData: headerData[0].acf.logo,
+      logoDarkModeData: headerData[0].acf.logo_dark_mode,
       menuData: {
         ...menuData,
         items: normalizedMenuDataItems,

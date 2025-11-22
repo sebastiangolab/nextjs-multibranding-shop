@@ -29,11 +29,13 @@ const CHECKOUT_STEPS = [
 
 interface CheckoutHeaderProps {
   logoData: HeaderData["logoData"];
+  logoDarkData?: HeaderData["logoDarkModeData"];
   currentStep: CheckoutStep;
 }
 
 const CheckoutHeaderClient = ({
   logoData,
+  logoDarkData,
   currentStep,
 }: CheckoutHeaderProps) => {
   const currentStepIndex = CHECKOUT_STEPS.findIndex(
@@ -44,7 +46,7 @@ const CheckoutHeaderClient = ({
     <header className="border-b bg-white top-0 z-40 px-4">
       <div className="flex items-center justify-between container mx-auto py-4">
         {/* Logo */}
-        <Logo data={logoData} />
+        <Logo logoData={logoData} logoDarkData={logoDarkData} />
 
         {/* Checkout steps */}
         <div className="hidden md:flex items-center gap-2 lg:gap-4 flex-1 justify-center px-4">

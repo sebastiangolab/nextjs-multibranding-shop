@@ -9,16 +9,22 @@ import { MenuItem } from "@shared/types";
 interface MainBarProps {
   isSticky: boolean;
   logoData: HeaderData["logoData"];
+  logoDarkData?: HeaderData["logoDarkModeData"];
   menuDataItems: MenuItem[];
 }
 
-const MainBar = ({ isSticky, logoData, menuDataItems }: MainBarProps) => {
+const MainBar = ({
+  isSticky,
+  logoData,
+  logoDarkData,
+  menuDataItems,
+}: MainBarProps) => {
   return (
     <div className={`transition-all ${isSticky ? "py-1" : "py-4"} px-4`}>
       {/* Mobile Layout */}
       <div className="md:hidden space-y-3">
         <div className="flex items-center justify-between">
-          <Logo data={logoData} />
+          <Logo logoData={logoData} logoDarkData={logoDarkData} />
 
           <UserActions />
         </div>
@@ -37,7 +43,7 @@ const MainBar = ({ isSticky, logoData, menuDataItems }: MainBarProps) => {
             <SidebarNavigationButton menuDataItems={menuDataItems} />
           )}
 
-          <Logo data={logoData} />
+          <Logo logoData={logoData} logoDarkData={logoDarkData} />
         </div>
 
         <div className="flex justify-center">

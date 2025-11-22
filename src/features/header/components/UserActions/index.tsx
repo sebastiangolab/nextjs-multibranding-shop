@@ -4,10 +4,14 @@ import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { Heart, ShoppingCart } from "lucide-react";
 import UserActionButton from "../UserActionButton";
+import ThemeToggle from "../ThemeToggle";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 
 const UserActions = () => {
   const { quantity } = useCartStore();
   const { productsIds } = useFavoritesStore();
+
+  const { availableThemeToggle } = getBrandConfig();
 
   return (
     <div className="flex items-center gap-2 justify-end">
@@ -26,6 +30,13 @@ const UserActions = () => {
         icon={<ShoppingCart className="size-5" />}
         quantity={quantity}
       />
+
+      {/* Theme Toggle */}
+      {availableThemeToggle ? (
+        <div className="pl-2 border-l-2">
+          <ThemeToggle />
+        </div>
+      ) : null}
     </div>
   );
 };
