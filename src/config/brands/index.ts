@@ -6,7 +6,7 @@ import { brand2Config } from "./brand2/config";
  * Helper to get the current brand configuration
  * Works in Server Components, Client Components, and Server Actions
  */
-export function getCurrentBrand(): BrandConfig {
+export function getBrandConfig(): BrandConfig {
   const brandId = process.env.NEXT_PUBLIC_BRAND;
 
   switch (brandId) {
@@ -25,6 +25,6 @@ export function getCurrentBrand(): BrandConfig {
  * Used in layout.tsx for inline <style> injection in <head>
  */
 export function generateThemeCSS(): string {
-  const brand = getCurrentBrand();
+  const brand = getBrandConfig();
   return brand.themeCss;
 }

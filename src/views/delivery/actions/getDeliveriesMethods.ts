@@ -1,3 +1,4 @@
+import { getBrandConfig } from "@/config/brands";
 import { DeliveryMethodData } from "@/features/checkout";
 import { axiosWCApi } from "@shared/lib/axios";
 
@@ -18,14 +19,15 @@ interface DeliveryMethodResponseData {
   };
 }
 
-const ID_ZONE = Number(process.env.WOOCOMMERCE_DELIVERIES_ZONE_ID) || 2;
-
 export const getDeliveriesMethods = async (): Promise<
   DeliveryMethodData[] | null
 > => {
   try {
+    const { wooCommerceSettings } = getBrandConfig();
+    const deliveryZoneId = wooCommerceSettings.deliveryZoneId;
+
     const { data: allMethods } = await axiosWCApi<DeliveryMethodResponseData[]>(
-      `/shipping/zones/${ID_ZONE}/methods`
+      `/shipping/zones/${deliveryZoneId}/methods`
     );
 
     if (!Array.isArray(allMethods) || allMethods.length === 0) {
