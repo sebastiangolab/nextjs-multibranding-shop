@@ -29,7 +29,13 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <head>
-        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
+        {/* Script that gives access to read the page in tweakcn.com editor */}
+        <script src="https://tweakcn.com/live-preview.min.js"></script>
+
+        <style
+          dangerouslySetInnerHTML={{ __html: themeCSS }}
+          suppressHydrationWarning
+        />
       </head>
       <body className={roboto.className}>
         <Providers>

@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 
+// Global flag to prevent multiple loads
+let envLoaded = false;
+
 /**
  * Load environment variables based on BRAND environment variable
  * Usage: BRAND=brand1 npm run dev or NEXT_PUBLIC_BRAND=brand1 npm run dev
@@ -9,6 +12,11 @@ import fs from "fs";
  * For Vercel: Set NEXT_PUBLIC_BRAND directly in environment variables
  */
 export function loadBrandEnv() {
+  // Skip if already loaded
+  if (envLoaded) {
+    return;
+  }
+
   // Check if NEXT_PUBLIC_BRAND is already set
   // If not, use BRAND env var (for local development)
   const brand = process.env.NEXT_PUBLIC_BRAND || process.env.BRAND;
@@ -28,7 +36,11 @@ export function loadBrandEnv() {
   // Check if brand-specific env file exists
   if (fs.existsSync(envPath)) {
     console.log(`✅ Loading environment for: ${brand} (${envFile})`);
-    const result = dotenv.config({ path: envPath });
+
+    const result = dotenv.config({
+      path: envPath,
+      override: false, // Don't override existing env vars
+    });
 
     if (result.error) {
       console.error(`❌ Error loading ${envFile}:`, result.error);
@@ -43,11 +55,14 @@ export function loadBrandEnv() {
 
   // Validate required variables
   const requiredVars = [
+    "NEXT_PUBLIC_BRAND",
+    "NEXT_PUBLIC_DEVELOPMENT_MODE",
     "NEXT_PUBLIC_WORDPRESS_API_URL",
     "WC_CONSUMER_KEY",
     "WC_SECRET_KEY",
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
     "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET",
   ];
 
   const missingVars = requiredVars.filter((v) => !process.env[v]);
@@ -56,4 +71,7 @@ export function loadBrandEnv() {
     console.warn(`⚠️  Warning: Missing environment variables for ${brand}:`);
     missingVars.forEach((v) => console.warn(`   - ${v}`));
   }
+
+  // Mark as loaded
+  envLoaded = true;
 }

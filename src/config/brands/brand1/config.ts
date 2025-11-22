@@ -1,5 +1,4 @@
 import { BrandConfig } from "../types";
-import themeCss from "./theme.css?raw";
 
 export const brand1Config: BrandConfig = {
   shopName: "Brand 1 - Sebastian Shop",
@@ -9,5 +8,5 @@ export const brand1Config: BrandConfig = {
     deliveryZoneId: 2,
   },
 
-  themeCss: themeCss,
+  themeCss: "src/config/brands/brand1/theme.css",
 };
