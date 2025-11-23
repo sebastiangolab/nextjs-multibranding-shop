@@ -57,6 +57,7 @@ export function loadBrandEnv() {
   const requiredVars = [
     "NEXT_PUBLIC_BRAND",
     "NEXT_PUBLIC_DEVELOPMENT_MODE",
+    "NEXT_PUBLIC_SITE_URL",
     "NEXT_PUBLIC_WORDPRESS_API_URL",
     "WC_CONSUMER_KEY",
     "WC_SECRET_KEY",

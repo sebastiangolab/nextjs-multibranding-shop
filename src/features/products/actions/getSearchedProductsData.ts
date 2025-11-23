@@ -1,5 +1,5 @@
-import { axiosWCApi } from "@shared/lib/axios";
 import { ProductData } from "../types";
+import { axiosNextWcApi } from "@/shared/lib/axios";
 
 interface SearchedProductsRequestParams {
   includeIds?: number[];
@@ -20,7 +20,7 @@ export const getSearchedProductsData = async (
   params: SearchedProductsRequestParams
 ): Promise<SearchProductsDataActionResult | null> => {
   try {
-    const response = await axiosWCApi<ProductData[]>("/products", {
+    const response = await axiosNextWcApi<ProductData[]>(`/products/search`, {
       params: {
         include: params.includeIds?.join(","),
         search: params.phrase,
