@@ -1,5 +1,20 @@
 import { Image } from "@shared/types";
 
+export interface GenericPageData {
+  id: number;
+  title?: {
+    rendered?: string;
+  };
+  seo: {
+    title: string;
+    description: string;
+    isNoIndex: boolean;
+  };
+  acf: {
+    sections: number[];
+  };
+}
+
 // Generic Section Types
 export enum GenericSectionType {
   TEXT_SECTION = "text-section",

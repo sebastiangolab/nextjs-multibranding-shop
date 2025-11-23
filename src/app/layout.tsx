@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "@shared/styles/globals.css";
 import { Providers } from "./providers";
@@ -13,11 +12,6 @@ const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
 });
-
-export const metadata: Metadata = {
-  title: "Next.js boilerplate",
-  description: "page description",
-};
 
 export default function RootLayout({
   children,

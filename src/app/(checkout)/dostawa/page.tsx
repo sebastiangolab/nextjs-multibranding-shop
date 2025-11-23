@@ -2,10 +2,13 @@ import { CheckoutStep } from "@/features/checkout";
 import { CheckoutHeader } from "@/features/header";
 import DeliveryView from "@/views/delivery";
 import type { Metadata } from "next";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const brand = getBrandConfig();
+
   return {
-    title: `Dostawa`,
+    title: `Dostawa | ${brand.shopName}`,
     description: `Wybierz sposób dostawy zamówienia`,
   };
 }
