@@ -1,5 +1,6 @@
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { DeliveryMethodData } from "@/features/checkout";
+import { parsePriceToNumber } from "@/features/prices";
 import { axiosWCApi } from "@shared/lib/axios";
 
 interface DeliveryMethodResponseData {
@@ -43,7 +44,7 @@ export const getDeliveriesMethods = async (): Promise<
         enabled: method.enabled,
         title: method.title,
         deliveryTime: method.settings?.delivery_terms?.value,
-        price: parseFloat(pricePerOrder || price),
+        price: parsePriceToNumber(pricePerOrder || price),
       };
     });
 

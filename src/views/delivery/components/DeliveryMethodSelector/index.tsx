@@ -4,6 +4,7 @@ import { Label } from "@/shared/shadcn/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/shared/shadcn/ui/radio-group";
 import { DeliveryMethodData, useCheckoutStore } from "@/features/checkout";
 import { getExtendedDeliveryMethod } from "../../helpers/getExtendedDeliveryMethod";
+import { Price } from "@/features/prices";
 
 interface DeliveryMethodSelectorProps {
   deliveriesMethods: DeliveryMethodData[];
@@ -106,7 +107,7 @@ export const DeliveryMethodSelector = ({
                     {method.isFree ? (
                       <span className="text-green-600">Gratis</span>
                     ) : (
-                      `${method.price.toFixed(2)} zł`
+                      <Price price={method.price} />
                     )}
                   </p>
                 </div>

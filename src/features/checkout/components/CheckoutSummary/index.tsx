@@ -6,6 +6,7 @@ import { Loader2, ShoppingBag, CreditCard, Truck } from "lucide-react";
 import { useCheckoutStore } from "../../store/useCheckoutStore";
 import { useCartStore } from "@/shared/store/cartStore";
 import { CheckoutStep } from "../../types";
+import { addPrices, Price } from "@/features/prices";
 
 interface CheckoutSummaryProps {
   step: CheckoutStep;
@@ -31,7 +32,7 @@ const CheckoutSummary = ({
   const totalProductsPriceElement = isLoading ? (
     <Loader2 className="h-4 w-4 animate-spin text-primary" />
   ) : (
-    `${summaryProductsPrice.toFixed(2)} zł`
+    <Price price={summaryProductsPrice} />
   );
 
   const buttonIconClasses = "w-5 h-5 mr-2";
@@ -47,7 +48,7 @@ const CheckoutSummary = ({
       deliveryEstimate: null,
     },
     [CheckoutStep.DELIVERY]: {
-      totalPrice: summaryProductsPrice + deliveryCost,
+      totalPrice: addPrices(summaryProductsPrice, deliveryCost),
       infoText: null,
       buttonText: "Przejdź do płatności",
       buttonIcon: <Truck className={buttonIconClasses} />,
@@ -55,7 +56,7 @@ const CheckoutSummary = ({
       deliveryEstimate,
     },
     [CheckoutStep.PAYMENT]: {
-      totalPrice: summaryProductsPrice + deliveryCost,
+      totalPrice: addPrices(summaryProductsPrice, deliveryCost),
       infoText: null,
       buttonText: `Zapłać`,
       buttonIcon: <CreditCard className={buttonIconClasses} />,
@@ -70,7 +71,7 @@ const CheckoutSummary = ({
   const totalPriceElement = isLoading ? (
     <Loader2 className="h-6 w-6 animate-spin text-primary" />
   ) : (
-    `${config.totalPrice.toFixed(2)} zł`
+    <Price price={config.totalPrice} />
   );
 
   return (
@@ -96,7 +97,7 @@ const CheckoutSummary = ({
                 <span className="font-medium text-green-600">Gratis</span>
               ) : (
                 <span className="font-medium">
-                  {config.deliveryCost.toFixed(2)} zł
+                  <Price price={config.deliveryCost} />
                 </span>
               )}
             </div>

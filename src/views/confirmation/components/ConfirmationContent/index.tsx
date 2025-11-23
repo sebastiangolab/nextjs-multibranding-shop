@@ -9,6 +9,7 @@ import { useCheckoutStore } from "@/features/checkout";
 import { PaymentSuccess } from "../PaymentSuccess";
 import { PaymentFailure } from "../PaymentFailure";
 import { PaymentProcessing } from "../PaymentProcessing";
+import { addPrices } from "@/features/prices";
 
 const ConfirmationContent = () => {
   const searchParams = useSearchParams();
@@ -68,7 +69,7 @@ const ConfirmationContent = () => {
           ) {
             // Webhook successfully processed the order
             const deliveryCost = deliveryMethodData?.price || 0;
-            const total = summaryProductsPrice + deliveryCost;
+            const total = addPrices(summaryProductsPrice, deliveryCost);
 
             setOrderData({
               orderId: statusResult.orderId,
@@ -91,7 +92,7 @@ const ConfirmationContent = () => {
             console.warn("⚠️ Max attempts (10) reached, showing fallback");
 
             const deliveryCost = deliveryMethodData?.price || 0;
-            const total = summaryProductsPrice + deliveryCost;
+            const total = addPrices(summaryProductsPrice, deliveryCost);
 
             setOrderData({
               orderId: paymentIntentId, // Fallback to payment intent ID
@@ -104,7 +105,7 @@ const ConfirmationContent = () => {
 
           // Fallback
           const deliveryCost = deliveryMethodData?.price || 0;
-          const total = summaryProductsPrice + deliveryCost;
+          const total = addPrices(summaryProductsPrice, deliveryCost);
 
           setOrderData({
             orderId: paymentIntentId,
@@ -121,7 +122,7 @@ const ConfirmationContent = () => {
     // For failed payments, show immediately (DO NOT clear cart)
     if (redirectStatus === "failed" && !orderData) {
       const deliveryCost = deliveryMethodData?.price || 0;
-      const total = summaryProductsPrice + deliveryCost;
+      const total = addPrices(summaryProductsPrice, deliveryCost);
 
       setOrderData({
         orderId: paymentIntentId || "unknown",

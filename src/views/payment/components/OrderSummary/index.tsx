@@ -4,6 +4,7 @@ import { Edit, Loader, ShoppingBag } from "lucide-react";
 import { SummaryOrderProductsList } from "./SummaryOrderProductsList";
 import { useCartProducts, useCheckoutStore } from "@/features/checkout";
 import { LinkButton } from "@/shared/components/LinkButton";
+import { Price } from "@/features/prices";
 
 export const OrderSummary = () => {
   const { deliveryFormData, deliveryMethodData } = useCheckoutStore();
@@ -152,7 +153,7 @@ export const OrderSummary = () => {
                   {deliveryMethodData.price === 0 ? (
                     <span className="text-green-600">Gratis</span>
                   ) : (
-                    `${deliveryMethodData.price.toFixed(2)} zł`
+                    <Price price={deliveryMethodData.price} />
                   )}{" "}
                   • {deliveryMethodData.deliveryTime}
                 </p>

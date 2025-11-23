@@ -1,5 +1,6 @@
 "use client";
 
+import { Price } from "@/features/prices";
 import { LinkButton } from "@/shared/components/LinkButton";
 import { CheckCircle, Mail } from "lucide-react";
 
@@ -44,7 +45,7 @@ export const PaymentSuccess = ({
             <div>
               <p className="text-sm text-gray-500 mb-1">Kwota zapłacona</p>
               <p className="font-semibold text-green-600">
-                {total.toFixed(2)} zł
+                <Price price={total} />
               </p>
             </div>
           </div>

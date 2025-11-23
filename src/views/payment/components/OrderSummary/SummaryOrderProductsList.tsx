@@ -1,6 +1,7 @@
 "use client";
 
 import { CartTableProduct } from "@/features/checkout";
+import { multiplyPrice, Price } from "@/features/prices";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -48,11 +49,11 @@ export const SummaryOrderProductsList = ({
 
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">
-                {product.quantity} x {product.price} zł
+                {product.quantity} x <Price price={product.price} />
               </span>
 
               <span className="font-medium text-gray-900">
-                {(parseFloat(product.price) * product.quantity).toFixed(2)} zł
+                <Price price={multiplyPrice(product.price, product.quantity)} />
               </span>
             </div>
           </div>

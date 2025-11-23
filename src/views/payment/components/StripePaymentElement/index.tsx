@@ -7,6 +7,7 @@ import { useCartStore } from "@/shared/store/cartStore";
 import { useCheckoutStore } from "@/features/checkout";
 import { StripePaymentForm } from "../StripePaymentForm";
 import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
+import { addPrices } from "@/features/prices";
 
 interface StripePaymentElementProps {
   onStripeReady: (stripe: Stripe, elements: StripeElements) => void;
@@ -36,7 +37,8 @@ const StripePaymentElement = ({
       return;
     }
 
-    const total = summaryProductsPrice + (deliveryMethodData?.price || 0);
+    const deliveryCost = deliveryMethodData?.price || 0;
+    const total = addPrices(summaryProductsPrice, deliveryCost);
 
     const handleCreateStripePaymentIntent = async () => {
       // Validate required data

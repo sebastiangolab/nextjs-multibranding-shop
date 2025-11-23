@@ -6,6 +6,7 @@ import InputWithLabel from "@shared/components/InputWithLabel";
 import { Label } from "@shared/shadcn/ui/label";
 import { Slider } from "@shared/shadcn/ui/slider";
 import { ProductsFiltersHookResults } from "../../types";
+import { Price } from "@/features/prices";
 
 interface PriceFilterProps {
   maxPrice: number;
@@ -65,8 +66,15 @@ export const PriceFilter = ({
       <Label className="text-sm font-medium">Cena</Label>
 
       <div className="flex items-center justify-between text-sm text-muted-foreground">
-        <span>{priceRange[0] ?? 0} zł</span>
-        <span>{priceRange[1] ?? maxPrice} zł</span>
+        <span>{priceRange[0] ? <Price price={priceRange[0]} /> : "0 zł"}</span>
+
+        <span>
+          {priceRange[1] ? (
+            <Price price={priceRange[1]} />
+          ) : (
+            <Price price={maxPrice} />
+          )}
+        </span>
       </div>
 
       <Slider

@@ -10,6 +10,7 @@ import { useCartStore } from "@shared/store/cartStore";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { ProductData } from "../../types";
+import { Price } from "@/features/prices";
 
 interface ProductCardProps {
   data: ProductData;
@@ -77,7 +78,9 @@ const ProductCard = ({ data }: ProductCardProps) => {
             </h3>
 
             <div className="flex items-center justify-between">
-              <p className="text-xl font-bold text-foreground">{price} zł</p>
+              <p className="text-xl font-bold text-foreground">
+                <Price price={price} />
+              </p>
 
               <Button onClick={handleAddToCartButtonClick} size="icon">
                 <ShoppingCart className="h-4 w-4" />

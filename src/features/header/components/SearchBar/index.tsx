@@ -8,6 +8,7 @@ import { getSearchedProductsData, ProductData } from "@features/products";
 import Image from "next/image";
 import Link from "next/link";
 import { useDebounce } from "use-debounce";
+import { Price } from "@/features/prices";
 
 export const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -186,7 +187,7 @@ export const SearchBar = () => {
                         </h4>
 
                         <p className="text-primary font-semibold mt-1">
-                          {product.price} zł
+                          <Price price={product.price} />
                         </p>
                       </div>
                     </Link>

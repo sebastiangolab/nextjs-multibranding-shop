@@ -10,6 +10,7 @@ import { QuantitySelector } from "../ProductQuantitySelector";
 import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
+import { Price } from "@/features/prices";
 
 interface ProductMainProps {
   productData: ProductData;
@@ -82,7 +83,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
 
           {/* Price */}
           <div className="text-3xl font-bold lg:text-4xl">
-            {Number(price).toFixed(2)} zł
+            <Price price={price} />
           </div>
 
           {/* Quantity Selector */}

@@ -14,6 +14,7 @@ import { Button } from "@shared/shadcn/ui/button";
 import { Separator } from "@shared/shadcn/ui/separator";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { useCartStore } from "@shared/store/cartStore";
+import { multiplyPrice, Price } from "@/features/prices";
 
 const AddToCartModal = () => {
   const router = useRouter();
@@ -33,8 +34,7 @@ const AddToCartModal = () => {
     return <></>;
   }
 
-  const productPrice = parseFloat(product.price);
-  const totalPrice = (productPrice * quantity).toFixed(2);
+  const totalPrice = multiplyPrice(product.price, quantity);
 
   return (
     <Dialog open={isOpen} onOpenChange={closeModal}>
@@ -77,7 +77,9 @@ const AddToCartModal = () => {
                   </span>
                 </span>
 
-                <span className="font-bold">{totalPrice} zł</span>
+                <span className="font-bold">
+                  <Price price={totalPrice} />
+                </span>
               </div>
             </div>
           </div>

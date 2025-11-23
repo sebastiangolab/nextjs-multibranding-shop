@@ -9,6 +9,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { ChangeEvent } from "react";
 import { LinkButton } from "@/shared/components/LinkButton";
 import { CartTableProduct } from "@/features/checkout";
+import { multiplyPrice, Price } from "@/features/prices";
 
 interface CartTableProps {
   products: CartTableProduct[];
@@ -80,7 +81,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                 {/* Price column */}
                 <td className="px-6 py-4">
                   <span className="font-medium text-foreground">
-                    {product.price} zł
+                    <Price price={product.price} />
                   </span>
                 </td>
 
@@ -134,7 +135,9 @@ export const CartTable = ({ products }: CartTableProps) => {
                 {/* Total column */}
                 <td className="px-6 py-4">
                   <span className="font-semibold text-foreground">
-                    {parseFloat(product.price) * product.quantity} zł
+                    <Price
+                      price={multiplyPrice(product.price, product.quantity)}
+                    />
                   </span>
                 </td>
 
@@ -185,7 +188,10 @@ export const CartTable = ({ products }: CartTableProps) => {
 
                 {/* Product price */}
                 <p className="text-sm text-muted-foreground mb-2">
-                  Cena: <span className="font-medium">{product.price} zł</span>
+                  Cena:{" "}
+                  <span className="font-medium">
+                    <Price price={product.price} />
+                  </span>
                 </p>
 
                 {/* Product quantity */}
@@ -226,7 +232,9 @@ export const CartTable = ({ products }: CartTableProps) => {
                   </div>
 
                   <p className="font-semibold text-foreground text-right">
-                    {parseFloat(product.price) * product.quantity} zł
+                    <Price
+                      price={multiplyPrice(product.price, product.quantity)}
+                    />
                   </p>
                 </div>
 

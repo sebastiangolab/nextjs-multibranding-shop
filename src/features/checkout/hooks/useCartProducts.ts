@@ -3,6 +3,7 @@ import { useCartStore } from "@/shared/store/cartStore";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { CartTableProduct } from "../types";
 import { useMemo } from "react";
+import { addPrices, multiplyPrice } from "@/features/prices";
 
 interface CartProductsHookResults {
   productsWithQuantity: CartTableProduct[];
@@ -49,7 +50,8 @@ export const useCartProducts = (): CartProductsHookResults => {
   const productsTotalPrice = useMemo(
     () =>
       productsWithQuantity.reduce(
-        (sum, product) => sum + parseFloat(product.price) * product.quantity,
+        (sumPrices, product) =>
+          addPrices(sumPrices, multiplyPrice(product.price, product.quantity)),
         0
       ),
     [productsWithQuantity]
