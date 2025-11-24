@@ -26,9 +26,9 @@ export const axiosWCApi = axios.create({
 });
 
 export const axiosStripeApi = axios.create({
-  baseURL: `/api/stripe`,
+  baseURL: `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe`,
 });
 
 export const axiosNextWcApi = axios.create({
-  baseURL: `/api/wc`,
+  baseURL: `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc`,
 });
