@@ -73,7 +73,7 @@ const ConfirmationContent = () => {
 
             setOrderData({
               orderId: statusResult.orderId,
-              email: deliveryFormData?.email || "unknown",
+              email: deliveryFormData?.email || "",
               total,
             });
 
@@ -96,7 +96,7 @@ const ConfirmationContent = () => {
 
             setOrderData({
               orderId: paymentIntentId, // Fallback to payment intent ID
-              email: deliveryFormData?.email || "unknown",
+              email: deliveryFormData?.email || "",
               total,
             });
           }
@@ -109,7 +109,7 @@ const ConfirmationContent = () => {
 
           setOrderData({
             orderId: paymentIntentId,
-            email: deliveryFormData?.email || "unknown",
+            email: deliveryFormData?.email || "",
             total,
           });
         }
@@ -126,7 +126,7 @@ const ConfirmationContent = () => {
 
       setOrderData({
         orderId: paymentIntentId || "unknown",
-        email: deliveryFormData?.email || "unknown",
+        email: deliveryFormData?.email || "",
         total,
       });
     }
@@ -145,19 +145,19 @@ const ConfirmationContent = () => {
   if (!paymentIntentId || !redirectStatus) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg border p-8 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="bg-card rounded-lg border p-8 text-center">
+          <h1 className="text-2xl font-bold text-foreground mb-4">
             Nie znaleziono informacji o płatności
           </h1>
 
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground mb-6">
             Wygląda na to, że trafiłeś tutaj bezpośrednio. Ta strona jest
             przeznaczona do obsługi przekierowań z systemu płatności.
           </p>
 
           <Link
             href="/koszyk"
-            className="inline-block px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90"
+            className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
           >
             Przejdź do koszyka
           </Link>
@@ -172,8 +172,10 @@ const ConfirmationContent = () => {
       if (!orderData) {
         return (
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-lg border p-8 text-center">
-              <p className="text-gray-600">Przetwarzanie zamówienia...</p>
+            <div className="bg-card rounded-lg border p-8 text-center">
+              <p className="text-muted-foreground">
+                Przetwarzanie zamówienia...
+              </p>
             </div>
           </div>
         );
@@ -194,8 +196,8 @@ const ConfirmationContent = () => {
       if (!orderData) {
         return (
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-lg border p-8 text-center">
-              <p className="text-gray-600">Ładowanie...</p>
+            <div className="bg-card rounded-lg border p-8 text-center">
+              <p className="text-muted-foreground">Ładowanie...</p>
             </div>
           </div>
         );
@@ -211,16 +213,18 @@ const ConfirmationContent = () => {
     default:
       return (
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-lg border p-8 text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-card rounded-lg border p-8 text-center">
+            <h1 className="text-2xl font-bold text-foreground mb-4">
               Nieznany status płatności
             </h1>
 
-            <p className="text-gray-600 mb-6">Status: {redirectStatus}</p>
+            <p className="text-muted-foreground mb-6">
+              Status: {redirectStatus}
+            </p>
 
             <Link
               href="/koszyk"
-              className="inline-block px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90"
+              className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
             >
               Wróć do koszyka
             </Link>

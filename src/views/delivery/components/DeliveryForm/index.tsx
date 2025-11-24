@@ -134,7 +134,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
     );
 
     const personalDataFormElement = (
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-card rounded-lg border p-6">
         <h3 className="text-lg font-semibold mb-5">Dane osobowe</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -202,7 +202,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
     );
 
     const deliveryAdressFormElement = (
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-card rounded-lg border p-6">
         <h3 className="text-lg font-semibold mb-5">Adres dostawy</h3>
 
         <div className="grid grid-cols-1 gap-5">
@@ -315,7 +315,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
     );
 
     const billingAddressFormElement = (
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-card rounded-lg border p-6">
         <FormField
           control={form.control}
           name="isDifferentBillingAddress"
@@ -449,7 +449,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
     );
 
     const additionalNotesFormElement = (
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-card rounded-lg border p-6">
         <FormField
           control={form.control}
           name="notes"

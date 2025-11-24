@@ -8,6 +8,8 @@ import { useCheckoutStore } from "@/features/checkout";
 import { StripePaymentForm } from "../StripePaymentForm";
 import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
 import { addPrices } from "@/features/prices";
+import { useTheme } from "next-themes";
+import { useThemeMode } from "@/shared/hooks/useThemeMode";
 
 interface StripePaymentElementProps {
   onStripeReady: (stripe: Stripe, elements: StripeElements) => void;
@@ -26,6 +28,8 @@ const StripePaymentElement = ({
   const { summaryProductsPrice, deliveryMethodData, deliveryFormData } =
     useCheckoutStore();
   const { items: cartItems } = useCartStore();
+
+  const { isDark } = useThemeMode();
 
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const hasInitialized = useRef(false);
@@ -75,8 +79,8 @@ const StripePaymentElement = ({
   // Render loading state if clientSecret is not ready
   if (!clientSecret || !stripePromise) {
     return (
-      <div className="bg-white rounded-lg border p-6">
-        <p className="text-center text-gray-500">
+      <div className="bg-card rounded-lg border p-6">
+        <p className="text-center text-muted-foreground">
           Ładowanie formularza płatności...
         </p>
       </div>
@@ -89,7 +93,7 @@ const StripePaymentElement = ({
       options={{
         clientSecret,
         appearance: {
-          theme: "stripe",
+          theme: isDark ? "night" : "stripe",
           variables: {
             colorPrimary: "#000",
           },

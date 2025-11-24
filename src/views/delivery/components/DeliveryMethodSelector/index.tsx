@@ -37,7 +37,7 @@ export const DeliveryMethodSelector = ({
   };
 
   return (
-    <div className="bg-white rounded-lg border p-6">
+    <div className="bg-card rounded-lg border p-6">
       <h3 className="text-lg font-semibold mb-5">Metoda dostawy</h3>
 
       <RadioGroup
@@ -53,7 +53,7 @@ export const DeliveryMethodSelector = ({
                 ${
                   selectedDeliveryMethod.id === method.id
                     ? "border-primary bg-primary/5"
-                    : "border-gray-200 hover:border-gray-300"
+                    : "border-border hover:border-primary/50"
                 }
               `}
               onClick={() => handleSelectedMethod(method.id)}
@@ -71,8 +71,8 @@ export const DeliveryMethodSelector = ({
                     p-3 rounded-lg
                     ${
                       selectedDeliveryMethod.id === method.id
-                        ? "bg-primary text-white"
-                        : "bg-gray-100 text-gray-600"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
                     }
                   `}
                 >
@@ -89,13 +89,13 @@ export const DeliveryMethodSelector = ({
                   </Label>
 
                   {method.description ? (
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       {method.description}
                     </p>
                   ) : null}
 
                   {method.deliveryTime ? (
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-muted-foreground/80 mt-1">
                       📦 {method.deliveryTime}
                     </p>
                   ) : null}

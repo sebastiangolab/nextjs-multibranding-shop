@@ -76,13 +76,13 @@ const CheckoutSummary = ({
 
   return (
     <div className="space-y-4 sticky top-24 self-start">
-      <div className="bg-white rounded-lg border p-6">
+      <div className="bg-card rounded-lg border p-6">
         <h2 className="text-xl font-bold mb-6">Podsumowanie</h2>
 
         <div className="space-y-4">
           {/* Products info */}
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">
+            <span className="text-muted-foreground">
               Produkty ({cartItemsQuantity} szt.)
             </span>
             <span className="font-medium">{totalProductsPriceElement}</span>
@@ -91,7 +91,7 @@ const CheckoutSummary = ({
           {/* Delivery info */}
           {config.deliveryCost !== null && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Dostawa</span>
+              <span className="text-muted-foreground">Dostawa</span>
 
               {config.deliveryCost === 0 ? (
                 <span className="font-medium text-green-600">Gratis</span>
@@ -123,7 +123,7 @@ const CheckoutSummary = ({
 
           {/* Delivery time info */}
           {config.deliveryEstimate ? (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-900">
+            <div className="bg-accent border border-accent rounded-lg p-3 text-sm text-accent-foreground">
               📦 Szacowany czas dostawy: {config.deliveryEstimate}
             </div>
           ) : null}
@@ -143,16 +143,20 @@ const CheckoutSummary = ({
 
           {/* Error message */}
           {errorMessage && (
-            <p className="text-xs text-red-600 text-center">{errorMessage}</p>
+            <p className="text-xs text-destructive text-center">
+              {errorMessage}
+            </p>
           )}
 
           {/* Additional info */}
           <div className="text-center pt-4 border-t">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground">
               🔒 Bezpieczne i szyfrowane płatności
             </p>
 
-            <p className="text-xs text-gray-400 mt-1">Powered by Stripe</p>
+            <p className="text-xs text-muted-foreground/60 mt-1">
+              Powered by Stripe
+            </p>
           </div>
         </div>
       </div>

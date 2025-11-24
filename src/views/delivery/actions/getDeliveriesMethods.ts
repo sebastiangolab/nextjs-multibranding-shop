@@ -31,20 +31,22 @@ export const getDeliveriesMethods = async (): Promise<
       `/shipping/zones/${deliveryZoneId}/methods`
     );
 
+    console.log(allMethods);
+
     if (!Array.isArray(allMethods) || allMethods.length === 0) {
       return [];
     }
 
     const normalizeDeliveriesMethods = allMethods.map((method) => {
-      const pricePerOrder = method.settings?.cost_per_order?.value ?? "0";
-      const price = method.settings?.cost?.value ?? "0";
+      const pricePerOrder = method.settings?.cost_per_order?.value;
+      const price = method.settings?.cost?.value;
 
       return {
         id: method.method_id,
         enabled: method.enabled,
         title: method.title,
         deliveryTime: method.settings?.delivery_terms?.value,
-        price: parsePriceToNumber(pricePerOrder || price),
+        price: parsePriceToNumber(pricePerOrder || price || "0"),
       };
     });
 

@@ -27,7 +27,7 @@ export const StripePaymentForm = ({ onReady }: StripePaymentFormProps) => {
   }, [stripe, elements, onReady]);
 
   return (
-    <div className="bg-white rounded-lg border p-6">
+    <div className="bg-card rounded-lg border p-6">
       <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
         <CreditCard className="w-5 h-5" />
         Płatność

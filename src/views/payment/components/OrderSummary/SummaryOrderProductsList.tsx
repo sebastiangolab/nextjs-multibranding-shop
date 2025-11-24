@@ -42,17 +42,17 @@ export const SummaryOrderProductsList = ({
               href={`/p/${product.slug}`}
               className="hover:text-primary transition-colors"
             >
-              <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+              <h4 className="text-sm font-medium text-foreground line-clamp-2 mb-1">
                 {product.name}
               </h4>
             </Link>
 
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">
+              <span className="text-muted-foreground">
                 {product.quantity} x <Price price={product.price} />
               </span>
 
-              <span className="font-medium text-gray-900">
+              <span className="font-medium text-foreground">
                 <Price price={multiplyPrice(product.price, product.quantity)} />
               </span>
             </div>

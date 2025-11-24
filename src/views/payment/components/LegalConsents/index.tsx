@@ -9,7 +9,7 @@ export const LegalConsents = () => {
   const { termsAccepted, updateTermsAccepted } = useCheckoutStore();
 
   return (
-    <div className="bg-white rounded-lg border p-6">
+    <div className="bg-card rounded-lg border p-6">
       <h3 className="text-lg font-semibold mb-4">Zgody i regulaminy</h3>
 
       <div className="space-y-4">
@@ -39,7 +39,7 @@ export const LegalConsents = () => {
               >
                 regulamin sklepu
               </Link>{" "}
-              <span className="text-red-500">*</span>
+              <span className="text-destructive">*</span>
             </Label>
           </div>
         </div>
@@ -70,13 +70,13 @@ export const LegalConsents = () => {
               >
                 politykę prywatności
               </Link>{" "}
-              <span className="text-red-500">*</span>
+              <span className="text-destructive">*</span>
             </Label>
           </div>
         </div>
 
         <div className="border-t pt-4 mt-4">
-          <p className="text-xs text-gray-500 mb-3">Opcjonalne:</p>
+          <p className="text-xs text-muted-foreground mb-3">Opcjonalne:</p>
 
           {/* Marketing - optional */}
           <div className="flex items-start space-x-3 mb-3">
@@ -93,7 +93,7 @@ export const LegalConsents = () => {
             <div className="flex-1">
               <Label
                 htmlFor="marketing"
-                className="text-sm font-normal cursor-pointer leading-relaxed text-gray-700"
+                className="text-sm font-normal cursor-pointer leading-relaxed text-foreground/80"
               >
                 Wyrażam zgodę na przetwarzanie moich danych osobowych w celach
                 marketingowych
@@ -102,8 +102,8 @@ export const LegalConsents = () => {
           </div>
         </div>
 
-        <div className="text-xs text-gray-600 mt-5">
-          <span className="text-red-500">*</span> Pola wymagane
+        <div className="text-xs text-muted-foreground mt-5">
+          <span className="text-destructive">*</span> Pola wymagane
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import { LinkButton } from "@/shared/components/LinkButton";
 import Logo from "../Logo";
 import { HeaderData } from "../../types";
 import { CheckoutStep } from "@/features/checkout";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import ThemeToggle from "../ThemeToggle";
 
 const CHECKOUT_STEPS = [
   {
@@ -38,12 +40,14 @@ const CheckoutHeaderClient = ({
   logoDarkData,
   currentStep,
 }: CheckoutHeaderProps) => {
+  const { availableThemeToggle } = getBrandConfig();
+
   const currentStepIndex = CHECKOUT_STEPS.findIndex(
     (step) => step.id === currentStep
   );
 
   return (
-    <header className="border-b bg-white top-0 z-40 px-4">
+    <header className="border-b bg-card top-0 z-40 px-4">
       <div className="flex items-center justify-between container mx-auto py-4">
         {/* Logo */}
         <Logo logoData={logoData} logoDarkData={logoDarkData} />
@@ -110,6 +114,13 @@ const CheckoutHeaderClient = ({
             <span className="sm:hidden">Wróć</span>
           </LinkButton>
         </div>
+
+        {/* Theme Toggle */}
+        {availableThemeToggle ? (
+          <div className="pl-2 border-l-2 ml-4">
+            <ThemeToggle />
+          </div>
+        ) : null}
       </div>
 
       {/* Mobile steps */}

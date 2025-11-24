@@ -18,7 +18,7 @@ export const OrderSummary = () => {
     !deliveryMethodData;
 
   return (
-    <div className="bg-white rounded-lg border p-6">
+    <div className="bg-card rounded-lg border p-6">
       <h3 className="text-lg font-semibold mb-4">Podsumowanie zamówienia</h3>
 
       <div className="space-y-4">
@@ -31,7 +31,7 @@ export const OrderSummary = () => {
           <>
             <div className="pb-4 border-b">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-medium text-sm text-gray-700 flex items-center gap-2">
+                <h4 className="font-medium text-sm text-foreground/80 flex items-center gap-2">
                   <ShoppingBag className="w-4 h-4" />
                   Produkty ({productsWithQuantity.length})
                 </h4>
@@ -48,7 +48,7 @@ export const OrderSummary = () => {
             {/* Personal data */}
             <div className="pb-4 border-b">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-sm text-gray-700">
+                <h4 className="font-medium text-sm text-foreground/80">
                   Dane kontaktowe
                 </h4>
 
@@ -58,8 +58,8 @@ export const OrderSummary = () => {
                 </LinkButton>
               </div>
 
-              <div className="text-sm text-gray-600 space-y-1">
-                <p className="font-medium text-gray-900">
+              <div className="text-sm text-muted-foreground space-y-1">
+                <p className="font-medium text-foreground">
                   {deliveryFormData.firstName} {deliveryFormData.lastName}
                 </p>
 
@@ -72,7 +72,7 @@ export const OrderSummary = () => {
             {/* Delivery address */}
             <div className="pb-4 border-b">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-sm text-gray-700">
+                <h4 className="font-medium text-sm text-foreground/80">
                   Adres dostawy
                 </h4>
 
@@ -82,7 +82,7 @@ export const OrderSummary = () => {
                 </LinkButton>
               </div>
 
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-muted-foreground">
                 <p>
                   {deliveryFormData.street} {deliveryFormData.houseNumber}
                   {deliveryFormData.apartmentNumber &&
@@ -101,7 +101,7 @@ export const OrderSummary = () => {
             {deliveryFormData.isDifferentBillingAddress ? (
               <div className="pb-4 border-b">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-sm text-gray-700">
+                  <h4 className="font-medium text-sm text-foreground/80">
                     Adres rozliczeniowy
                   </h4>
 
@@ -111,7 +111,7 @@ export const OrderSummary = () => {
                   </LinkButton>
                 </div>
 
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-muted-foreground">
                   <p>
                     {deliveryFormData.billingStreet}{" "}
                     {deliveryFormData.billingHouseNumber}
@@ -134,7 +134,7 @@ export const OrderSummary = () => {
             {/* Delivery method */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-sm text-gray-700">
+                <h4 className="font-medium text-sm text-foreground/80">
                   Metoda dostawy
                 </h4>
 
@@ -145,11 +145,11 @@ export const OrderSummary = () => {
               </div>
 
               <div className="text-sm">
-                <p className="font-medium text-gray-900">
+                <p className="font-medium text-foreground">
                   {deliveryMethodData.title}
                 </p>
 
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   {deliveryMethodData.price === 0 ? (
                     <span className="text-green-600">Gratis</span>
                   ) : (
