@@ -13,9 +13,6 @@ interface SocialLinks {
 }
 
 export interface FooterData {
-  shopName: string;
-  phone: string;
-  email: string;
   socialLinks: SocialLinks;
   menuData: FooterMenuData;
 }

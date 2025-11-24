@@ -2,8 +2,12 @@ import { BrandConfig } from "../types";
 
 export const brand1Config: BrandConfig = {
   shopName: "Brand 1 - Sebastian Shop",
-  email: "seba@gmail.com",
   availableThemeToggle: true,
+
+  contact: {
+    email: "seba@gmail.com",
+    phone: "+48 123 123 123",
+  },
 
   wooCommerceSettings: {
     deliveryZoneId: 2,

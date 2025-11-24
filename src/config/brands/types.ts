@@ -1,7 +1,11 @@
 export interface BrandConfig {
   shopName: string;
-  email: string;
   availableThemeToggle: boolean;
+
+  contact: {
+    email: string;
+    phone: string;
+  };
 
   wooCommerceSettings: {
     deliveryZoneId: number;

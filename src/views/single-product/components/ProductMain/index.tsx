@@ -5,18 +5,21 @@ import ProductGallery from "../ProductGallery";
 import { ProductData } from "@features/products";
 import { Badge } from "@shared/shadcn/ui/badge";
 import { Button } from "@shared/shadcn/ui/button";
-import { Heart, Mail, RotateCcw, ShoppingCart, Truck } from "lucide-react";
+import { Heart, Mail, ShoppingCart } from "lucide-react";
 import { QuantitySelector } from "../ProductQuantitySelector";
 import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { Price } from "@/features/prices";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 
 interface ProductMainProps {
   productData: ProductData;
 }
 
 const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
+  const { contact } = getBrandConfig();
+
   const [quantity, setQuantity] = useState(1);
 
   const { addItemToCart } = useCartStore();
@@ -148,7 +151,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
               <p>
                 Masz pytania? Skontaktuj się z nami:{" "}
                 <strong>
-                  <a href="mailto:sklep@example.com">sklep@example.com</a>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
                 </strong>
               </p>
             </div>

@@ -1,3 +1,4 @@
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { FooterData } from "../../types";
 import ContactFooterColumn from "../ContactFooterColumn";
 import MenuFooterColumn from "../MenuFooterColumn";
@@ -7,6 +8,8 @@ interface FooterClientProps {
 }
 
 const FooterClient = ({ footerData }: FooterClientProps) => {
+  const { shopName, contact } = getBrandConfig();
+
   return (
     <footer className="bg-muted/50">
       <div className="container mx-auto px-4 pt-14 pb-5">
@@ -22,8 +25,8 @@ const FooterClient = ({ footerData }: FooterClientProps) => {
 
           {/* Column 4: Contact */}
           <ContactFooterColumn
-            phone={footerData.phone}
-            email={footerData.email}
+            phone={contact.phone}
+            email={contact.email}
             socialLinks={footerData.socialLinks}
           />
         </div>
@@ -31,7 +34,7 @@ const FooterClient = ({ footerData }: FooterClientProps) => {
         {/* Copyright */}
         <div className="mt-5 flex flex-col items-center gap-6 pt-12">
           <p className="text-sm text-muted-foreground">
-            © {footerData.shopName} {new Date().getFullYear()}
+            © {shopName} {new Date().getFullYear()}
           </p>
         </div>
       </div>

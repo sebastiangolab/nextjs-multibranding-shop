@@ -5,9 +5,6 @@ import { FooterData } from "../types";
 
 interface FooterResponseData {
   acf: {
-    shop_name: string;
-    phone: string;
-    email: string;
     link_facebook: string;
     instagram_link: string;
     link_twitter: string;
@@ -36,9 +33,6 @@ export const getFooterData = async (): Promise<FooterData | null> => {
       await axiosWpCustomApi<MenuResponseData>("/menu/main_menu");
 
     return {
-      shopName: footerData[0].acf.shop_name,
-      phone: footerData[0].acf.phone,
-      email: footerData[0].acf.email,
       socialLinks: {
         facebook: footerData[0].acf.link_facebook,
         instagram: footerData[0].acf.instagram_link,

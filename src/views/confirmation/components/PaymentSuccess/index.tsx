@@ -1,5 +1,6 @@
 "use client";
 
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Price } from "@/features/prices";
 import { LinkButton } from "@/shared/components/LinkButton";
 import { CheckCircle, Mail } from "lucide-react";
@@ -15,6 +16,8 @@ export const PaymentSuccess = ({
   email,
   total,
 }: PaymentSuccessProps) => {
+  const { contact } = getBrandConfig();
+
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-card rounded-lg border p-8 text-center">
@@ -92,10 +95,10 @@ export const PaymentSuccess = ({
           <p>
             Masz pytania? Skontaktuj się z nami:{" "}
             <a
-              href="mailto:kontakt@sklep.pl"
+              href={`mailto:${contact.email}`}
               className="text-primary hover:underline"
             >
-              kontakt@sklep.pl
+              {contact.email}
             </a>
           </p>
         </div>

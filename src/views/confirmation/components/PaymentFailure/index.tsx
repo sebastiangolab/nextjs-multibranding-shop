@@ -1,9 +1,12 @@
 "use client";
 
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { LinkButton } from "@/shared/components/LinkButton";
 import { XCircle, RefreshCcw, HelpCircle } from "lucide-react";
 
 export const PaymentFailure = () => {
+  const { contact } = getBrandConfig();
+
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-card rounded-lg border p-8 text-center">
@@ -94,14 +97,17 @@ export const PaymentFailure = () => {
           <p>
             Skontaktuj się z nami:{" "}
             <a
-              href="mailto:kontakt@sklep.pl"
+              href={`mailto:${contact.email}`}
               className="text-primary hover:underline"
             >
-              kontakt@sklep.pl
+              {contact.email}
             </a>{" "}
             lub{" "}
-            <a href="tel:+48111111111" className="text-primary hover:underline">
-              +48 111 111 111
+            <a
+              href={`tel:${contact.phone}`}
+              className="text-primary hover:underline"
+            >
+              {contact.phone}
             </a>
           </p>
         </div>
