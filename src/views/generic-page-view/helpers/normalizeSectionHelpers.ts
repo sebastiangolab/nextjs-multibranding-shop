@@ -39,7 +39,7 @@ export const normalizeSliderSectionData = (
         url: slide.url!,
       };
     })
-    .filter((slide) => slide !== null);
+    .filter((slide): slide is Slide => slide !== null);
 
   return {
     slides: filteredSlides,

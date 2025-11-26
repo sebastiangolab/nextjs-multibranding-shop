@@ -80,7 +80,7 @@ const ContactFooterColumn = ({
               >
                 <social.icon className="size-5" />
               </a>
-            ) : null
+            ) : null,
           )}
         </div>
       </div>

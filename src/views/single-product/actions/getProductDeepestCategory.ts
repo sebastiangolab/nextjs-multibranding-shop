@@ -27,7 +27,9 @@ export const getProductDeepestCategory = async (
           (category) => category.id === productCategory.id,
         );
       })
-      .filter((category) => !!category);
+      .filter(
+        (category): category is ProductsCategoryResponseData => !!category,
+      );
 
     // Function to calculate category depth
     const getDepth = (category: ProductsCategoryResponseData): number => {
