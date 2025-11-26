@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosWcCustomApi } from "@shared/lib/axios";
 import { ProductData } from "../types";
 

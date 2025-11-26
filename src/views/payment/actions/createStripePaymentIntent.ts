@@ -1,3 +1,5 @@
+"use server";
+
 import { DeliveryFormData, DeliveryMethodData } from "@/features/checkout";
 import { CartProductItem } from "@/shared/types";
 import { axiosStripeApi } from "@shared/lib/axios";

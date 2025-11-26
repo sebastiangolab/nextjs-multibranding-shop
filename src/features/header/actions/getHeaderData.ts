@@ -1,3 +1,5 @@
+"use server";
+
 import { normalizeMenuItems } from "@shared/helpers/menuHelpers";
 import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
 import { Image, MenuResponseData } from "@shared/types";

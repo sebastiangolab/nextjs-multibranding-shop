@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosWpAcfApi } from "@shared/lib/axios";
 import { normalizeSectionData } from "../helpers/normalizeSectionHelpers";
 import { GenericSectionType, SectionData, SectionResponseData } from "../types";

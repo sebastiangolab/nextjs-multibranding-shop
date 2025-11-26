@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosWCApi } from "@shared/lib/axios";
 import {
   ProductsCategoryFullData,

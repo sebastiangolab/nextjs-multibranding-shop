@@ -1,3 +1,4 @@
+"use server";
 import { BreadcrumbItem } from "@shared/hooks/useBreadcrumb";
 import { axiosWCApi } from "@shared/lib/axios";
 import {

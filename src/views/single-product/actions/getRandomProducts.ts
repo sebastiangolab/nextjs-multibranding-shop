@@ -1,3 +1,5 @@
+"use server";
+
 import { ProductData } from "@features/products";
 import { axiosWCApi } from "@shared/lib/axios";
 

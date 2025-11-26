@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosStripeApi } from "@/shared/lib/axios";
 
 interface PaymentStatusResult {

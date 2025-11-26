@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  getProductsData,
+  getSearchedProductsData,
   ProductData,
   ProductsGrid,
   ProductsGridSkeleton,
@@ -17,6 +17,9 @@ const FavoritesView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(false);
 
+  console.log("dupa");
+  console.log(productsIds);
+
   // Get products once when productsIds is loaded from localStorage
   useEffect(() => {
     // Skip if already loaded or if we're waiting for rehydration
@@ -29,8 +32,8 @@ const FavoritesView = () => {
         return;
       }
 
-      const productsData = await getProductsData({
-        ids: productsIds,
+      const productsData = await getSearchedProductsData({
+        includeIds: productsIds,
       });
 
       setDisplayedProducts(productsData?.products || []);

@@ -1,3 +1,5 @@
+"use server";
+
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { DeliveryMethodData } from "@/features/checkout";
 import { parsePriceToNumber } from "@/features/prices";

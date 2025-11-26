@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosWpCustomApi } from "@shared/lib/axios";
 import { GenericPageData } from "../types";
 
