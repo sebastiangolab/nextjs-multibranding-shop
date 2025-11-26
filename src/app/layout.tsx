@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
-import { generateThemeCSS } from "@/config/brands/generateThemeCSS";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
@@ -18,7 +18,7 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const themeCSS = generateThemeCSS();
+  const { themeCss } = getBrandConfig();
 
   return (
     <html lang="pl" suppressHydrationWarning>
@@ -27,7 +27,7 @@ export default function RootLayout({
         <script src="https://tweakcn.com/live-preview.min.js" async></script>
 
         <style
-          dangerouslySetInnerHTML={{ __html: themeCSS }}
+          dangerouslySetInnerHTML={{ __html: themeCss }}
           suppressHydrationWarning
         />
       </head>

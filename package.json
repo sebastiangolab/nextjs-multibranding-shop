@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "BRAND=${BRAND:-brand1} PORT=${PORT:-3000} next dev --turbopack",
     "dev:brand1": "BRAND=brand1 PORT=3000 next dev --turbopack",
     "dev:brand2": "BRAND=brand2 PORT=3001 next dev --turbopack",
-    "build": "BRAND=${BRAND:-brand1} next build",
     "build:brand1": "BRAND=brand1 next build",
     "build:brand2": "BRAND=brand2 next build",
-    "start": "next start",
     "start:brand1": "BRAND=brand1 PORT=3000 next start",
     "start:brand2": "BRAND=brand2 PORT=3001 next start",
     "lint": "BRAND=brand1 next lint",
