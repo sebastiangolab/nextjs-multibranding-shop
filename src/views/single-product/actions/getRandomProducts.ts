@@ -8,11 +8,11 @@ export const getRandomProducts = async (
   categoryId: number,
 ): Promise<ProductData[] | null> => {
   try {
-    // Fetch first 100 products from the same category
+    // Fetch products from the same category (limited to reasonable amount)
     const { data } = await axiosWCApi<ProductData[]>("/products", {
       params: {
         category: categoryId,
-        perPage: 100,
+        per_page: 30,
       },
     });
 
@@ -20,13 +20,9 @@ export const getRandomProducts = async (
       return null;
     }
 
-    // Exclude the current product from the results
-    const productsWithoutCurrent = data.filter(
-      (product) => product.id !== currentProductId,
-    );
-
-    // Shuffle and select 10 random products
-    const randomProducts = productsWithoutCurrent
+    // Exclude the current product and shuffle
+    const randomProducts = data
+      .filter((product) => product.id !== currentProductId)
       .sort(() => 0.5 - Math.random())
       .slice(0, 10);
 

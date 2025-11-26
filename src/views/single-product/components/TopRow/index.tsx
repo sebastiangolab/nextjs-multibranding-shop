@@ -2,8 +2,7 @@
 
 import React from "react";
 import { Heart } from "lucide-react";
-import BreadcrumbWithData from "@shared/components/BreadcrumbWithData";
-import { BreadcrumbItem } from "@shared/hooks/useBreadcrumb";
+import { BreadcrumbItem, BreadcrumbWithData } from "@/features/breadcrumb";
 import { Button } from "@shared/shadcn/ui/button";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 

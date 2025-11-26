@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useMemo, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductImage } from "@features/products";
@@ -20,6 +20,9 @@ const ProductGallery = ({
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  const hasMultipleImages = images.length > 1;
+  const hasMoreThan5Images = images.length > 5;
+
   const handlePrevious = () => {
     setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
@@ -36,6 +39,13 @@ const ProductGallery = ({
     setIsLightboxOpen(true);
   };
 
+  const selectedImage = useMemo(
+    () => images[selectedIndex],
+    [images, selectedIndex],
+  );
+
+  const thumbnails = useMemo(() => images.slice(0, 5), [images]);
+
   const commonArrowButtonClasses =
     "absolute top-1/2 -translate-y-1/2 rounded-full shadow-lg opacity-90 hover:opacity-100";
 
@@ -50,15 +60,16 @@ const ProductGallery = ({
           onClick={handleMainImageClick}
         >
           <Image
-            src={images[selectedIndex].src}
-            alt={images[selectedIndex].alt}
+            src={selectedImage.src}
+            alt={selectedImage.alt}
             fill
             className="object-cover"
             priority
+            fetchPriority="high"
           />
 
           {/* Navigation Arrows - Visible on Hover */}
-          {isHovered && images.length > 1 && (
+          {isHovered && hasMultipleImages && (
             <>
               <Button
                 variant="secondary"
@@ -94,11 +105,11 @@ const ProductGallery = ({
 
         {/* Thumbnails */}
         <div className="grid grid-cols-5 gap-2">
-          {images.slice(0, 5).map((image, index) => (
+          {thumbnails.map((image, index) => (
             <button
               key={index}
               onClick={() => {
-                if (index === 4 && images.length > 5) {
+                if (index === 4 && hasMoreThan5Images) {
                   handleMainImageClick();
                 } else {
                   handleThumbnailClick(index);
@@ -110,7 +121,7 @@ const ProductGallery = ({
                   : "border-border hover:border-primary/50"
               }`}
             >
-              {index === 4 && images.length > 5 ? (
+              {index === 4 && hasMoreThan5Images ? (
                 <>
                   <Image
                     src={image.src}

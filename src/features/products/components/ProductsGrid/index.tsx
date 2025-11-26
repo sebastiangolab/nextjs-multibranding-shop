@@ -19,7 +19,7 @@ const ProductsGrid = ({ products, isSectionVariant }: ProductsGridProps) => {
   }
 
   return (
-    <div className={`grid gap-6 ${gridClasses}`}>
+    <div className={`grid gap-6 items-stretch ${gridClasses}`}>
       {products.map((product) => (
         <ProductCard key={`product-${product.id}`} data={product} />
       ))}

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { Price } from "@/features/prices";
-import { getSearchedProductsData, ProductData } from "@features/products";
+import { getProductsData, ProductData } from "@features/products";
 import { Button } from "@shared/shadcn/ui/button";
 import { Input } from "@shared/shadcn/ui/input";
 
@@ -79,7 +79,7 @@ export const SearchBar = () => {
     const fetchProducts = async () => {
       setIsLoading(true);
 
-      const results = await getSearchedProductsData({
+      const results = await getProductsData({
         phrase: debouncedSearchQuery,
         perPage: 5,
       });

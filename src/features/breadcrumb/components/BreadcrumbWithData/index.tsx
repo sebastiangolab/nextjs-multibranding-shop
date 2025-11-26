@@ -3,10 +3,6 @@
 import React, { Fragment } from "react";
 import { SlashIcon } from "lucide-react";
 import {
-  BreadcrumbItem as BreadcrumbItemType,
-  useBreadcrumb,
-} from "@shared/hooks/useBreadcrumb";
-import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -14,6 +10,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@shared/shadcn/ui/breadcrumb";
+import { useBreadcrumb } from "../../hooks/useBreadcrumb";
+import { BreadcrumbItem as BreadcrumbItemType } from "../../types";
 
 interface BreadcrumbWithDataProps {
   currentPageLabel: string;

@@ -14,12 +14,11 @@ interface HeaderResponseData {
 
 export const getHeaderData = async (): Promise<HeaderData | null> => {
   try {
-    const { data: headerData } = await axiosWpAcfApi<HeaderResponseData[]>(
-      'theme-setting?slug="header"',
-    );
-
-    const { data: menuData } =
-      await axiosWpCustomApi<MenuResponseData>("/menu/main_menu");
+    // Fetch header settings and main menu in parallel
+    const [{ data: headerData }, { data: menuData }] = await Promise.all([
+      axiosWpAcfApi<HeaderResponseData[]>('theme-setting?slug="header"'),
+      axiosWpCustomApi<MenuResponseData>("/menu/main_menu"),
+    ]);
 
     const normalizedMenuDataItems = normalizeMenuItems(menuData.items);
 

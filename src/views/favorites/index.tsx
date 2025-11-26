@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  getSearchedProductsData,
+  getProductsData,
   ProductData,
   ProductsGrid,
   ProductsGridSkeleton,
@@ -17,9 +17,6 @@ const FavoritesView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(false);
 
-  console.log("dupa");
-  console.log(productsIds);
-
   // Get products once when productsIds is loaded from localStorage
   useEffect(() => {
     // Skip if already loaded or if we're waiting for rehydration
@@ -32,7 +29,7 @@ const FavoritesView = () => {
         return;
       }
 
-      const productsData = await getSearchedProductsData({
+      const productsData = await getProductsData({
         includeIds: productsIds,
       });
 
@@ -55,7 +52,7 @@ const FavoritesView = () => {
 
     // Filter products that are still in favorites
     setDisplayedProducts((prev) =>
-      prev.filter((product) => productsIds.includes(product.id)),
+      prev.filter((product) => productsIds.includes(product.id))
     );
   }, [productsIds, initialLoad, displayedProducts.length]);
 
@@ -63,7 +60,9 @@ const FavoritesView = () => {
     <BasicContainer>
       <h1 className="text-3xl font-bold mb-6">Ulubione</h1>
 
-      {isLoading ? <ProductsGridSkeleton count={productsIds.length} /> : null}
+      {isLoading ? (
+        <ProductsGridSkeleton count={productsIds.length} isSectionVariant />
+      ) : null}
 
       {!isLoading && displayedProducts.length === 0 ? (
         <p className="text-center py-12 text-muted-foreground text-lg">

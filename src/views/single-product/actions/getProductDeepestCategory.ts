@@ -4,7 +4,7 @@ import {
   normalizeProductsCategoryData,
   ProductCategoryData,
 } from "@features/products";
-import { axiosWCApi } from "@shared/lib/axios";
+import { getAllProductsCategories } from "@shared/actions/getAllProductsCategories";
 import {
   ProductsCategoryFullData,
   ProductsCategoryResponseData,
@@ -19,29 +19,34 @@ export const getProductDeepestCategory = async (
     }
 
     // Fetch all categories
-    const { data: allCategories } =
-      await axiosWCApi<ProductsCategoryResponseData[]>(`/products/categories`);
+    const allCategories = await getAllProductsCategories();
 
-    // Get full product categories data
+    // Create category Map for quick lookup
+    const categoryMap = new Map(
+      allCategories.map((category) => [category.id, category]),
+    );
+
+    // Get full product categories data using Map
     const categoriesDetails: ProductsCategoryResponseData[] = productCategories
-      .map((productCategory) => {
-        return allCategories.find(
-          (category) => category.id === productCategory.id,
-        );
-      })
+      .map((productCategory) => categoryMap.get(productCategory.id))
       .filter(
         (category): category is ProductsCategoryResponseData => !!category,
       );
 
-    // Function to calculate category depth
+    // Memoize depth calculations
+    const depthCache = new Map<number, number>();
+
+    // Function to calculate category depth with memoization
     const getDepth = (category: ProductsCategoryResponseData): number => {
+      if (depthCache.has(category.id)) {
+        return depthCache.get(category.id)!;
+      }
+
       let depth = 0;
       let current = category;
 
       while (current.parent) {
-        const parent = allCategories.find(
-          (category) => category.id === current.parent,
-        );
+        const parent = categoryMap.get(current.parent);
 
         if (!parent) {
           break;
@@ -51,6 +56,7 @@ export const getProductDeepestCategory = async (
         current = parent;
       }
 
+      depthCache.set(category.id, depth);
       return depth;
     };
 

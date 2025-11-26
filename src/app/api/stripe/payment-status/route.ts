@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("Error fetching payment status:", error);
+
     return NextResponse.json(
       {
         success: false,

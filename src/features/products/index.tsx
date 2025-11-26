@@ -14,9 +14,9 @@ export { normalizeProductsCategoryData } from "./helpers/normalizeProductsCatego
 
 // Actions -------------------------------------------------
 
-export { getProductsData } from "./actions/getProductsData";
+export { getFilteredProductsData } from "./actions/getFilteredProductsData";
 export { getProductsCategoryData } from "./actions/getProductsCategoryData";
-export { getSearchedProductsData } from "./actions/getSearchedProductsData";
+export { getProductsData } from "./actions/getProductsData";
 
 // Types ---------------------------------------------------
 

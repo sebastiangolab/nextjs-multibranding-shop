@@ -1,7 +1,10 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getCategoriesBreadcrumbItems } from "@/shared/actions/getCategoriesBreadcrumbItems";
-import { getProductsCategoryData, getProductsData } from "@features/products";
+import { getCategoriesBreadcrumbItems } from "@/features/breadcrumb";
+import {
+  getFilteredProductsData,
+  getProductsCategoryData,
+} from "@features/products";
 import BasicContainer from "@shared/components/BasicContainer";
 import CategoryViewClient from "./components/CategoryViewClient";
 
@@ -12,26 +15,31 @@ interface CategoryPageProps {
 const CategoryView = async ({ params }: CategoryPageProps) => {
   const { categorySlug } = await params;
 
+  console.log("Category slug:", categorySlug);
+
   if (!categorySlug || categorySlug.length === 0) {
     notFound();
   }
 
   const categoryData = await getProductsCategoryData(categorySlug);
 
+  console.log("Category data:", categoryData);
+
   if (!categoryData) {
     notFound();
   }
 
-  const productsResponse = await getProductsData({
-    categoryId: categoryData.id,
-  });
+  // Execute independent queries in parallel
+  const [productsResponse, breadcrumbCategoryItems] = await Promise.all([
+    getFilteredProductsData({
+      categoryId: categoryData.id,
+    }),
+    getCategoriesBreadcrumbItems(categoryData),
+  ]);
 
   if (!productsResponse) {
     notFound();
   }
-
-  const breadcrumbCategoryItems =
-    await getCategoriesBreadcrumbItems(categoryData);
 
   return (
     <BasicContainer>

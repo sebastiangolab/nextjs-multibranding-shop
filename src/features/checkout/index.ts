@@ -24,3 +24,7 @@ export type { CartTableProduct } from "./types";
 // Schemas ----------------------------------------------
 
 export { deliveryFormSchema } from "./schemas/deliveryFormSchema";
+
+// Actions ----------------------------------------------
+
+export { createWoocommerceOrderByMetadata } from "./actions/createWoocommerceOrderByMetadata";

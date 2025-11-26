@@ -1,10 +1,5 @@
 import { usePathname } from "next/navigation";
-
-export interface BreadcrumbItem {
-  label: string;
-  href: string;
-  isCurrentPage?: boolean;
-}
+import { BreadcrumbItem } from "../types";
 
 const breadcrumbLabels = {
   home: "Start",

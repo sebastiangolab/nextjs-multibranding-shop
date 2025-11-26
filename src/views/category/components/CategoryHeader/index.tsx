@@ -1,5 +1,4 @@
-import { BreadcrumbItem } from "@/shared/hooks/useBreadcrumb";
-import BreadcrumbWithData from "@shared/components/BreadcrumbWithData";
+import { BreadcrumbItem, BreadcrumbWithData } from "@/features/breadcrumb";
 
 type CategoryHeaderProps = {
   title: string;

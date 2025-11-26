@@ -15,24 +15,22 @@ interface FooterResponseData {
 
 export const getFooterData = async (): Promise<FooterData | null> => {
   try {
-    const { data: footerData } = await axiosWpAcfApi<FooterResponseData[]>(
-      "theme-setting?slug=footer",
-    );
+    // Fetch footer settings and menus in parallel
+    const [
+      { data: footerData },
+      { data: column1MenuData },
+      { data: column2MenuData },
+      { data: column3MenuData },
+    ] = await Promise.all([
+      axiosWpAcfApi<FooterResponseData[]>("theme-setting?slug=footer"),
+      axiosWpCustomApi<MenuResponseData>("/menu/footer_column_1"),
+      axiosWpCustomApi<MenuResponseData>("/menu/footer_column_2"),
+      axiosWpCustomApi<MenuResponseData>("/menu/main_menu"),
+    ]);
 
     if (!footerData || footerData.length === 0) {
       return null;
     }
-
-    const { data: column1MenuData } = await axiosWpCustomApi<MenuResponseData>(
-      "/menu/footer_column_1",
-    );
-
-    const { data: column2MenuData } = await axiosWpCustomApi<MenuResponseData>(
-      "/menu/footer_column_2",
-    );
-
-    const { data: column3MenuData } =
-      await axiosWpCustomApi<MenuResponseData>("/menu/main_menu");
 
     return {
       socialLinks: {

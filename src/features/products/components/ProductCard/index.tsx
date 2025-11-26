@@ -43,7 +43,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
 
   return (
     <Link href={`/p/${slug}`}>
-      <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0 cursor-pointer">
+      <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0 cursor-pointer h-full">
         <div className="aspect-1/1 bg-muted relative overflow-hidden">
           {images && images[0] ? (
             <Image
@@ -71,8 +71,8 @@ const ProductCard = ({ data }: ProductCardProps) => {
           </Button>
         </div>
 
-        <CardContent className="px-4 pb-6 pt-0">
-          <div className="space-y-2">
+        <CardContent className="px-4 pb-6 pt-0 flex-1">
+          <div className="space-y-2 h-full flex flex-col justify-between">
             <h3 className="font-semibold text-foreground line-clamp-2 mb-2">
               {name}
             </h3>

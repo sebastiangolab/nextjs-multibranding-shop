@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { addPrices, multiplyPrice } from "@/features/prices";
-import { getSearchedProductsData, ProductData } from "@/features/products";
+import { getProductsData, ProductData } from "@/features/products";
 import { useCartStore } from "@/shared/store/cartStore";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { CartTableProduct } from "../types";
@@ -22,7 +22,7 @@ export const useCartProducts = (): CartProductsHookResults => {
   const { data, isLoading, isFetching, isSuccess } = useQuery({
     queryKey: ["cart-products", productIds],
     queryFn: async () =>
-      await getSearchedProductsData({
+      await getProductsData({
         includeIds: productIds.length > 0 ? productIds : [0],
       }),
     placeholderData: keepPreviousData,

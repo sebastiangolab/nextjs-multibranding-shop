@@ -1,15 +1,13 @@
 "use server";
 
-import { axiosWcCustomApi } from "@shared/lib/axios";
+import { axiosWCApi } from "@/shared/lib/axios";
 import { ProductData } from "../types";
 
 interface ProductsRequestParams {
-  ids?: number[];
-  categoryId?: number;
+  includeIds?: number[];
+  phrase?: string;
   page?: number;
-  min_price?: number | null;
-  max_price?: number | null;
-  attributes?: Record<string, string>;
+  perPage?: number;
 }
 
 interface ProductsDataActionResult {
@@ -21,33 +19,48 @@ interface ProductsDataActionResult {
 const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 24;
 
 export const getProductsData = async (
-  params: ProductsRequestParams,
+  params: ProductsRequestParams
 ): Promise<ProductsDataActionResult | null> => {
   try {
-    const requestParams = {
-      include: params.ids?.join(","),
-      category: params.categoryId,
-      page: params.page,
-      per_page: params.page ? DEFAULT_PRODUCTS_COUNT_PER_PAGE : undefined,
-      min_price: params.min_price ?? undefined,
-      max_price: params.max_price ?? undefined,
-      ...params.attributes,
-    };
-
-    const response = await axiosWcCustomApi<ProductData[]>("/products", {
-      params: requestParams,
-    });
+    const response = await axiosWCApi<ProductData[]>(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wc/v3/products`,
+      {
+        params: {
+          include: params.includeIds?.join(","),
+          search: params.phrase,
+          page: params.page,
+          per_page: params.page
+            ? DEFAULT_PRODUCTS_COUNT_PER_PAGE
+            : params.perPage,
+        },
+      }
+    );
 
     const totalProducts = parseInt(response.headers["x-wp-total"] || "0");
     const totalPages = parseInt(response.headers["x-wp-totalpages"] || "1");
 
+    let products = response.data ?? [];
+
+    // Sort products by includeIds order if provided
+    if (params.includeIds && params.includeIds.length > 0) {
+      const idIndexMap = new Map(
+        params.includeIds.map((id, index) => [id, index]),
+      );
+
+      products = products.sort((a, b) => {
+        const indexA = idIndexMap.get(a.id) ?? Infinity;
+        const indexB = idIndexMap.get(b.id) ?? Infinity;
+        return indexA - indexB;
+      });
+    }
+
     return {
-      products: response.data ?? [],
+      products,
       totalPages: totalPages,
       totalProducts: totalProducts,
     };
   } catch (error) {
-    console.error("❌ Error fetching products data: ", error);
+    console.error("❌ Error fetching searched products data: ", error);
     return null;
   }
 };

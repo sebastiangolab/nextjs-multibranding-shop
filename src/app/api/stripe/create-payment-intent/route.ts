@@ -80,6 +80,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("Payment Intent error:", error);
+
     return NextResponse.json({ error: error }, { status: 500 });
   }
 }

@@ -1,4 +1,4 @@
-import { getSearchedProductsData, ProductsGrid } from "@features/products";
+import { getProductsData, ProductsGrid } from "@features/products";
 import Section from "../../components/Section";
 import SectionTitleH2 from "../../components/SectionTitleH2";
 import { ProductsListSectionProps } from "../../types";
@@ -7,7 +7,7 @@ const ProductsListSection = async ({
   title,
   products,
 }: ProductsListSectionProps) => {
-  const productsResponse = await getSearchedProductsData({
+  const productsResponse = await getProductsData({
     includeIds: products,
   });
 

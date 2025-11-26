@@ -18,54 +18,59 @@ interface GenericSectionsProps {
 }
 
 const GenericSections = async ({ sectionsData }: GenericSectionsProps) => {
-  const sectionsElements = sectionsData.map((sectionData, index) => {
-    if (sectionData.type === GenericSectionType.IMAGE_WITH_TEXT_SECTION) {
-      return (
-        <ImageWithTextSection
-          key={`${sectionData.type}-${index}`}
-          {...(sectionData.fields as ImageWithTextSectionProps)}
-        />
-      );
-    }
+  return (
+    <>
+      {sectionsData.map((sectionData, index) => {
+        const key = `${sectionData.type}-${index}`;
 
-    if (sectionData.type === GenericSectionType.TEXT_SECTION) {
-      return (
-        <TextSection
-          key={`${sectionData.type}-${index}`}
-          {...(sectionData.fields as TextSectionProps)}
-        />
-      );
-    }
+        switch (sectionData.type) {
+          case GenericSectionType.IMAGE_WITH_TEXT_SECTION:
+            return (
+              <ImageWithTextSection
+                key={key}
+                {...(sectionData.fields as ImageWithTextSectionProps)}
+              />
+            );
 
-    if (sectionData.type === GenericSectionType.PRODUCTS_LIST_SECTION) {
-      return (
-        <ProductsListSection
-          key={`${sectionData.type}-${index}`}
-          {...(sectionData.fields as ProductsListSectionProps)}
-        />
-      );
-    }
+          case GenericSectionType.TEXT_SECTION:
+            return (
+              <TextSection
+                key={key}
+                {...(sectionData.fields as TextSectionProps)}
+              />
+            );
 
-    if (sectionData.type === GenericSectionType.SLIDER_SECTION) {
-      return (
-        <SliderSection
-          key={`${sectionData.type}-${index}`}
-          {...(sectionData.fields as SliderSectionProps)}
-        />
-      );
-    }
+          case GenericSectionType.PRODUCTS_LIST_SECTION:
+            return (
+              <ProductsListSection
+                key={key}
+                {...(sectionData.fields as ProductsListSectionProps)}
+              />
+            );
 
-    if (sectionData.type === GenericSectionType.IMAGE_PROMO_SECTION) {
-      return (
-        <ImagePromoSection
-          key={`${sectionData.type}-${index}`}
-          {...(sectionData.fields as ImagePromoSectionProps)}
-        />
-      );
-    }
-  });
+          case GenericSectionType.SLIDER_SECTION:
+            return (
+              <SliderSection
+                key={key}
+                {...(sectionData.fields as SliderSectionProps)}
+              />
+            );
 
-  return <>{sectionsElements}</>;
+          case GenericSectionType.IMAGE_PROMO_SECTION:
+            return (
+              <ImagePromoSection
+                key={key}
+                {...(sectionData.fields as ImagePromoSectionProps)}
+              />
+            );
+
+          default:
+            console.warn(`Unknown section type: ${sectionData.type}`);
+            return null;
+        }
+      })}
+    </>
+  );
 };
 
 export default GenericSections;

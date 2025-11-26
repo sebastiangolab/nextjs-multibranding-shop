@@ -1,23 +1,24 @@
 "use server";
-import { BreadcrumbItem } from "@shared/hooks/useBreadcrumb";
-import { axiosWCApi } from "@shared/lib/axios";
 import {
   ProductsCategoryFullData,
   ProductsCategoryResponseData,
-} from "@shared/types";
+} from "@/shared/types";
+import { getAllProductsCategories } from "../../../shared/actions/getAllProductsCategories";
+import { BreadcrumbItem } from "../types";
 
 export const getCategoriesBreadcrumbItems = async (
   activeCategory: ProductsCategoryFullData,
 ): Promise<BreadcrumbItem[]> => {
-  const { data: allCategories } =
-    await axiosWCApi<ProductsCategoryResponseData[]>(`/products/categories`);
+  const allCategories = await getAllProductsCategories();
+
+  const categoryMap = new Map(
+    allCategories.map((category) => [category.id, category]),
+  );
 
   // Find the full category chain from root to activeCategory
   const categoryChain: ProductsCategoryResponseData[] = [];
 
-  let current = allCategories.find(
-    (category) => category.id === activeCategory.id,
-  );
+  let current = categoryMap.get(activeCategory.id);
 
   while (current) {
     categoryChain.unshift(current);
@@ -26,7 +27,7 @@ export const getCategoriesBreadcrumbItems = async (
       break;
     }
 
-    current = allCategories.find((category) => category.id === current!.parent);
+    current = categoryMap.get(current.parent);
   }
 
   // Now build breadcrumbs with the accumulating path

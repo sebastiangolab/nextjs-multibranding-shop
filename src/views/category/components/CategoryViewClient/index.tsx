@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { BreadcrumbItem } from "@/shared/hooks/useBreadcrumb";
-import { getProductsData, ProductData } from "@features/products";
+import { useEffect, useMemo, useState } from "react";
+import { BreadcrumbItem } from "@/features/breadcrumb";
+import { getFilteredProductsData, ProductData } from "@features/products";
 import { LoadingOverlay } from "@shared/components/LoadingOverlay";
 import { ProductsCategoryFullData } from "@shared/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
@@ -52,7 +52,7 @@ const CategoryViewClient = ({
         paginationPage,
       ],
       queryFn: async () =>
-        await getProductsData({
+        await getFilteredProductsData({
           categoryId: categoryData.id,
           page: paginationPage,
           min_price: selectedFiltersValues.minPrice,
@@ -72,17 +72,29 @@ const CategoryViewClient = ({
     if (hasSelectedFilters && paginationPage !== 1) {
       setPaginationPage(1);
     }
-  }, [selectedFiltersValues]);
+  }, [hasSelectedFilters]);
 
-  const sharedProductsFiltersData = {
-    hasSelectedFilters,
-    clearAllFiltersValues,
-    priceFilterData,
-    setPriceFilterValues,
-    attributesFiltersData,
-    changeActiveAttribute,
-    checkIsActiveAttributeOption,
-  };
+  // Memoize sharedProductsFiltersData object to prevent unnecessary child re-renders
+  const sharedProductsFiltersData = useMemo(
+    () => ({
+      hasSelectedFilters,
+      clearAllFiltersValues,
+      priceFilterData,
+      setPriceFilterValues,
+      attributesFiltersData,
+      changeActiveAttribute,
+      checkIsActiveAttributeOption,
+    }),
+    [
+      hasSelectedFilters,
+      clearAllFiltersValues,
+      priceFilterData,
+      setPriceFilterValues,
+      attributesFiltersData,
+      changeActiveAttribute,
+      checkIsActiveAttributeOption,
+    ],
+  );
 
   const isSubcategoriesAvailable =
     categoryData.subcategories && categoryData.subcategories.length > 0;

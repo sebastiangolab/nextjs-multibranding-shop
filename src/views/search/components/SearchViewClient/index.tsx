@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  getSearchedProductsData,
+  getProductsData,
   ProductData,
   ProductsGrid,
   ProductsGridSkeleton,
@@ -33,7 +33,7 @@ const SearchViewClient = ({
   const { data, isFetching, isSuccess, isPlaceholderData } = useQuery({
     queryKey: ["search-products", searchPhrase, paginationPage],
     queryFn: async () =>
-      await getSearchedProductsData({
+      await getProductsData({
         phrase: searchPhrase,
         page: paginationPage,
       }),

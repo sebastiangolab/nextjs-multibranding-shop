@@ -1,37 +1,36 @@
 "use server";
 
-import { axiosWCApi } from "@shared/lib/axios";
-import {
-  ProductsCategoryFullData,
-  ProductsCategoryResponseData,
-} from "@shared/types";
+import { ProductsCategoryFullData } from "@/shared/types";
+import { getAllProductsCategories } from "@shared/actions/getAllProductsCategories";
 import { normalizeProductsCategoryData } from "../helpers/normalizeProductsCategoryData";
 
 export const getProductsCategoryData = async (
   categorySlug: string[],
 ): Promise<ProductsCategoryFullData | null> => {
   try {
-    const { data: allCategories } = await axiosWCApi<
-      ProductsCategoryResponseData[]
-    >(`/products/categories`, {
-      params: {
-        per_page: 100,
-      },
-    });
+    const allCategories = await getAllProductsCategories();
 
     if (!Array.isArray(allCategories) || allCategories.length === 0) {
       return null;
     }
+
+    const categoriesBySlugAndParent = new Map<
+      string,
+      (typeof allCategories)[0]
+    >();
+
+    allCategories.forEach((cat) => {
+      const key = `${cat.slug}-${cat.parent}`;
+      categoriesBySlugAndParent.set(key, cat);
+    });
 
     // Validate category hierarchy path
     let currentParentId = 0;
 
     for (let i = 0; i < categorySlug.length; i++) {
       const slug = categorySlug[i];
-
-      const category = allCategories.find(
-        (cat) => cat.slug === slug && cat.parent === currentParentId,
-      );
+      const key = `${slug}-${currentParentId}`;
+      const category = categoriesBySlugAndParent.get(key);
 
       if (!category) {
         // Category not found or parent mismatch

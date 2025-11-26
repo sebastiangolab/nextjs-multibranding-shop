@@ -1,6 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getCategoriesBreadcrumbItems } from "@shared/actions/getCategoriesBreadcrumbItems";
+import { getCategoriesBreadcrumbItems } from "@/features/breadcrumb";
 import BasicContainer from "@shared/components/BasicContainer";
 import { getProductDeepestCategory } from "./actions/getProductDeepestCategory";
 import { getSingleProductData } from "./actions/getSingleProductData";

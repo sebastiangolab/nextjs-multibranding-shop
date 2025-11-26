@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -22,6 +22,14 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const navButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const navContainerRef = useRef<HTMLDivElement>(null);
+
+  // Memoize setIsPlaying callback to prevent child re-renders
+  const handleSetIsPlaying = useCallback(
+    (value: boolean | ((prev: boolean) => boolean)) => {
+      setIsPlaying(value);
+    },
+    [],
+  );
 
   // Update active slide on carousel change
   useEffect(() => {
@@ -47,7 +55,6 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
       const buttonLeft = activeButton.offsetLeft;
       const buttonWidth = activeButton.offsetWidth;
       const containerWidth = navContainer.offsetWidth;
-      const currentScroll = navContainer.scrollLeft;
 
       // Calculate target scroll position to center the button
       const targetScroll = buttonLeft - containerWidth / 2 + buttonWidth / 2;
@@ -64,14 +71,12 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
   useEffect(() => {
     if (!carouselApi || !isPlaying) return;
 
-    // Autoplay interval
     const interval = setInterval(() => {
       if (carouselApi.canScrollNext()) {
         carouselApi.scrollNext();
-        return;
+      } else {
+        carouselApi.scrollTo(0);
       }
-
-      carouselApi.scrollTo(0);
     }, AUTOPLAY_DELAY);
 
     return () => clearInterval(interval);
@@ -115,7 +120,7 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
           activeSlide={activeSlide}
           slides={slides}
           isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
+          setIsPlaying={handleSetIsPlaying}
           navButtonsRef={navButtonsRef}
           navContainerRef={navContainerRef}
         />
