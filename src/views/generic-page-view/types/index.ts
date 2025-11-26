@@ -62,7 +62,7 @@ export interface TextSectionProps {
 // Products List Section
 export interface ProductsListSectionProps {
   title?: string;
-  productsIds: number[];
+  products: number[];
 }
 
 // Image Promo Section

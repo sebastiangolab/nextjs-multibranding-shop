@@ -31,8 +31,6 @@ export const getDeliveriesMethods = async (): Promise<
       `/shipping/zones/${deliveryZoneId}/methods`
     );
 
-    console.log(allMethods);
-
     if (!Array.isArray(allMethods) || allMethods.length === 0) {
       return [];
     }

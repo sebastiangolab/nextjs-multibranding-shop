@@ -9,8 +9,13 @@ export const getProductsCategoryData = async (
   categorySlug: string[]
 ): Promise<ProductsCategoryFullData | null> => {
   try {
-    const { data: allCategories } =
-      await axiosWCApi<ProductsCategoryResponseData[]>(`/products/categories`);
+    const { data: allCategories } = await axiosWCApi<
+      ProductsCategoryResponseData[]
+    >(`/products/categories`, {
+      params: {
+        per_page: 100,
+      },
+    });
 
     if (!Array.isArray(allCategories) || allCategories.length === 0) {
       return null;

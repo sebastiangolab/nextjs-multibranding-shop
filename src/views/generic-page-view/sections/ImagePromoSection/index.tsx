@@ -15,14 +15,13 @@ export const ImagePromoSection = ({
     <Section isFullWidth={isFullWidth}>
       <Link
         href={url}
-        className="block relative w-full h-[360px] overflow-hidden rounded-lg group"
+        className="block relative w-full h-[390px] overflow-hidden rounded-lg group"
         title={linkTitle}
       >
         <Image
           src={image.url}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
+          fill
           className="w-full h-auto object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
         />
       </Link>

@@ -8,7 +8,7 @@ export const normalizeProductsCategoryData = (
   allCategories: ProductsCategoryResponseData[]
 ): ProductsCategoryFullData => {
   const subcategories = allCategories.filter((subCategory) => {
-    return subCategory.parent.toString() === category.id.toString();
+    return subCategory.parent.toString() === category?.id.toString();
   });
 
   const normalizedSubcategories: ProductsCategoryFullData[] = subcategories.map(

@@ -112,7 +112,7 @@ export const SearchBar = () => {
             <Input
               type="text"
               placeholder="Wyszukaj produkt"
-              className="flex-1 h-10 pr-8 bg-background"
+              className="flex-1 h-10 pr-8 bg-background border-border"
               value={searchQuery}
               onChange={handleSearchInputOnChange}
               onFocus={() => {

@@ -1,11 +1,11 @@
 import { BrandConfig } from "../types";
 
 export const brand2Config: BrandConfig = {
-  shopName: "Brand 2 - Sebastian Shop",
+  shopName: "Flowers Shop",
   availableThemeToggle: true,
 
   contact: {
-    email: "seba@gmail.com",
+    email: "flowershop@test.com",
     phone: "+48 123 123 123",
   },
 

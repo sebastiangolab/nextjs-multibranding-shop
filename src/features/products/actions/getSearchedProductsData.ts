@@ -34,8 +34,19 @@ export const getSearchedProductsData = async (
     const totalProducts = parseInt(response.headers["x-wp-total"] || "0");
     const totalPages = parseInt(response.headers["x-wp-totalpages"] || "1");
 
+    let products = response.data ?? [];
+
+    // Sort products by includeIds order if provided
+    if (params.includeIds && params.includeIds.length > 0) {
+      products = products.sort((a, b) => {
+        const indexA = params.includeIds!.indexOf(a.id);
+        const indexB = params.includeIds!.indexOf(b.id);
+        return indexA - indexB;
+      });
+    }
+
     return {
-      products: response.data ?? [],
+      products,
       totalPages: totalPages,
       totalProducts: totalProducts,
     };
