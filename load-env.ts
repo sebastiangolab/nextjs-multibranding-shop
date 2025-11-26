@@ -17,6 +17,21 @@ export function loadBrandEnv() {
     return;
   }
 
+  // Check if we're in a serverless environment (Vercel, etc.)
+  const isServerless = process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME;
+
+  if (isServerless) {
+    // In serverless environments, env vars are injected by the platform
+    console.log("✅ [SERVERLESS MODE] Using platform-injected environment variables");
+    
+    if (!process.env.NEXT_PUBLIC_BRAND) {
+      console.warn("⚠️  Warning: NEXT_PUBLIC_BRAND not set in serverless environment");
+    }
+    
+    envLoaded = true;
+    return;
+  }
+
   // First, load main .env file to get NEXT_PUBLIC_DEVELOPMENT_MODE
   const mainEnvPath = path.resolve(process.cwd(), ".env");
   if (fs.existsSync(mainEnvPath)) {
@@ -69,13 +84,13 @@ export function loadBrandEnv() {
       );
     }
   } else {
-    // Production mode: use main .env file only
-    console.log("✅ [PRODUCTION MODE] Using main .env file");
+    // Production mode: use main .env file only (if it exists)
+    console.log("✅ [PRODUCTION MODE] Using environment variables");
 
-    // Ensure NEXT_PUBLIC_BRAND is set from main .env
+    // In production, NEXT_PUBLIC_BRAND should be set via platform or .env
     if (!process.env.NEXT_PUBLIC_BRAND) {
-      throw new Error(
-        "❌ NEXT_PUBLIC_BRAND must be set in .env file for production mode!"
+      console.warn(
+        "⚠️  Warning: NEXT_PUBLIC_BRAND not set. Please set it in your deployment platform."
       );
     }
   }
