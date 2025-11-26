@@ -1,7 +1,7 @@
 "use client";
 
-import { LinkButton } from "@/shared/components/LinkButton";
 import { Clock, Loader2 } from "lucide-react";
+import { LinkButton } from "@/shared/components/LinkButton";
 
 interface PaymentProcessingProps {
   orderId: string;

@@ -1,7 +1,7 @@
 import React from "react";
-import SearchView from "@views/search";
 import type { Metadata } from "next";
 import { generateSearchMetadata } from "@/features/seo";
+import SearchView from "@views/search";
 
 interface SearchPageProps {
   searchParams: Promise<{ q?: string; page?: string }>;

@@ -1,13 +1,13 @@
+import { DeliveryFormData, DeliveryMethodData } from "@/features/checkout";
+import { CartProductItem } from "@/shared/types";
 import { axiosStripeApi } from "@shared/lib/axios";
 import { StripePaymentIntentData } from "../type";
-import { CartProductItem } from "@/shared/types";
-import { DeliveryFormData, DeliveryMethodData } from "@/features/checkout";
 
 export const createStripePaymentIntent = async (
   total: number,
   cartItems: CartProductItem[],
   deliveryFormData: DeliveryFormData,
-  deliveryMethod: DeliveryMethodData
+  deliveryMethod: DeliveryMethodData,
 ): Promise<StripePaymentIntentData | null> => {
   try {
     const { data } = await axiosStripeApi.post<StripePaymentIntentData>(
@@ -17,7 +17,7 @@ export const createStripePaymentIntent = async (
         cartItems,
         deliveryFormData,
         deliveryMethod,
-      }
+      },
     );
 
     return {

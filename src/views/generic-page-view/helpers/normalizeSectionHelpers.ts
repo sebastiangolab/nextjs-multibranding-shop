@@ -12,7 +12,7 @@ import {
 } from "../types";
 
 export const normalizeImagePromoSectionData = (
-  data: ImagePromoSectionResponseData
+  data: ImagePromoSectionResponseData,
 ): ImagePromoSectionProps => {
   return {
     image: data.image,
@@ -23,7 +23,7 @@ export const normalizeImagePromoSectionData = (
 };
 
 export const normalizeSliderSectionData = (
-  data: SliderSectionResponseData
+  data: SliderSectionResponseData,
 ): SliderSectionProps => {
   const slides = [data.slide_1, data.slide_2, data.slide_3, data.slide_4];
 
@@ -47,7 +47,7 @@ export const normalizeSliderSectionData = (
 };
 
 export const normalizeImageWithTextSectionData = (
-  data: ImageWithTextSectionResponseData
+  data: ImageWithTextSectionResponseData,
 ): ImageWithTextSectionProps => {
   const { button_text_1, button_text_2, button_url_1, button_url_2 } = data;
 
@@ -80,11 +80,11 @@ export const normalizeImageWithTextSectionData = (
 
 export const normalizeSectionData = (
   sectionType: GenericSectionType,
-  data: SectionResponseData
+  data: SectionResponseData,
 ): SectionProps => {
   if (sectionType === GenericSectionType.IMAGE_PROMO_SECTION) {
     return normalizeImagePromoSectionData(
-      data as ImagePromoSectionResponseData
+      data as ImagePromoSectionResponseData,
     );
   }
 
@@ -94,7 +94,7 @@ export const normalizeSectionData = (
 
   if (sectionType === GenericSectionType.IMAGE_WITH_TEXT_SECTION) {
     return normalizeImageWithTextSectionData(
-      data as ImageWithTextSectionResponseData
+      data as ImageWithTextSectionResponseData,
     );
   }
 

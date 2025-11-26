@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import { LinkButton } from "@shared/components/LinkButton";
 import { Badge } from "@shared/shadcn/ui/badge";
-import { ReactNode } from "react";
 
 interface UserActionButtonProps {
   label: string;

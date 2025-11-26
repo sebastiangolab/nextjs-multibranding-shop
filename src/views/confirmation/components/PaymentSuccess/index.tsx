@@ -1,9 +1,9 @@
 "use client";
 
+import { CheckCircle, Mail } from "lucide-react";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Price } from "@/features/prices";
 import { LinkButton } from "@/shared/components/LinkButton";
-import { CheckCircle, Mail } from "lucide-react";
 
 interface PaymentSuccessProps {
   orderId: string;

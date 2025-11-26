@@ -1,16 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import {
   NavigationMenu as NavigationMenuShadcn,
-  NavigationMenuList,
-  NavigationMenuItem,
   NavigationMenuContent,
-  NavigationMenuTrigger,
+  NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@shared/shadcn/ui/navigation-menu";
 import { MenuItem } from "@shared/types";
-import Link from "next/link";
 
 interface NavigationMenuProps {
   menuDataItems: MenuItem[];

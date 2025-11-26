@@ -14,7 +14,7 @@ interface FooterResponseData {
 export const getFooterData = async (): Promise<FooterData | null> => {
   try {
     const { data: footerData } = await axiosWpAcfApi<FooterResponseData[]>(
-      "theme-setting?slug=footer"
+      "theme-setting?slug=footer",
     );
 
     if (!footerData || footerData.length === 0) {
@@ -22,11 +22,11 @@ export const getFooterData = async (): Promise<FooterData | null> => {
     }
 
     const { data: column1MenuData } = await axiosWpCustomApi<MenuResponseData>(
-      "/menu/footer_column_1"
+      "/menu/footer_column_1",
     );
 
     const { data: column2MenuData } = await axiosWpCustomApi<MenuResponseData>(
-      "/menu/footer_column_2"
+      "/menu/footer_column_2",
     );
 
     const { data: column3MenuData } =

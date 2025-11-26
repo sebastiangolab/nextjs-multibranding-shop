@@ -30,11 +30,11 @@ export interface ProductsFiltersHookResults {
     attributeId: string,
     attributeSlug: string,
     option: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => void;
   checkIsActiveAttributeOption: (
     attributeId: string,
-    option: string
+    option: string,
   ) => boolean;
   clearAllFiltersValues: () => void;
 }

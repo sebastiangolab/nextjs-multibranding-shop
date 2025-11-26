@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button } from "@shared/shadcn/ui/button";
-import BasicContainer from "@shared/components/BasicContainer";
-import { useFavoritesStore } from "@shared/store/favoritesStore";
 import {
-  ProductsGrid,
-  ProductData,
   getProductsData,
+  ProductData,
+  ProductsGrid,
   ProductsGridSkeleton,
 } from "@features/products";
+import BasicContainer from "@shared/components/BasicContainer";
+import { Button } from "@shared/shadcn/ui/button";
+import { useFavoritesStore } from "@shared/store/favoritesStore";
 
 const FavoritesView = () => {
   const { clearFavorites, productsIds } = useFavoritesStore();
@@ -52,7 +52,7 @@ const FavoritesView = () => {
 
     // Filter products that are still in favorites
     setDisplayedProducts((prev) =>
-      prev.filter((product) => productsIds.includes(product.id))
+      prev.filter((product) => productsIds.includes(product.id)),
     );
   }, [productsIds, initialLoad, displayedProducts.length]);
 

@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { CreditCard } from "lucide-react";
 import {
   PaymentElement,
-  useStripe,
   useElements,
+  useStripe,
 } from "@stripe/react-stripe-js";
 import type { Stripe, StripeElements } from "@stripe/stripe-js";
-import { CreditCard } from "lucide-react";
 
 interface StripePaymentFormProps {
   onReady?: (stripe: Stripe, elements: StripeElements) => void;

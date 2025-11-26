@@ -1,7 +1,7 @@
 import MarkdownText from "@shared/components/MarkdownText";
 import Section from "../../components/Section";
-import { TextSectionProps } from "../../types";
 import SectionTitleH2 from "../../components/SectionTitleH2";
+import { TextSectionProps } from "../../types";
 
 const TextSection = ({ title, text }: TextSectionProps) => {
   return (

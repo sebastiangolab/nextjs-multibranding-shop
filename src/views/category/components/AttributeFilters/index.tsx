@@ -1,13 +1,13 @@
 "use client";
 
-import { Label } from "@shared/shadcn/ui/label";
-import { Checkbox } from "@shared/shadcn/ui/checkbox";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/shadcn/ui/accordion";
+import { Checkbox } from "@shared/shadcn/ui/checkbox";
+import { Label } from "@shared/shadcn/ui/label";
 import { ProductsFiltersHookResults } from "../../types";
 
 interface AttributeFiltersProps {
@@ -45,7 +45,7 @@ export const AttributeFilters = ({
                         attribute.id,
                         attribute.slug,
                         option,
-                        !!checked
+                        !!checked,
                       )
                     }
                   />

@@ -1,15 +1,13 @@
 "use client";
 
-import { Input } from "@/shared/shadcn/ui/input";
-import { Checkbox } from "@/shared/shadcn/ui/checkbox";
-import { Textarea } from "@/shared/shadcn/ui/textarea";
+import { forwardRef, useEffect, useImperativeHandle } from "react";
+import { useForm } from "react-hook-form";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/shadcn/ui/select";
+  DeliveryFormData,
+  deliveryFormSchema,
+  useCheckoutStore,
+} from "@/features/checkout";
+import { Checkbox } from "@/shared/shadcn/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -18,14 +16,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/shadcn/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/shared/shadcn/ui/input";
 import {
-  DeliveryFormData,
-  deliveryFormSchema,
-  useCheckoutStore,
-} from "@/features/checkout";
-import { forwardRef, useImperativeHandle, useEffect } from "react";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/shadcn/ui/select";
+import { Textarea } from "@/shared/shadcn/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DeliveryFormRef } from "../../types";
 
 const VOIVODESHIPS = [
@@ -130,7 +130,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
     }, [form, onFormChange]);
 
     const isDifferentBillingAddressField = form.watch(
-      "isDifferentBillingAddress"
+      "isDifferentBillingAddress",
     );
 
     const personalDataFormElement = (
@@ -488,7 +488,7 @@ export const DeliveryForm = forwardRef<DeliveryFormRef, DeliveryFormProps>(
         </div>
       </Form>
     );
-  }
+  },
 );
 
 DeliveryForm.displayName = "DeliveryForm";

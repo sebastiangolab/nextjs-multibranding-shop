@@ -1,11 +1,11 @@
 "use client";
 
+import React from "react";
+import { Heart } from "lucide-react";
 import BreadcrumbWithData from "@shared/components/BreadcrumbWithData";
 import { BreadcrumbItem } from "@shared/hooks/useBreadcrumb";
 import { Button } from "@shared/shadcn/ui/button";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
-import { Heart } from "lucide-react";
-import React from "react";
 
 interface TopRowProps {
   productId: number;

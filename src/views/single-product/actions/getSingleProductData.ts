@@ -2,7 +2,7 @@ import { ProductData } from "@features/products";
 import { axiosWCApi } from "@shared/lib/axios";
 
 export const getSingleProductData = async (
-  productSlug: string
+  productSlug: string,
 ): Promise<ProductData | null> => {
   try {
     const { data } = await axiosWCApi<ProductData[]>(`/products`, {

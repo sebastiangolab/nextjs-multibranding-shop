@@ -1,6 +1,6 @@
-import { BrandConfig } from "./types";
 import { brand1Config } from "./brand1/config";
 import { brand2Config } from "./brand2/config";
+import { BrandConfig } from "./types";
 
 /**
  * Helper to get the current brand configuration

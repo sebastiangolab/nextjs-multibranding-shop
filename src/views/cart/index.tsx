@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import { useCartStore } from "@/shared/store/cartStore";
-import BasicContainer from "@/shared/components/BasicContainer";
-import { CartTable } from "./components/CartTable";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 import {
   CheckoutStep,
   CheckoutSummary,
   useCartProducts,
   useCheckoutStore,
 } from "@/features/checkout";
+import BasicContainer from "@/shared/components/BasicContainer";
+import { useCartStore } from "@/shared/store/cartStore";
+import { CartTable } from "./components/CartTable";
 
 const CartView = () => {
   const router = useRouter();

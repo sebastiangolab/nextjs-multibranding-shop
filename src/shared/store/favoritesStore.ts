@@ -44,6 +44,6 @@ export const useFavoritesStore = create<FavoritesStore>()(
     {
       name: "favorites-storage", // localStorage key
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

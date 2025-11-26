@@ -2,14 +2,14 @@ import { ProductData } from "@features/products";
 import { AttributeFilterData } from "../types";
 
 export const getAttributeFilters = (
-  products: ProductData[]
+  products: ProductData[],
 ): AttributeFilterData[] => {
   const attributes = products.flatMap((product) => product.attributes || []);
 
   const attributesFilters: AttributeFilterData[] = attributes.reduce(
     (prevAttributes, currentAttribute) => {
       let existingAttribute = prevAttributes.find(
-        (filter) => filter.id.toString() === currentAttribute.id.toString()
+        (filter) => filter.id.toString() === currentAttribute.id.toString(),
       );
 
       if (existingAttribute) {
@@ -17,7 +17,7 @@ export const getAttributeFilters = (
         existingAttribute.options = [...new Set(existingAttribute.options)]; // Remove duplicates
 
         const attributesWithoutExisting = prevAttributes.filter(
-          (attr) => attr.id !== existingAttribute.id
+          (attr) => attr.id !== existingAttribute.id,
         );
 
         return [...attributesWithoutExisting, existingAttribute];
@@ -32,7 +32,7 @@ export const getAttributeFilters = (
 
       return [...prevAttributes, normalizeAttribute];
     },
-    [] as AttributeFilterData[]
+    [] as AttributeFilterData[],
   );
 
   return attributesFilters;

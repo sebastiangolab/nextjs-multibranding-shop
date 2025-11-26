@@ -6,7 +6,7 @@ import {
 } from "@shared/types";
 
 export const getCategoriesBreadcrumbItems = async (
-  activeCategory: ProductsCategoryFullData
+  activeCategory: ProductsCategoryFullData,
 ): Promise<BreadcrumbItem[]> => {
   const { data: allCategories } =
     await axiosWCApi<ProductsCategoryResponseData[]>(`/products/categories`);
@@ -15,7 +15,7 @@ export const getCategoriesBreadcrumbItems = async (
   const categoryChain: ProductsCategoryResponseData[] = [];
 
   let current = allCategories.find(
-    (category) => category.id === activeCategory.id
+    (category) => category.id === activeCategory.id,
   );
 
   while (current) {
@@ -40,7 +40,7 @@ export const getCategoriesBreadcrumbItems = async (
         label: category.name,
         href: `/kategorie/${slugPath}`,
       };
-    }
+    },
   );
 
   return breadcrumbItems;

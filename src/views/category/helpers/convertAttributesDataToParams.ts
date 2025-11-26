@@ -1,7 +1,7 @@
 import { Attribute } from "../types";
 
 export const convertAttributesDataToParams = (
-  attributes: Attribute[]
+  attributes: Attribute[],
 ): Record<string, string> => {
   const result = attributes.reduce(
     (prevObject, { attributeSlug, activeOptions }) => {
@@ -13,7 +13,7 @@ export const convertAttributesDataToParams = (
 
       return prevObject;
     },
-    {} as Record<string, string>
+    {} as Record<string, string>,
   );
 
   return result;

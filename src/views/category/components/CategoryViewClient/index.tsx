@@ -1,18 +1,18 @@
 "use client";
 
-import { ProductData, getProductsData } from "@features/products";
-import { useProductsFilters } from "../../hooks/useProductsFilters";
-import CategoryHeader from "../CategoryHeader";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { BreadcrumbItem } from "@/shared/hooks/useBreadcrumb";
+import { getProductsData, ProductData } from "@features/products";
+import { LoadingOverlay } from "@shared/components/LoadingOverlay";
+import { ProductsCategoryFullData } from "@shared/types";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { convertAttributesDataToParams } from "@views/category/helpers/convertAttributesDataToParams";
+import { useProductsFilters } from "../../hooks/useProductsFilters";
 import { CategoryContent } from "../CategoryContent";
+import CategoryHeader from "../CategoryHeader";
 import { CategorySidebar } from "../CategorySidebar";
 import { MobileFiltersSheet } from "../MobileFiltersSheet";
 import { MobileSubcategoriesSheet } from "../MobileSubcategoriesSheet";
-import { LoadingOverlay } from "@shared/components/LoadingOverlay";
-import { convertAttributesDataToParams } from "@views/category/helpers/convertAttributesDataToParams";
-import { ProductsCategoryFullData } from "@shared/types";
-import { BreadcrumbItem } from "@/shared/hooks/useBreadcrumb";
 
 type CategoryViewClientProps = {
   categoryData: ProductsCategoryFullData;

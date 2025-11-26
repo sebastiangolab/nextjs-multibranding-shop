@@ -1,10 +1,10 @@
+import type { Metadata } from "next";
 import {
   generateNotFoundPageMetadata,
   generateProductMetadata,
 } from "@/features/seo";
 import { SingleProductView } from "@views/single-product";
 import { getSingleProductData } from "@views/single-product/actions/getSingleProductData";
-import type { Metadata } from "next";
 
 interface SingleProductPageProps {
   params: Promise<{ productSlug?: string }>;
@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   return generateProductMetadata(
     productData.name,
-    productData.shortDescription
+    productData.shortDescription,
   );
 }
 

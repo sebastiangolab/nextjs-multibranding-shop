@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { PaymentView } from "@/views/payment";
-import { CheckoutHeader } from "@/features/header";
-import { CheckoutStep } from "@/features/checkout";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import { CheckoutStep } from "@/features/checkout";
+import { CheckoutHeader } from "@/features/header";
+import { PaymentView } from "@/views/payment";
 
 export async function generateMetadata(): Promise<Metadata> {
   const brand = getBrandConfig();

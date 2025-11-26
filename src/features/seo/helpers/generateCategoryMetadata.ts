@@ -1,11 +1,11 @@
-import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Metadata } from "next";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { generateMetadataBySeoData } from "./generateMetadataBySeoData";
 
 // Generate metadata for category page
 export function generateCategoryMetadata(
   categoryName: string,
-  categoryDescription?: string
+  categoryDescription?: string,
 ): Metadata {
   const brand = getBrandConfig();
 

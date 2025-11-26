@@ -8,7 +8,7 @@ interface ResponseSectionData {
 }
 
 export const getGenericSectionsData = async (
-  genericPageSectionsIds: number[]
+  genericPageSectionsIds: number[],
 ): Promise<SectionData[] | null> => {
   try {
     const formattedSectionsIds = genericPageSectionsIds.join(",");

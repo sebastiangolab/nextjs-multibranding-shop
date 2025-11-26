@@ -15,7 +15,7 @@ export const deliveryFormSchema = z
       .max(50, "Imię może mieć maksymalnie 50 znaków")
       .regex(
         /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s-]+$/,
-        "Imię zawiera niedozwolone znaki"
+        "Imię zawiera niedozwolone znaki",
       ),
 
     lastName: z
@@ -24,7 +24,7 @@ export const deliveryFormSchema = z
       .max(50, "Nazwisko może mieć maksymalnie 50 znaków")
       .regex(
         /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s-]+$/,
-        "Nazwisko zawiera niedozwolone znaki"
+        "Nazwisko zawiera niedozwolone znaki",
       ),
 
     email: z
@@ -37,7 +37,7 @@ export const deliveryFormSchema = z
       .min(1, "Numer telefonu jest wymagany")
       .regex(
         phoneRegex,
-        "Nieprawidłowy format numeru telefonu (np. +48 123456789 lub 123456789)"
+        "Nieprawidłowy format numeru telefonu (np. +48 123456789 lub 123456789)",
       ),
 
     // Delivery address
@@ -59,7 +59,7 @@ export const deliveryFormSchema = z
       .string()
       .regex(
         postalCodeRegex,
-        "Nieprawidłowy format kodu pocztowego (np. 00-000)"
+        "Nieprawidłowy format kodu pocztowego (np. 00-000)",
       ),
     city: z
       .string()

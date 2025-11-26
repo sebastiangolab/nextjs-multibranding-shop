@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { SubcategoryMenu } from "../SubcategoryMenu";
-import { Button } from "@shared/shadcn/ui/button";
 import { BottomSheet } from "@shared/components/BottomSheet";
+import { Button } from "@shared/shadcn/ui/button";
 import { ProductsCategoryFullData } from "@shared/types";
+import { SubcategoryMenu } from "../SubcategoryMenu";
 
 interface MobileSubcategoriesSheetProps {
   isMobileSubcategoriesSheetOpen: boolean;

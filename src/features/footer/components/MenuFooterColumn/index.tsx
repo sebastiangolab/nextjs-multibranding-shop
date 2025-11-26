@@ -1,5 +1,5 @@
-import { MenuData } from "@shared/types";
 import Link from "next/link";
+import { MenuData } from "@shared/types";
 
 interface MenuFooterColumnProps {
   menuData: MenuData;

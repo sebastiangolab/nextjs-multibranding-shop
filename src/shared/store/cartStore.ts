@@ -10,7 +10,7 @@ interface CartStore {
   addItemToCart: (
     productId: number,
     quantity?: number,
-    onSuccess?: () => void
+    onSuccess?: () => void,
   ) => void;
   removeItemFromCart: (productId: number) => void;
   updateProductQuantityInCart: (productId: number, quantity: number) => void;
@@ -26,11 +26,11 @@ export const useCartStore = create<CartStore>()(
       addItemToCart: (
         productId: number,
         quantity: number | undefined = 1,
-        onSuccess?: () => void
+        onSuccess?: () => void,
       ) => {
         set((state) => {
           const existingItem = state.items.find(
-            (item) => item.productId === productId
+            (item) => item.productId === productId,
           );
 
           if (existingItem) {
@@ -38,7 +38,7 @@ export const useCartStore = create<CartStore>()(
               items: state.items.map((item) =>
                 item.productId === productId
                   ? { ...item, quantity: item.quantity + quantity }
-                  : item
+                  : item,
               ),
               quantity: state.quantity + quantity,
             };
@@ -79,7 +79,7 @@ export const useCartStore = create<CartStore>()(
 
           return {
             items: state.items.map((item) =>
-              item.productId === productId ? { ...item, quantity } : item
+              item.productId === productId ? { ...item, quantity } : item,
             ),
             quantity: state.quantity + quantityDiff,
           };
@@ -93,6 +93,6 @@ export const useCartStore = create<CartStore>()(
     {
       name: "cart-storage", // localStorage key
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

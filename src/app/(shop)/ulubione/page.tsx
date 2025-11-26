@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import FavoritesView from "@views/favorites";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import FavoritesView from "@views/favorites";
 
 export async function generateMetadata(): Promise<Metadata> {
   const brand = getBrandConfig();

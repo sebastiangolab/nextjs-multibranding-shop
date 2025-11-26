@@ -1,5 +1,5 @@
-import { ProductData } from "@/features/products";
 import { ReactNode } from "react";
+import { ProductData } from "@/features/products";
 
 export enum CheckoutStep {
   CART = "cart",

@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { ProductData } from "@features/products";
-import { Attribute, ProductsFiltersHookResults } from "../types";
-import { getPriceFilter } from "../helpers/getPriceFilter";
 import { getAttributeFilters } from "../helpers/getAttributeFilters";
+import { getPriceFilter } from "../helpers/getPriceFilter";
+import { Attribute, ProductsFiltersHookResults } from "../types";
 
 export function useProductsFilters(
-  products: ProductData[]
+  products: ProductData[],
 ): ProductsFiltersHookResults {
   const [minPriceValue, setMinPriceValue] = useState<number | null>(null);
   const [maxPriceValue, setMaxPriceValue] = useState<number | null>(null);
@@ -16,14 +16,14 @@ export function useProductsFilters(
     maxPriceValue !== null ||
     activeAttributes.length > 0;
 
-  const priceFilterData =
-    products.length > 0
-      ? useMemo(() => getPriceFilter(products), [products])
-      : null;
+  const priceFilterData = useMemo(
+    () => (products.length > 0 ? getPriceFilter(products) : null),
+    [products],
+  );
 
   const attributesFiltersData = useMemo(
     () => getAttributeFilters(products),
-    [products]
+    [products],
   );
 
   const setPriceFilterValues = (min: number | null, max: number | null) => {
@@ -35,14 +35,14 @@ export function useProductsFilters(
     attributeId: string,
     attributeSlug: string,
     option: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
     const otherAttributes = activeAttributes.filter(
-      (activeAttribute) => activeAttribute.attributeId !== attributeId
+      (activeAttribute) => activeAttribute.attributeId !== attributeId,
     );
 
     const currentAttribute = activeAttributes.find(
-      (activeAttribute) => activeAttribute.attributeId === attributeId
+      (activeAttribute) => activeAttribute.attributeId === attributeId,
     );
 
     const currentOptions = currentAttribute?.activeOptions ?? [];
@@ -64,7 +64,7 @@ export function useProductsFilters(
 
   const checkIsActiveAttributeOption = (
     attributeId: string,
-    option: string
+    option: string,
   ): boolean => {
     return (
       activeAttributes

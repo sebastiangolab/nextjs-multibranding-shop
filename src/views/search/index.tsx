@@ -1,8 +1,8 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { getSearchedProductsData } from "@features/products";
-import SearchViewClient from "./components/SearchViewClient";
 import BasicContainer from "@shared/components/BasicContainer";
+import SearchViewClient from "./components/SearchViewClient";
 
 interface SearchViewProps {
   searchParams: Promise<{ q?: string; page?: string }>;

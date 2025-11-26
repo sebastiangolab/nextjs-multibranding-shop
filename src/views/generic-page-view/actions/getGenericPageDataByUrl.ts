@@ -15,11 +15,11 @@ interface GenericPageResponseData {
 }
 
 export const getGenericPageDataByUrl = async (
-  url: string
+  url: string,
 ): Promise<GenericPageData | null> => {
   try {
     const { data } = await axiosWpCustomApi<GenericPageResponseData>(
-      `/generic-page-by-url?url=${url}`
+      `/generic-page-by-url?url=${url}`,
     );
 
     return {

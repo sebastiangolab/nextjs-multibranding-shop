@@ -1,8 +1,8 @@
 "use client";
 
+import { HelpCircle, RefreshCcw, XCircle } from "lucide-react";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { LinkButton } from "@/shared/components/LinkButton";
-import { XCircle, RefreshCcw, HelpCircle } from "lucide-react";
 
 export const PaymentFailure = () => {
   const { contact } = getBrandConfig();

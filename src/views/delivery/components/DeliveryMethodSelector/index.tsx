@@ -1,10 +1,10 @@
 "use client";
 
+import { DeliveryMethodData, useCheckoutStore } from "@/features/checkout";
+import { Price } from "@/features/prices";
 import { Label } from "@/shared/shadcn/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/shared/shadcn/ui/radio-group";
-import { DeliveryMethodData, useCheckoutStore } from "@/features/checkout";
 import { getExtendedDeliveryMethod } from "../../helpers/getExtendedDeliveryMethod";
-import { Price } from "@/features/prices";
 
 interface DeliveryMethodSelectorProps {
   deliveriesMethods: DeliveryMethodData[];
@@ -23,7 +23,7 @@ export const DeliveryMethodSelector = ({
   }
 
   const normalizedMethods = deliveriesMethods.map((method) =>
-    getExtendedDeliveryMethod(method)
+    getExtendedDeliveryMethod(method),
   );
 
   const handleSelectedMethod = (methodId: string) => {

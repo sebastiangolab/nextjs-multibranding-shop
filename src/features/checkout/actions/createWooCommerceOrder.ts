@@ -57,12 +57,12 @@ interface WooCommerceOrderResponse {
 }
 
 export async function createWooCommerceOrder(
-  orderData: OrderData
+  orderData: OrderData,
 ): Promise<{ success: boolean; orderId?: number; error?: string }> {
   try {
     const { data } = await axiosWCApi.post<WooCommerceOrderResponse>(
       "/orders",
-      orderData
+      orderData,
     );
 
     return {

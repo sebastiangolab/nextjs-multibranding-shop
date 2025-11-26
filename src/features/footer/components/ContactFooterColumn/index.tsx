@@ -1,4 +1,5 @@
-import { FooterData } from "../../types";
+import React from "react";
+import Link from "next/link";
 import {
   Facebook,
   Instagram,
@@ -7,8 +8,7 @@ import {
   Phone,
   Twitter,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import { FooterData } from "../../types";
 
 type ContactFooterColumnProps = Pick<
   FooterData,
@@ -79,7 +79,7 @@ const ContactFooterColumn = ({
               >
                 <social.icon className="size-5" />
               </a>
-            ) : null
+            ) : null,
           )}
         </div>
       </div>

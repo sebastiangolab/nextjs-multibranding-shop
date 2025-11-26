@@ -49,7 +49,7 @@ export function loadBrandEnv() {
     }
   } else {
     console.warn(
-      `⚠️  Warning: ${envFile} not found. Using default environment variables.`
+      `⚠️  Warning: ${envFile} not found. Using default environment variables.`,
     );
   }
 

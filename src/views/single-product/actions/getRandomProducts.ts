@@ -3,7 +3,7 @@ import { axiosWCApi } from "@shared/lib/axios";
 
 export const getRandomProducts = async (
   currentProductId: number,
-  categoryId: number
+  categoryId: number,
 ): Promise<ProductData[] | null> => {
   try {
     // Fetch first 100 products from the same category
@@ -20,7 +20,7 @@ export const getRandomProducts = async (
 
     // Exclude the current product from the results
     const productsWithoutCurrent = data.filter(
-      (product) => product.id !== currentProductId
+      (product) => product.id !== currentProductId,
     );
 
     // Shuffle and select 10 random products

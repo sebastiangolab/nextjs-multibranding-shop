@@ -1,14 +1,14 @@
 "use client";
 
-import { Button } from "@shared/shadcn/ui/button";
-import { Input } from "@shared/shadcn/ui/input";
-import { Search, X } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import { getSearchedProductsData, ProductData } from "@features/products";
 import Image from "next/image";
 import Link from "next/link";
+import { Search, X } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { Price } from "@/features/prices";
+import { getSearchedProductsData, ProductData } from "@features/products";
+import { Button } from "@shared/shadcn/ui/button";
+import { Input } from "@shared/shadcn/ui/input";
 
 export const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");

@@ -13,30 +13,30 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 async function createOrderFromMetadata(
   paymentIntent: Stripe.PaymentIntent,
   orderStatus: "processing" | "pending" | "on-hold" | "failed" | "completed",
-  setPaid: boolean
+  setPaid: boolean,
 ) {
   const metadata = paymentIntent.metadata;
 
   // Check if already processed - update status instead of creating new order
   if (metadata.order_processed === "true" && metadata.woo_order_id) {
     console.log(
-      `⚠️ Order already exists: ${metadata.woo_order_id}, updating status to ${orderStatus}`
+      `⚠️ Order already exists: ${metadata.woo_order_id}, updating status to ${orderStatus}`,
     );
 
     // Update existing order status
     const updateResult = await updateWooCommerceOrderStatus(
       parseInt(metadata.woo_order_id),
-      orderStatus
+      orderStatus,
     );
 
     if (updateResult.success) {
       console.log(
-        `✅ Order ${metadata.woo_order_id} status updated to ${orderStatus}`
+        `✅ Order ${metadata.woo_order_id} status updated to ${orderStatus}`,
       );
     } else {
       console.error(
         `❌ Failed to update order ${metadata.woo_order_id}:`,
-        updateResult.error
+        updateResult.error,
       );
     }
 
@@ -149,24 +149,24 @@ export async function POST(req: NextRequest) {
   }
 
   switch (event.type) {
-    case "payment_intent.succeeded":
+    case "payment_intent.succeeded": {
       const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
       try {
         const result = await createOrderFromMetadata(
           paymentIntent,
           "processing", // Successful payment = processing order
-          true // Payment is confirmed
+          true, // Payment is confirmed
         );
 
         if (result.success) {
           console.log(
-            `✅ Order ${result.orderId} created successfully for payment ${paymentIntent.id}`
+            `✅ Order ${result.orderId} created successfully for payment ${paymentIntent.id}`,
           );
         } else {
           console.error(
             `❌ Failed to create order for payment ${paymentIntent.id}:`,
-            result.error
+            result.error,
           );
         }
       } catch (error) {
@@ -174,8 +174,9 @@ export async function POST(req: NextRequest) {
       }
 
       break;
+    }
 
-    case "payment_intent.payment_failed":
+    case "payment_intent.payment_failed": {
       const failedPayment = event.data.object as Stripe.PaymentIntent;
       console.error("❌ Payment failed:", failedPayment.id);
 
@@ -183,12 +184,12 @@ export async function POST(req: NextRequest) {
         const result = await createOrderFromMetadata(
           failedPayment,
           "failed", // Failed payment = failed order
-          false // Payment not confirmed
+          false, // Payment not confirmed
         );
 
         if (result.success) {
           console.log(
-            `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`
+            `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`,
           );
         }
       } catch (error) {
@@ -196,8 +197,9 @@ export async function POST(req: NextRequest) {
       }
 
       break;
+    }
 
-    case "payment_intent.processing":
+    case "payment_intent.processing": {
       const processingPayment = event.data.object as Stripe.PaymentIntent;
       console.log("⏳ Payment processing:", processingPayment.id);
 
@@ -205,18 +207,19 @@ export async function POST(req: NextRequest) {
         const result = await createOrderFromMetadata(
           processingPayment,
           "on-hold", // Processing payment = on-hold order
-          false // Payment not yet confirmed
+          false, // Payment not yet confirmed
         );
 
         if (result.success) {
           console.log(
-            `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`
+            `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`,
           );
         }
       } catch (error) {
         console.error("Error processing payment in progress:", error);
       }
       break;
+    }
 
     default:
       console.log(`Unhandled event type: ${event.type}`);

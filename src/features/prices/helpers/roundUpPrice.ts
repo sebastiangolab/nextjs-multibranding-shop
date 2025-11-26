@@ -2,7 +2,7 @@ import { parsePriceToNumber } from "./parsePriceToNumber";
 
 export function roundUpPrice(
   price: number | string,
-  decimals: number = 2
+  decimals: number = 2,
 ): number {
   const priceNumber = parsePriceToNumber(price);
 

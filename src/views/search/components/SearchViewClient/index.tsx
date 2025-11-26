@@ -1,16 +1,16 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
+  getSearchedProductsData,
   ProductData,
   ProductsGrid,
   ProductsGridSkeleton,
-  getSearchedProductsData,
 } from "@features/products";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useState } from "react";
 import { LoadingOverlay } from "@shared/components/LoadingOverlay";
-import { useRouter } from "next/navigation";
 import { CustomPagination } from "@shared/components/Pagination";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 interface SearchViewClientProps {
   searchPhrase: string;
@@ -49,7 +49,7 @@ const SearchViewClient = ({
       `/szukaj?q=${encodeURIComponent(searchPhrase)}&page=${newPage}`,
       {
         scroll: true,
-      }
+      },
     );
   };
 

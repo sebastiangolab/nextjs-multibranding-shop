@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Carousel,
   CarouselApi,
@@ -9,10 +10,9 @@ import {
   CarouselItem,
 } from "@shared/shadcn/ui/carousel";
 import Section from "../../components/Section";
-import { SliderSectionProps } from "../../types";
-import Link from "next/link";
-import SliderBottomNavigation from "../../components/SliderBottomNavigation";
 import SliderArrows from "../../components/SliderArrows";
+import SliderBottomNavigation from "../../components/SliderBottomNavigation";
+import { SliderSectionProps } from "../../types";
 
 const AUTOPLAY_DELAY = 5000;
 

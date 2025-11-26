@@ -9,7 +9,7 @@ import {
 } from "@shared/types";
 
 export const getProductDeepestCategory = async (
-  productCategories: ProductCategoryData[]
+  productCategories: ProductCategoryData[],
 ): Promise<ProductsCategoryFullData | null> => {
   try {
     if (!productCategories?.length) {
@@ -24,7 +24,7 @@ export const getProductDeepestCategory = async (
     const categoriesDetails: ProductsCategoryResponseData[] = productCategories
       .map((productCategory) => {
         return allCategories.find(
-          (category) => category.id === productCategory.id
+          (category) => category.id === productCategory.id,
         );
       })
       .filter((category) => !!category);
@@ -36,7 +36,7 @@ export const getProductDeepestCategory = async (
 
       while (current.parent) {
         const parent = allCategories.find(
-          (category) => category.id === current.parent
+          (category) => category.id === current.parent,
         );
 
         if (!parent) {
@@ -62,7 +62,7 @@ export const getProductDeepestCategory = async (
           ? { data: currentCategory, depth }
           : deepestCategoryObject;
       },
-      { data: categoriesDetails[0], depth: -1 }
+      { data: categoriesDetails[0], depth: -1 },
     );
 
     return normalizeProductsCategoryData(deepestCategory.data, allCategories);

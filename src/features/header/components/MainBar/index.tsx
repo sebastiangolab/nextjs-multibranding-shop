@@ -1,10 +1,10 @@
 import React from "react";
-import Logo from "../Logo";
-import UserActions from "../UserActions";
-import SearchBar from "../SearchBar";
-import { HeaderData } from "../../types";
-import SidebarNavigationButton from "../SidebarNavigationButton";
 import { MenuItem } from "@shared/types";
+import { HeaderData } from "../../types";
+import Logo from "../Logo";
+import SearchBar from "../SearchBar";
+import SidebarNavigationButton from "../SidebarNavigationButton";
+import UserActions from "../UserActions";
 
 interface MainBarProps {
   isSticky: boolean;

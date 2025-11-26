@@ -1,17 +1,17 @@
 "use client";
 
 import React, { ReactElement, useState } from "react";
-import ProductGallery from "../ProductGallery";
+import { Heart, Mail, ShoppingCart } from "lucide-react";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import { Price } from "@/features/prices";
 import { ProductData } from "@features/products";
 import { Badge } from "@shared/shadcn/ui/badge";
 import { Button } from "@shared/shadcn/ui/button";
-import { Heart, Mail, ShoppingCart } from "lucide-react";
-import { QuantitySelector } from "../ProductQuantitySelector";
+import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
-import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
-import { Price } from "@/features/prices";
-import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import ProductGallery from "../ProductGallery";
+import { QuantitySelector } from "../ProductQuantitySelector";
 
 interface ProductMainProps {
   productData: ProductData;
@@ -30,7 +30,7 @@ const ProductMain = ({ productData }: ProductMainProps): ReactElement => {
     productData;
 
   const isProductInFavorites = !!productsIds.find(
-    (productInFavoriteId) => productInFavoriteId === id
+    (productInFavoriteId) => productInFavoriteId === id,
   );
 
   const handleAddToCart = () => {

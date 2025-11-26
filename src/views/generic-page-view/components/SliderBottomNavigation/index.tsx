@@ -1,8 +1,8 @@
+import React, { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Pause, Play } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
 import { CarouselApi } from "@shared/shadcn/ui/carousel";
 import { Slide } from "../../types";
-import { Pause, Play } from "lucide-react";
-import React, { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 interface SliderBottomNavigationProps {
   carouselApi: CarouselApi;

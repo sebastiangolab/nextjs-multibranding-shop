@@ -2,7 +2,7 @@ import { axiosWCApi } from "@/shared/lib/axios";
 
 export async function updateWooCommerceOrderStatus(
   orderId: number,
-  status: "pending" | "processing" | "on-hold" | "completed" | "failed"
+  status: "pending" | "processing" | "on-hold" | "completed" | "failed",
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await axiosWCApi.put(`/orders/${orderId}`, {

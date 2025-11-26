@@ -1,5 +1,5 @@
-import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Metadata } from "next";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { generateMetadataBySeoData } from "./generateMetadataBySeoData";
 
 /**

@@ -1,42 +1,42 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "🚀 Start Development Server",
-			"type": "shell",
-			"command": "npm run dev",
-			"isBackground": true,
-			"problemMatcher": [],
-			"group": "build",
-			"detail": "Starts Next.js development server on localhost:3001"
-		},
-		{
-			"label": "📦 Install Dependencies",
-			"type": "shell",
-			"command": "npm install",
-			"group": "build",
-			"detail": "Installs all npm dependencies"
-		},
-		{
-			"label": "💾 Create Commit Command",
-			"type": "shell",
-			"command": "echo \"Generate and run ONLY the git commit command (no explanations, no additional text) based on these staged files: $(git diff --cached --name-only | tr '\\n' ', ' | sed 's/, $//'), make format how describe in .copilot-instructions.md file\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
-			"group": "build",
-			"detail": "Generate prompt for AI to create and run git commit command (output only) based on staged files"
-		},
-		{
-			"label": "🎨 Create a design system JSON profile",
-			"type": "shell",
-			"command": "echo \"Create a JSON profile design system that extracts visual data from these screenshots so that i can use the JSON output in Cursor to give it context on how to replicate such design systems in a consistent style. Avoid including the contents of the specific images. The output should include the design style, the structure and anything that'll help an AI replicate such designs.\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
-			"group": "build",
-			"detail": "Generate prompt for AI to create a design system JSON profile"
-		},
-				{
-			"label": "🏗️ Create a structure JSON profile",
-			"type": "shell",
-			"command": "echo \"Create a JSON profile design system that extracts structural and positioning data from the provided screenshots. The JSON output is intended to provide context to Cursor (or another AI) for the purpose of replicating the layout and composition of these design systems in a consistent manner. Explicitly avoid including specific visual style values (such as color, exact fonts, shadows, or border radii), focusing instead on the component hierarchy, spatial relationships, layout mechanics (grid/flex), relative sizing, and positioning. The final JSON output must include the component tree structure, position mapping, and layout rules that will help the AI replicate the architecture of the design.\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
-			"group": "build",
-			"detail": "Generate prompt for AI to create a structure JSON profile"
-		},
-	],
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Start Development Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Starts Next.js development server on localhost:3001"
+    },
+    {
+      "label": "📦 Install Dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "group": "build",
+      "detail": "Installs all npm dependencies"
+    },
+    {
+      "label": "💾 Create Commit Command",
+      "type": "shell",
+      "command": "echo \"Generate and run ONLY the git commit command (no explanations, no additional text) based on these staged files: $(git diff --cached --name-only | tr '\\n' ', ' | sed 's/, $//'), make format how describe in .copilot-instructions.md file\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
+      "group": "build",
+      "detail": "Generate prompt for AI to create and run git commit command (output only) based on staged files"
+    },
+    {
+      "label": "🎨 Create a design system JSON profile",
+      "type": "shell",
+      "command": "echo \"Create a JSON profile design system that extracts visual data from these screenshots so that i can use the JSON output in Cursor to give it context on how to replicate such design systems in a consistent style. Avoid including the contents of the specific images. The output should include the design style, the structure and anything that'll help an AI replicate such designs.\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
+      "group": "build",
+      "detail": "Generate prompt for AI to create a design system JSON profile"
+    },
+    {
+      "label": "🏗️ Create a structure JSON profile",
+      "type": "shell",
+      "command": "echo \"Create a JSON profile design system that extracts structural and positioning data from the provided screenshots. The JSON output is intended to provide context to Cursor (or another AI) for the purpose of replicating the layout and composition of these design systems in a consistent manner. Explicitly avoid including specific visual style values (such as color, exact fonts, shadows, or border radii), focusing instead on the component hierarchy, spatial relationships, layout mechanics (grid/flex), relative sizing, and positioning. The final JSON output must include the component tree structure, position mapping, and layout rules that will help the AI replicate the architecture of the design.\" | pbcopy && echo '✅ Prompt copied to clipboard!'",
+      "group": "build",
+      "detail": "Generate prompt for AI to create a structure JSON profile"
+    }
+  ]
 }

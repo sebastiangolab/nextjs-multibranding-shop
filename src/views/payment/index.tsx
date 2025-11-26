@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import {
+  CheckoutStep,
+  CheckoutSummary,
+  useCheckoutStore,
+} from "@/features/checkout";
 import BasicContainer from "@/shared/components/BasicContainer";
-import { useCheckoutStore } from "@/features/checkout";
-import { CheckoutStep, CheckoutSummary } from "@/features/checkout";
+import type { Stripe, StripeElements } from "@stripe/stripe-js";
+import { LegalConsents } from "./components/LegalConsents";
 import { OrderSummary } from "./components/OrderSummary";
 import StripePaymentElement from "./components/StripePaymentElement";
-import { LegalConsents } from "./components/LegalConsents";
-import type { Stripe, StripeElements } from "@stripe/stripe-js";
 
 export const PaymentView = () => {
   const { termsAccepted, deliveryFormData } = useCheckoutStore();

@@ -1,10 +1,10 @@
 "use client";
 
-import { ProductImage } from "@features/products";
 import React, { ReactElement, useState } from "react";
 import Image from "next/image";
-import { Button } from "@shared/shadcn/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ProductImage } from "@features/products";
+import { Button } from "@shared/shadcn/ui/button";
 import ProductGalleryLightbox from "../ProductGalleryLightbox";
 
 interface ProductGalleryProps {

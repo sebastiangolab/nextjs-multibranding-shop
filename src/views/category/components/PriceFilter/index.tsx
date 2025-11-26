@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import { Price } from "@/features/prices";
 import InputWithLabel from "@shared/components/InputWithLabel";
 import { Label } from "@shared/shadcn/ui/label";
 import { Slider } from "@shared/shadcn/ui/slider";
 import { ProductsFiltersHookResults } from "../../types";
-import { Price } from "@/features/prices";
 
 interface PriceFilterProps {
   maxPrice: number;

@@ -1,8 +1,8 @@
-import { HeaderData } from "../../types";
-import Link from "next/link";
-import Image from "next/image";
 import React, { ReactElement } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useThemeMode } from "@/shared/hooks/useThemeMode";
+import { HeaderData } from "../../types";
 
 type LogoProps = {
   logoData: HeaderData["logoData"];

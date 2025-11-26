@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { LinkButton } from "@shared/components/LinkButton";
+import MarkdownText from "@shared/components/MarkdownText";
 import { Badge } from "@shared/shadcn/ui/badge";
 import Section from "../../components/Section";
-import { ImageWithTextSectionProps } from "../../types";
-import MarkdownText from "@shared/components/MarkdownText";
 import SectionTitleH2 from "../../components/SectionTitleH2";
+import { ImageWithTextSectionProps } from "../../types";
 
 const ContentWithImageSection = ({
   label,

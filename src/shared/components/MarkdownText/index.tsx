@@ -1,5 +1,5 @@
-import Markdown from "markdown-to-jsx";
 import React from "react";
+import Markdown from "markdown-to-jsx";
 
 interface MarkdownTextProps {
   children: string;

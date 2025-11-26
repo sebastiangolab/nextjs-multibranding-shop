@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["src/shared/shadcn/**"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -36,6 +37,7 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": "warn",
     "simple-import-sort/imports": [
       "error",

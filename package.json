@@ -9,10 +9,10 @@
     "build:brand2": "BRAND=brand2 next build",
     "start:brand1": "BRAND=brand1 PORT=3000 next start",
     "start:brand2": "BRAND=brand2 PORT=3001 next start",
-    "lint": "next lint",
-    "lint-fix": "next lint --fix",
-    "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "lint": "BRAND=brand1 next lint",
+    "lint-fix": "BRAND=brand1 next lint --fix",
+    "format": "BRAND=brand1 prettier --check --ignore-path .gitignore .",
+    "format:fix": "BRAND=brand1 prettier --write --ignore-path .gitignore .",
     "husky": "husky"
   },
   "dependencies": {
@@ -67,6 +67,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "9.0.11",
     "tw-animate-css": "^1.3.7",
-    "typescript": "^5"
+    "typescript": "~5.4.0"
   }
 }

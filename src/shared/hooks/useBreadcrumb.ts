@@ -20,7 +20,7 @@ const formatPathSegmentLabel = (pathSegment: string): string => {
 export const useBreadcrumb = (
   currentPageLabel: string,
   categoriesItems?: BreadcrumbItem[],
-  isCategoryCurrentPage?: boolean
+  isCategoryCurrentPage?: boolean,
 ): BreadcrumbItem[] => {
   const pathname = usePathname();
 
@@ -48,7 +48,7 @@ export const useBreadcrumb = (
 
     if (isCategoryCurrentPage) {
       return items.map((item, index) =>
-        index === items.length - 1 ? { ...item, isCurrentPage: true } : item
+        index === items.length - 1 ? { ...item, isCurrentPage: true } : item,
       );
     }
 

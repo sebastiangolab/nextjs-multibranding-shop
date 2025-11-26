@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   generateGenericPageMetadata,
   generateNotFoundPageMetadata,
@@ -6,7 +7,6 @@ import GenericPageView, {
   GenericPageViewProps,
 } from "@views/generic-page-view";
 import { getGenericPageDataByUrl } from "@views/generic-page-view/actions/getGenericPageDataByUrl";
-import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

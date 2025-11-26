@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   CheckoutStep,
-  DeliveryMethodData,
   CheckoutSummary,
+  DeliveryMethodData,
   useCheckoutStore,
 } from "@/features/checkout";
-import { useRouter } from "next/navigation";
 import BasicContainer from "@/shared/components/BasicContainer";
-import { DeliveryMethodSelector } from "../DeliveryMethodSelector";
-import { DeliveryForm } from "../DeliveryForm";
 import { DeliveryFormRef } from "../../types";
+import { DeliveryForm } from "../DeliveryForm";
+import { DeliveryMethodSelector } from "../DeliveryMethodSelector";
 
 interface DeliveryViewClientProps {
   deliveriesMethods: DeliveryMethodData[];
@@ -58,13 +58,15 @@ const DeliveryViewClient = ({ deliveriesMethods }: DeliveryViewClientProps) => {
     }
   };
 
+  useEffect(() => {
+    if (deliveriesMethods.length > 0) {
+      updateDeliveryMethodData(deliveriesMethods[0]);
+    }
+  }, []);
+
   if (!Array.isArray(deliveriesMethods) || deliveriesMethods.length === 0) {
     return null;
   }
-
-  useEffect(() => {
-    updateDeliveryMethodData(deliveriesMethods[0]);
-  }, []);
 
   return (
     <BasicContainer className="py-8">

@@ -1,9 +1,9 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { getProductsCategoryData, getProductsData } from "@features/products";
-import CategoryViewClient from "./components/CategoryViewClient";
-import BasicContainer from "@shared/components/BasicContainer";
 import { getCategoriesBreadcrumbItems } from "@/shared/actions/getCategoriesBreadcrumbItems";
+import { getProductsCategoryData, getProductsData } from "@features/products";
+import BasicContainer from "@shared/components/BasicContainer";
+import CategoryViewClient from "./components/CategoryViewClient";
 
 interface CategoryPageProps {
   params: Promise<{ categorySlug?: string[] }>;

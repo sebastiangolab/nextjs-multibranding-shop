@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     if (!paymentIntentId) {
       return NextResponse.json(
         { error: "payment_intent_id is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
         success: false,
         error: error || "Failed to fetch payment status",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

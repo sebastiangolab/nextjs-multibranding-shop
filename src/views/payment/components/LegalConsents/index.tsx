@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useCheckoutStore } from "@/features/checkout";
 import { Checkbox } from "@/shared/shadcn/ui/checkbox";
 import { Label } from "@/shared/shadcn/ui/label";
-import Link from "next/link";
 
 export const LegalConsents = () => {
   const { termsAccepted, updateTermsAccepted } = useCheckoutStore();

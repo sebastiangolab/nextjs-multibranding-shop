@@ -1,5 +1,5 @@
-import MarkdownText from "@shared/components/MarkdownText";
 import React, { ReactElement } from "react";
+import MarkdownText from "@shared/components/MarkdownText";
 
 interface ProductDescriptionProps {
   description: string;

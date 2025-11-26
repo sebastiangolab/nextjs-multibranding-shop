@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { PageSeoData } from "../types";
-import { truncateText } from "./truncateText";
 import { stripHtml } from "./stripHtml";
+import { truncateText } from "./truncateText";
 
 // Google recommends: title 50-60 chars, description 150-160 chars
 export function generateMetadataBySeoData(seoData: PageSeoData): Metadata {

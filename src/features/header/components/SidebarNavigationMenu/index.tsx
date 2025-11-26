@@ -2,8 +2,8 @@
 
 import { LinkButton } from "@shared/components/LinkButton";
 import { Accordion } from "@shared/shadcn/ui/accordion";
-import SidebarMenuDropdownItem from "../SidebarMenuDropdownItem";
 import { MenuItem } from "@shared/types";
+import SidebarMenuDropdownItem from "../SidebarMenuDropdownItem";
 
 interface SidebarNavigationMenuProps {
   menuDataItems: MenuItem[];
@@ -30,7 +30,7 @@ export const SidebarNavigationMenu = ({
                 {menuItem.title}
               </LinkButton>
             </div>
-          )
+          ),
         )}
       </Accordion>
     </nav>

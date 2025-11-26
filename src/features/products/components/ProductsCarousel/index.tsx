@@ -1,5 +1,4 @@
 import React from "react";
-import ProductCard from "../ProductCard";
 import { ProductData } from "@features/products";
 import {
   Carousel,
@@ -8,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@shared/shadcn/ui/carousel";
+import ProductCard from "../ProductCard";
 
 interface ProductsCarouselProps {
   products?: ProductData[] | null;

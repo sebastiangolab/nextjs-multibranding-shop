@@ -1,3 +1,5 @@
+import React, { ReactElement, useEffect, useState } from "react";
+import Image from "next/image";
 import { ProductImage } from "@features/products/types";
 import {
   Carousel,
@@ -8,8 +10,6 @@ import {
   CarouselPrevious,
 } from "@shared/shadcn/ui/carousel";
 import { Dialog, DialogContent, DialogTitle } from "@shared/shadcn/ui/dialog";
-import React, { ReactElement, useEffect, useState } from "react";
-import Image from "next/image";
 
 interface ProductGalleryLightboxProps {
   productName: string;

@@ -1,6 +1,6 @@
+import { parsePriceToNumber } from "@/features/prices";
 import { ProductData } from "@features/products";
 import { PriceFilterData } from "../types";
-import { parsePriceToNumber } from "@/features/prices";
 
 export const getPriceFilter = (products: ProductData[]): PriceFilterData => {
   const prices = products.map((product) => parsePriceToNumber(product.price));

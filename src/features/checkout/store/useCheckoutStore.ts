@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { DeliveryMethodData } from "../types";
 import { DeliveryFormData } from "../schemas/deliveryFormSchema";
+import { DeliveryMethodData } from "../types";
 
 interface CheckoutTerms {
   storeRegulation: boolean;
@@ -76,6 +76,6 @@ export const useCheckoutStore = create<CheckoutStore>()(
     {
       name: "checkout-storage", // sessionStorage key
       storage: createJSONStorage(() => sessionStorage),
-    }
-  )
+    },
+  ),
 );

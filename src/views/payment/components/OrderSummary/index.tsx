@@ -1,10 +1,10 @@
 "use client";
 
 import { Edit, Loader, ShoppingBag } from "lucide-react";
-import { SummaryOrderProductsList } from "./SummaryOrderProductsList";
 import { useCartProducts, useCheckoutStore } from "@/features/checkout";
-import { LinkButton } from "@/shared/components/LinkButton";
 import { Price } from "@/features/prices";
+import { LinkButton } from "@/shared/components/LinkButton";
+import { SummaryOrderProductsList } from "./SummaryOrderProductsList";
 
 export const OrderSummary = () => {
   const { deliveryFormData, deliveryMethodData } = useCheckoutStore();

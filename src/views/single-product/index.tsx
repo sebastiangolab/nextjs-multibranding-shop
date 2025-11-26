@@ -1,13 +1,13 @@
-import { notFound } from "next/navigation";
 import React from "react";
-import ProductMain from "./components/ProductMain";
-import ProductDescription from "./components/ProductDescription";
-import RelatedProducts from "./components/RelatedProducts";
-import { getSingleProductData } from "./actions/getSingleProductData";
-import { getProductDeepestCategory } from "./actions/getProductDeepestCategory";
+import { notFound } from "next/navigation";
 import { getCategoriesBreadcrumbItems } from "@shared/actions/getCategoriesBreadcrumbItems";
-import TopRow from "./components/TopRow";
 import BasicContainer from "@shared/components/BasicContainer";
+import { getProductDeepestCategory } from "./actions/getProductDeepestCategory";
+import { getSingleProductData } from "./actions/getSingleProductData";
+import ProductDescription from "./components/ProductDescription";
+import ProductMain from "./components/ProductMain";
+import RelatedProducts from "./components/RelatedProducts";
+import TopRow from "./components/TopRow";
 
 interface SingleProductViewProps {
   params: Promise<{ productSlug?: string }>;
@@ -27,7 +27,7 @@ export const SingleProductView = async (params: SingleProductViewProps) => {
   }
 
   const productCategory = await getProductDeepestCategory(
-    productData.categories
+    productData.categories,
   );
 
   if (!productCategory) {

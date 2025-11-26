@@ -1,9 +1,9 @@
 "use client";
 
+import { ChangeEvent } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
 import { Input } from "@shared/shadcn/ui/input";
-import { ChangeEvent } from "react";
 
 type QuantitySelectorProps = {
   quantity: number;

@@ -1,12 +1,12 @@
 "use client";
 
+import { CreditCard, Loader2, ShoppingBag, Truck } from "lucide-react";
+import { addPrices, Price } from "@/features/prices";
 import { Button } from "@/shared/shadcn/ui/button";
 import { Separator } from "@/shared/shadcn/ui/separator";
-import { Loader2, ShoppingBag, CreditCard, Truck } from "lucide-react";
-import { useCheckoutStore } from "../../store/useCheckoutStore";
 import { useCartStore } from "@/shared/store/cartStore";
+import { useCheckoutStore } from "../../store/useCheckoutStore";
 import { CheckoutStep } from "../../types";
-import { addPrices, Price } from "@/features/prices";
 
 interface CheckoutSummaryProps {
   step: CheckoutStep;

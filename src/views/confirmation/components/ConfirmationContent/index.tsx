@@ -1,15 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useCartStore } from "@/shared/store/cartStore";
-import { getPaymentStatus } from "@/features/checkout/actions/getPaymentStatus";
+import { useSearchParams } from "next/navigation";
 import { useCheckoutStore } from "@/features/checkout";
-import { PaymentSuccess } from "../PaymentSuccess";
+import { getPaymentStatus } from "@/features/checkout/actions/getPaymentStatus";
+import { addPrices } from "@/features/prices";
+import { useCartStore } from "@/shared/store/cartStore";
 import { PaymentFailure } from "../PaymentFailure";
 import { PaymentProcessing } from "../PaymentProcessing";
-import { addPrices } from "@/features/prices";
+import { PaymentSuccess } from "../PaymentSuccess";
 
 const ConfirmationContent = () => {
   const searchParams = useSearchParams();

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+import { Filter, Menu } from "lucide-react";
 import {
   ProductData,
   ProductsGrid,
@@ -5,8 +7,6 @@ import {
 } from "@features/products";
 import { CustomPagination } from "@shared/components/Pagination";
 import { Button } from "@shared/shadcn/ui/button";
-import { Filter, Menu } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 
 interface CategoryContentProps {
   paginationTotalPages: number;

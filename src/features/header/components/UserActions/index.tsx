@@ -1,11 +1,11 @@
 "use client";
 
+import { Heart, ShoppingCart } from "lucide-react";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
-import { Heart, ShoppingCart } from "lucide-react";
-import UserActionButton from "../UserActionButton";
 import ThemeToggle from "../ThemeToggle";
-import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import UserActionButton from "../UserActionButton";
 
 const UserActions = () => {
   const { quantity } = useCartStore();

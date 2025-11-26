@@ -1,5 +1,6 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
 import {
   Sheet,
@@ -8,9 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@shared/shadcn/ui/sheet";
-import { Menu } from "lucide-react";
-import { SidebarNavigationMenu } from "../SidebarNavigationMenu";
 import { MenuItem } from "@shared/types";
+import { SidebarNavigationMenu } from "../SidebarNavigationMenu";
 
 interface SidebarNavigationButtonProps {
   menuDataItems: MenuItem[];

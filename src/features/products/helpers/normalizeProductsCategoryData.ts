@@ -5,7 +5,7 @@ import {
 
 export const normalizeProductsCategoryData = (
   category: ProductsCategoryResponseData,
-  allCategories: ProductsCategoryResponseData[]
+  allCategories: ProductsCategoryResponseData[],
 ): ProductsCategoryFullData => {
   const subcategories = allCategories.filter((subCategory) => {
     return subCategory.parent.toString() === category?.id.toString();
@@ -17,7 +17,7 @@ export const normalizeProductsCategoryData = (
         ...subCategory,
         subcategories: [],
       };
-    }
+    },
   );
 
   return {

@@ -1,5 +1,5 @@
-import { getFooterData } from "../../actions/getFooterData";
 import React from "react";
+import { getFooterData } from "../../actions/getFooterData";
 import FooterClient from "./Footer.client";
 
 const Footer = async () => {

@@ -1,10 +1,10 @@
-import { Button } from "@shared/shadcn/ui/button";
 import React, { Dispatch, SetStateAction } from "react";
-import { PriceFilter } from "../PriceFilter";
-import { AttributeFilters } from "../AttributeFilters";
-import { ProductsFiltersElementData } from "../../types";
-import { ClearFiltersButton } from "../ClearFiltersButton";
 import { BottomSheet } from "@shared/components/BottomSheet";
+import { Button } from "@shared/shadcn/ui/button";
+import { ProductsFiltersElementData } from "../../types";
+import { AttributeFilters } from "../AttributeFilters";
+import { ClearFiltersButton } from "../ClearFiltersButton";
+import { PriceFilter } from "../PriceFilter";
 
 interface MobileFiltersSheetProps {
   isMobileFilterSheetOpen: boolean;

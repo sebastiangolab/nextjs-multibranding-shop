@@ -1,11 +1,11 @@
 "use client";
 
 import { ArrowLeft, CreditCard, ShoppingCart, Truck } from "lucide-react";
-import { LinkButton } from "@/shared/components/LinkButton";
-import Logo from "../Logo";
-import { HeaderData } from "../../types";
-import { CheckoutStep } from "@/features/checkout";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import { CheckoutStep } from "@/features/checkout";
+import { LinkButton } from "@/shared/components/LinkButton";
+import { HeaderData } from "../../types";
+import Logo from "../Logo";
 import ThemeToggle from "../ThemeToggle";
 
 const CHECKOUT_STEPS = [
@@ -43,7 +43,7 @@ const CheckoutHeaderClient = ({
   const { availableThemeToggle } = getBrandConfig();
 
   const currentStepIndex = CHECKOUT_STEPS.findIndex(
-    (step) => step.id === currentStep
+    (step) => step.id === currentStep,
   );
 
   return (

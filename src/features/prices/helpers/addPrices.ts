@@ -3,7 +3,7 @@ import { parsePriceToNumber } from "./parsePriceToNumber";
 
 export const addPrices = (
   price: string | number,
-  secondPrice: string | number
+  secondPrice: string | number,
 ): number => {
   const priceNumber = parsePriceToNumber(price);
   const secondPriceNumber = parsePriceToNumber(secondPrice);

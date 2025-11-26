@@ -1,6 +1,6 @@
+import React from "react";
 import { Button } from "@shared/shadcn/ui/button";
 import { ProductsFiltersHookResults } from "../../types";
-import React from "react";
 
 interface ClearFiltersButtonProps {
   clearAllFiltersValues: ProductsFiltersHookResults["clearAllFiltersValues"];

@@ -4,13 +4,13 @@ import React, { MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShoppingCart } from "lucide-react";
+import { Price } from "@/features/prices";
 import { Button } from "@shared/shadcn/ui/button";
 import { Card, CardContent } from "@shared/shadcn/ui/card";
-import { useCartStore } from "@shared/store/cartStore";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
+import { useCartStore } from "@shared/store/cartStore";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
 import { ProductData } from "../../types";
-import { Price } from "@/features/prices";
 
 interface ProductCardProps {
   data: ProductData;

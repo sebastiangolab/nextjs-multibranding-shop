@@ -1,11 +1,11 @@
 import React from "react";
-import { SubcategoryMenu } from "../SubcategoryMenu";
 import { Separator } from "@shared/shadcn/ui/separator";
-import { PriceFilter } from "../PriceFilter";
-import { AttributeFilters } from "../AttributeFilters";
-import { ProductsFiltersElementData } from "../../types";
-import { ClearFiltersButton } from "../ClearFiltersButton";
 import { ProductsCategoryFullData } from "@shared/types";
+import { ProductsFiltersElementData } from "../../types";
+import { AttributeFilters } from "../AttributeFilters";
+import { ClearFiltersButton } from "../ClearFiltersButton";
+import { PriceFilter } from "../PriceFilter";
+import { SubcategoryMenu } from "../SubcategoryMenu";
 
 interface CategorySidebarProps {
   subcategories: ProductsCategoryFullData[];

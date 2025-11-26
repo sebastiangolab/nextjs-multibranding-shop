@@ -4,17 +4,17 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
+import { multiplyPrice, Price } from "@/features/prices";
+import { Button } from "@shared/shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@shared/shadcn/ui/dialog";
-import { Button } from "@shared/shadcn/ui/button";
 import { Separator } from "@shared/shadcn/ui/separator";
 import { useAddToCartModalStore } from "@shared/store/addToCartModalStore";
 import { useCartStore } from "@shared/store/cartStore";
-import { multiplyPrice, Price } from "@/features/prices";
 
 const AddToCartModal = () => {
   const router = useRouter();

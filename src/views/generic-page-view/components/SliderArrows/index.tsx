@@ -1,7 +1,7 @@
+import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@shared/shadcn/ui/button";
 import { CarouselApi } from "@shared/shadcn/ui/carousel";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import React from "react";
 
 interface SliderArrowsProps {
   carouselApi: CarouselApi;

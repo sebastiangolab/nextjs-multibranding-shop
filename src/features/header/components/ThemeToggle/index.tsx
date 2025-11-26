@@ -1,7 +1,7 @@
 "use client";
 
-import { useThemeMode } from "@/shared/hooks/useThemeMode";
 import { Loader2, Moon, Sun } from "lucide-react";
+import { useThemeMode } from "@/shared/hooks/useThemeMode";
 
 const ThemeToggle = () => {
   const { isDark, toggleTheme, mounted } = useThemeMode();

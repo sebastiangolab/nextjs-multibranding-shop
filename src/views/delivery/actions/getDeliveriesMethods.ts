@@ -28,7 +28,7 @@ export const getDeliveriesMethods = async (): Promise<
     const deliveryZoneId = wooCommerceSettings.deliveryZoneId;
 
     const { data: allMethods } = await axiosWCApi<DeliveryMethodResponseData[]>(
-      `/shipping/zones/${deliveryZoneId}/methods`
+      `/shipping/zones/${deliveryZoneId}/methods`,
     );
 
     if (!Array.isArray(allMethods) || allMethods.length === 0) {

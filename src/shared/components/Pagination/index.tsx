@@ -50,7 +50,7 @@ export const CustomPagination = ({
           totalPages - 3,
           totalPages - 2,
           totalPages - 1,
-          totalPages
+          totalPages,
         );
       } else {
         // In the middle
@@ -61,7 +61,7 @@ export const CustomPagination = ({
           currentPage,
           currentPage + 1,
           "...",
-          totalPages
+          totalPages,
         );
       }
     }

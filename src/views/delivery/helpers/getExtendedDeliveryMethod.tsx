@@ -1,5 +1,5 @@
+import { Package, Store, Truck } from "lucide-react";
 import { DeliveryMethodData } from "@/features/checkout";
-import { Package, Truck, Store } from "lucide-react";
 
 enum DeliveryMethodId {
   STORE_PICKUP = "store_pickup",
@@ -7,7 +7,7 @@ enum DeliveryMethodId {
 }
 
 export const getExtendedDeliveryMethod = (
-  deliveryMethodData: DeliveryMethodData
+  deliveryMethodData: DeliveryMethodData,
 ): DeliveryMethodData => {
   const iconClasses = "w-6 h-6";
 

@@ -1,5 +1,5 @@
-import { ProductData } from "../types";
 import { axiosNextWcApi } from "@/shared/lib/axios";
+import { ProductData } from "../types";
 
 interface SearchedProductsRequestParams {
   includeIds?: number[];
@@ -17,7 +17,7 @@ interface SearchProductsDataActionResult {
 const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 24;
 
 export const getSearchedProductsData = async (
-  params: SearchedProductsRequestParams
+  params: SearchedProductsRequestParams,
 ): Promise<SearchProductsDataActionResult | null> => {
   try {
     const response = await axiosNextWcApi<ProductData[]>(`/products/search`, {

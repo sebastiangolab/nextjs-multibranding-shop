@@ -1,6 +1,6 @@
-import { getRandomProducts } from "../../actions/getRandomProducts";
-import { ProductsCarousel } from "@features/products";
 import React from "react";
+import { ProductsCarousel } from "@features/products";
+import { getRandomProducts } from "../../actions/getRandomProducts";
 
 interface RelatedProductsProps {
   currentProductId: number;
@@ -13,7 +13,7 @@ const RelatedProducts = async ({
 }: RelatedProductsProps) => {
   const relatedProductsData = await getRandomProducts(
     currentProductId,
-    categoryId
+    categoryId,
   );
 
   if (!relatedProductsData || relatedProductsData.length === 0) {

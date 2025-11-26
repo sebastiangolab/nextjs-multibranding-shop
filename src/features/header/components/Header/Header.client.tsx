@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { HeaderData } from "../../types";
 import MainBar from "../MainBar";
 import { NavigationMenu } from "../NavigationMenu";
-import { HeaderData } from "../../types";
 
 interface HeaderProps {
   data: HeaderData;

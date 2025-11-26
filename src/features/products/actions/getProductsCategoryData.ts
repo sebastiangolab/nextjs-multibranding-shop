@@ -1,12 +1,12 @@
 import { axiosWCApi } from "@shared/lib/axios";
-import { normalizeProductsCategoryData } from "../helpers/normalizeProductsCategoryData";
 import {
   ProductsCategoryFullData,
   ProductsCategoryResponseData,
 } from "@shared/types";
+import { normalizeProductsCategoryData } from "../helpers/normalizeProductsCategoryData";
 
 export const getProductsCategoryData = async (
-  categorySlug: string[]
+  categorySlug: string[],
 ): Promise<ProductsCategoryFullData | null> => {
   try {
     const { data: allCategories } = await axiosWCApi<
@@ -28,7 +28,7 @@ export const getProductsCategoryData = async (
       const slug = categorySlug[i];
 
       const category = allCategories.find(
-        (cat) => cat.slug === slug && cat.parent === currentParentId
+        (cat) => cat.slug === slug && cat.parent === currentParentId,
       );
 
       if (!category) {

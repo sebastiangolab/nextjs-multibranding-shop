@@ -13,7 +13,7 @@ interface HeaderResponseData {
 export const getHeaderData = async (): Promise<HeaderData | null> => {
   try {
     const { data: headerData } = await axiosWpAcfApi<HeaderResponseData[]>(
-      'theme-setting?slug="header"'
+      'theme-setting?slug="header"',
     );
 
     const { data: menuData } =

@@ -1,11 +1,11 @@
 import React from "react";
-import CategoryView from "@views/category";
-import { getProductsCategoryData } from "@features/products";
 import type { Metadata } from "next";
 import {
   generateCategoryMetadata,
   generateNotFoundPageMetadata,
 } from "@/features/seo";
+import { getProductsCategoryData } from "@features/products";
+import CategoryView from "@views/category";
 
 interface CategoryPageProps {
   params: Promise<{ categorySlug?: string[] }>;

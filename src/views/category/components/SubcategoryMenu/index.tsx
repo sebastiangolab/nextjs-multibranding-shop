@@ -1,6 +1,6 @@
+import { usePathname } from "next/navigation";
 import { LinkButton } from "@shared/components/LinkButton";
 import { ProductsCategoryFullData } from "@shared/types";
-import { usePathname } from "next/navigation";
 
 interface SubcategoryMenuProps {
   categoriesData: ProductsCategoryFullData[];

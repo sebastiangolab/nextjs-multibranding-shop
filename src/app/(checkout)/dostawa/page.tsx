@@ -1,8 +1,8 @@
+import type { Metadata } from "next";
+import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { CheckoutStep } from "@/features/checkout";
 import { CheckoutHeader } from "@/features/header";
 import DeliveryView from "@/views/delivery";
-import type { Metadata } from "next";
-import { getBrandConfig } from "@/config/brands/getBrandConfig";
 
 export async function generateMetadata(): Promise<Metadata> {
   const brand = getBrandConfig();

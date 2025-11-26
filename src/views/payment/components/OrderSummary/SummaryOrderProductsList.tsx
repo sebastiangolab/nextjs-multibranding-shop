@@ -1,9 +1,9 @@
 "use client";
 
-import { CartTableProduct } from "@/features/checkout";
-import { multiplyPrice, Price } from "@/features/prices";
 import Image from "next/image";
 import Link from "next/link";
+import { CartTableProduct } from "@/features/checkout";
+import { multiplyPrice, Price } from "@/features/prices";
 
 interface OrderProductsListProps {
   products: CartTableProduct[];

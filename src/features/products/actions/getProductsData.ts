@@ -19,7 +19,7 @@ interface ProductsDataActionResult {
 const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 24;
 
 export const getProductsData = async (
-  params: ProductsRequestParams
+  params: ProductsRequestParams,
 ): Promise<ProductsDataActionResult | null> => {
   try {
     const requestParams = {

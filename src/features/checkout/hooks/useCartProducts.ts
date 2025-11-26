@@ -1,9 +1,9 @@
+import { useMemo } from "react";
+import { addPrices, multiplyPrice } from "@/features/prices";
 import { getSearchedProductsData, ProductData } from "@/features/products";
 import { useCartStore } from "@/shared/store/cartStore";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { CartTableProduct } from "../types";
-import { useMemo } from "react";
-import { addPrices, multiplyPrice } from "@/features/prices";
 
 interface CartProductsHookResults {
   productsWithQuantity: CartTableProduct[];
@@ -35,7 +35,7 @@ export const useCartProducts = (): CartProductsHookResults => {
     () =>
       productsData.map((product: ProductData) => {
         const cartItem = cartItems.find(
-          (item) => item.productId === product.id
+          (item) => item.productId === product.id,
         );
 
         return {
@@ -43,7 +43,7 @@ export const useCartProducts = (): CartProductsHookResults => {
           quantity: cartItem?.quantity || 1,
         };
       }),
-    [productsData, cartItems]
+    [productsData, cartItems],
   );
 
   // Calculate total price of products in the cart
@@ -52,9 +52,9 @@ export const useCartProducts = (): CartProductsHookResults => {
       productsWithQuantity.reduce(
         (sumPrices, product) =>
           addPrices(sumPrices, multiplyPrice(product.price, product.quantity)),
-        0
+        0,
       ),
-    [productsWithQuantity]
+    [productsWithQuantity],
   );
 
   return {

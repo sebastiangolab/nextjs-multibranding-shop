@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { loadStripe, Stripe, StripeElements } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { useCartStore } from "@/shared/store/cartStore";
-import { useCheckoutStore } from "@/features/checkout";
-import { StripePaymentForm } from "../StripePaymentForm";
-import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
-import { addPrices } from "@/features/prices";
 import { useTheme } from "next-themes";
+import { useCheckoutStore } from "@/features/checkout";
+import { addPrices } from "@/features/prices";
 import { useThemeMode } from "@/shared/hooks/useThemeMode";
+import { useCartStore } from "@/shared/store/cartStore";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe, Stripe, StripeElements } from "@stripe/stripe-js";
+import { createStripePaymentIntent } from "../../actions/createStripePaymentIntent";
+import { StripePaymentForm } from "../StripePaymentForm";
 
 interface StripePaymentElementProps {
   onStripeReady: (stripe: Stripe, elements: StripeElements) => void;
@@ -18,7 +18,7 @@ interface StripePaymentElementProps {
 
 // Initialize Stripe once outside component
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 
 const StripePaymentElement = ({
@@ -62,7 +62,7 @@ const StripePaymentElement = ({
         total,
         cartItems,
         deliveryFormData,
-        deliveryMethodData
+        deliveryMethodData,
       );
 
       if (!data || !data.clientSecret) {

@@ -1,15 +1,15 @@
 "use client";
 
+import { ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCartStore } from "@/shared/store/cartStore";
-import { Button } from "@/shared/shadcn/ui/button";
-import { Input } from "@/shared/shadcn/ui/input";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { ChangeEvent } from "react";
-import { LinkButton } from "@/shared/components/LinkButton";
 import { CartTableProduct } from "@/features/checkout";
 import { multiplyPrice, Price } from "@/features/prices";
+import { LinkButton } from "@/shared/components/LinkButton";
+import { Button } from "@/shared/shadcn/ui/button";
+import { Input } from "@/shared/shadcn/ui/input";
+import { useCartStore } from "@/shared/store/cartStore";
 
 interface CartTableProps {
   products: CartTableProduct[];
@@ -95,7 +95,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                       onClick={() =>
                         updateProductQuantityInCart(
                           product.id,
-                          product.quantity - 1
+                          product.quantity - 1,
                         )
                       }
                       disabled={product.quantity <= 1}
@@ -110,7 +110,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         updateProductQuantityInCart(
                           product.id,
-                          parseInt(event.target.value) || 1
+                          parseInt(event.target.value) || 1,
                         )
                       }
                       className="w-16 text-center"
@@ -123,7 +123,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                       onClick={() =>
                         updateProductQuantityInCart(
                           product.id,
-                          product.quantity + 1
+                          product.quantity + 1,
                         )
                       }
                     >
@@ -204,7 +204,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                       onClick={() =>
                         updateProductQuantityInCart(
                           product.id,
-                          product.quantity - 1
+                          product.quantity - 1,
                         )
                       }
                       disabled={product.quantity <= 1}
@@ -223,7 +223,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                       onClick={() =>
                         updateProductQuantityInCart(
                           product.id,
-                          product.quantity + 1
+                          product.quantity + 1,
                         )
                       }
                     >
