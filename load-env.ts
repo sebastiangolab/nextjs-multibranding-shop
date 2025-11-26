@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import path from "path";
 import fs from "fs";
+import path from "path";
 
 // Global flag to prevent multiple loads
 let envLoaded = false;
@@ -17,60 +17,67 @@ export function loadBrandEnv() {
     return;
   }
 
-  // Check if NEXT_PUBLIC_BRAND is already set
-  // If not, use BRAND env var (for local development)
-  const brand = process.env.NEXT_PUBLIC_BRAND || process.env.BRAND;
-
-  if (!brand) {
-    throw new Error("❌ BRAND environment variable is required!");
-  }
-
-  // Ensure NEXT_PUBLIC_BRAND is set for client-side access
-  if (!process.env.NEXT_PUBLIC_BRAND) {
-    process.env.NEXT_PUBLIC_BRAND = brand;
-  }
-
-  const envFile = `.env.${brand}`;
-  const envPath = path.resolve(process.cwd(), envFile);
-
-  // Check if brand-specific env file exists
-  if (fs.existsSync(envPath)) {
-    console.log(`✅ Loading environment for: ${brand} (${envFile})`);
-
-    const result = dotenv.config({
-      path: envPath,
-      override: false, // Don't override existing env vars
+  // First, load main .env file to get NEXT_PUBLIC_DEVELOPMENT_MODE
+  const mainEnvPath = path.resolve(process.cwd(), ".env");
+  if (fs.existsSync(mainEnvPath)) {
+    dotenv.config({
+      path: mainEnvPath,
+      override: false,
     });
+  }
 
-    if (result.error) {
-      console.error(`❌ Error loading ${envFile}:`, result.error);
+  // Check if we're in development mode
+  const isDevelopmentMode = process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === "true";
+
+  if (isDevelopmentMode) {
+    // Development mode: load brand-specific .env files
+    const brand = process.env.NEXT_PUBLIC_BRAND || process.env.BRAND;
+
+    if (!brand) {
+      throw new Error(
+        "❌ BRAND environment variable is required in development mode!"
+      );
+    }
+
+    // Ensure NEXT_PUBLIC_BRAND is set for client-side access
+    if (!process.env.NEXT_PUBLIC_BRAND) {
+      process.env.NEXT_PUBLIC_BRAND = brand;
+    }
+
+    const envFile = `.env.${brand}`;
+    const envPath = path.resolve(process.cwd(), envFile);
+
+    // Check if brand-specific env file exists
+    if (fs.existsSync(envPath)) {
+      console.log(
+        `✅ [DEV MODE] Loading environment for: ${brand} (${envFile})`
+      );
+
+      const result = dotenv.config({
+        path: envPath,
+        override: false, // Don't override existing env vars
+      });
+
+      if (result.error) {
+        console.error(`❌ Error loading ${envFile}:`, result.error);
+      } else {
+        console.log(`✅ Successfully loaded ${envFile}`);
+      }
     } else {
-      console.log(`✅ Successfully loaded ${envFile}`);
+      console.warn(
+        `⚠️  Warning: ${envFile} not found. Using default environment variables.`
+      );
     }
   } else {
-    console.warn(
-      `⚠️  Warning: ${envFile} not found. Using default environment variables.`,
-    );
-  }
+    // Production mode: use main .env file only
+    console.log("✅ [PRODUCTION MODE] Using main .env file");
 
-  // Validate required variables
-  const requiredVars = [
-    "NEXT_PUBLIC_BRAND",
-    "NEXT_PUBLIC_DEVELOPMENT_MODE",
-    "NEXT_PUBLIC_SITE_URL",
-    "NEXT_PUBLIC_WORDPRESS_API_URL",
-    "WC_CONSUMER_KEY",
-    "WC_SECRET_KEY",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
-    "STRIPE_SECRET_KEY",
-    "STRIPE_WEBHOOK_SECRET",
-  ];
-
-  const missingVars = requiredVars.filter((v) => !process.env[v]);
-
-  if (missingVars.length > 0) {
-    console.warn(`⚠️  Warning: Missing environment variables for ${brand}:`);
-    missingVars.forEach((v) => console.warn(`   - ${v}`));
+    // Ensure NEXT_PUBLIC_BRAND is set from main .env
+    if (!process.env.NEXT_PUBLIC_BRAND) {
+      throw new Error(
+        "❌ NEXT_PUBLIC_BRAND must be set in .env file for production mode!"
+      );
+    }
   }
 
   // Mark as loaded
