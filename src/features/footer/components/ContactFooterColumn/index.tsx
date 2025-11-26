@@ -10,10 +10,11 @@ import {
 } from "lucide-react";
 import { FooterData } from "../../types";
 
-type ContactFooterColumnProps = Pick<
-  FooterData,
-  "phone" | "email" | "socialLinks"
->;
+interface ContactFooterColumnProps {
+  phone: string;
+  email: string;
+  socialLinks: FooterData["socialLinks"];
+}
 
 const ContactFooterColumn = ({
   phone,
@@ -79,7 +80,7 @@ const ContactFooterColumn = ({
               >
                 <social.icon className="size-5" />
               </a>
-            ) : null,
+            ) : null
           )}
         </div>
       </div>
