@@ -13,5 +13,5 @@ export const brand2Config: BrandConfig = {
     deliveryZoneId: 2,
   },
 
-  themeCss: "src/config/brands/brand2/theme.css",
+  themeCss: "public/themes/brand2.css",
 };

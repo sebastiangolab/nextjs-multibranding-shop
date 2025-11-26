@@ -11,8 +11,15 @@ export function generateThemeCSS(): string {
   const path = require("path");
 
   const brand = getBrandConfig();
+  
+  // Try to read from public folder (works in both dev and production)
   const themeCssPath = path.join(process.cwd(), brand.themeCss);
-  const themeCSS = fs.readFileSync(themeCssPath, "utf-8");
-
-  return themeCSS;
+  
+  try {
+    const themeCSS = fs.readFileSync(themeCssPath, "utf-8");
+    return themeCSS;
+  } catch (error) {
+    console.error(`Failed to read theme CSS from: ${themeCssPath}`, error);
+    throw error;
+  }
 }
