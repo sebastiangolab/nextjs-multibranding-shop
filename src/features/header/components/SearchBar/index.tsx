@@ -164,6 +164,7 @@ export const SearchBar = () => {
                       key={product.id}
                       href={`/p/${product.slug}`}
                       onClick={() => setIsResultsDropdownOpen(false)}
+                      prefetch={false}
                       className="flex items-center gap-3 p-3 hover:bg-accent transition-colors"
                     >
                       <div className="relative w-16 h-16 flex-shrink-0 bg-muted rounded">
@@ -198,6 +199,7 @@ export const SearchBar = () => {
                   <Link
                     href={`/szukaj?q=${encodeURIComponent(searchQuery)}`}
                     onClick={() => setIsResultsDropdownOpen(false)}
+                    prefetch={false}
                     className="block p-3 text-center text-sm text-primary hover:bg-accent border-t font-medium"
                   >
                     Zobacz wszystkie wyniki

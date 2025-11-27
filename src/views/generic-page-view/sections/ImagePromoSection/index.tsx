@@ -15,6 +15,7 @@ export const ImagePromoSection = ({
     <Section isFullWidth={isFullWidth}>
       <Link
         href={url}
+        prefetch={false}
         className="block relative w-full h-[230px] md:h-[300px] lg:h-[390px] overflow-hidden rounded-lg group"
         title={linkTitle}
       >

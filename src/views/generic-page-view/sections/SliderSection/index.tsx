@@ -98,6 +98,7 @@ const SliderSection = ({ slides }: SliderSectionProps) => {
               <Link
                 href={slide.url}
                 title={slide.label}
+                prefetch={false}
                 className="block relative h-[300px] md:h-[380px] lg:h-[450px] w-full overflow-hidden"
               >
                 <Image

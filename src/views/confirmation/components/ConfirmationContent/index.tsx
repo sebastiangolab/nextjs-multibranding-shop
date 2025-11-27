@@ -157,6 +157,7 @@ const ConfirmationContent = () => {
 
           <Link
             href="/koszyk"
+            prefetch={false}
             className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
           >
             Przejdź do koszyka
@@ -224,6 +225,7 @@ const ConfirmationContent = () => {
 
             <Link
               href="/koszyk"
+              prefetch={false}
               className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
             >
               Wróć do koszyka

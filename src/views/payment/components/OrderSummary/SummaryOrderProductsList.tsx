@@ -23,6 +23,7 @@ export const SummaryOrderProductsList = ({
           {product.images && product.images.length > 0 ? (
             <Link
               href={`/p/${product.slug}`}
+              prefetch={false}
               className="relative w-16 h-16 flex-shrink-0 bg-muted rounded-md overflow-hidden hover:opacity-80 transition-opacity"
             >
               <Image
@@ -40,6 +41,7 @@ export const SummaryOrderProductsList = ({
           <div className="flex-1 min-w-0">
             <Link
               href={`/p/${product.slug}`}
+              prefetch={false}
               className="hover:text-primary transition-colors"
             >
               <h4 className="text-sm font-medium text-foreground line-clamp-2 mb-1">

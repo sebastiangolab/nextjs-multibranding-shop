@@ -20,6 +20,7 @@ const Logo = ({ logoData, logoDarkData }: LogoProps): ReactElement => {
     <Link
       href="/"
       className="flex items-center text-xl font-bold hover:opacity-80 transition-opacity"
+      prefetch={false}
     >
       <Image
         src={url}

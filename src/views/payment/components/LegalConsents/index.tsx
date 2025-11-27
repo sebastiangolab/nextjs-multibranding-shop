@@ -35,6 +35,7 @@ export const LegalConsents = () => {
               <Link
                 href="/regulamin"
                 className="text-primary hover:underline font-medium"
+                prefetch={false}
                 target="_blank"
               >
                 regulamin sklepu
@@ -66,6 +67,7 @@ export const LegalConsents = () => {
               <Link
                 href="/polityka-prywatnosci"
                 className="text-primary hover:underline font-medium"
+                prefetch={false}
                 target="_blank"
               >
                 politykę prywatności

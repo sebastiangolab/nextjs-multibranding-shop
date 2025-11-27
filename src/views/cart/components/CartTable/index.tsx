@@ -57,6 +57,7 @@ export const CartTable = ({ products }: CartTableProps) => {
                 <td className="px-6 py-4">
                   <Link
                     href={`/p/${product.slug}`}
+                    prefetch={false}
                     className="flex items-center gap-4 hover:opacity-80 transition-opacity"
                   >
                     {product.images && product.images.length > 0 ? (
@@ -167,6 +168,7 @@ export const CartTable = ({ products }: CartTableProps) => {
               {product.images && product.images.length > 0 ? (
                 <Link
                   href={`/p/${product.slug}`}
+                  prefetch={false}
                   className="relative w-24 h-24 flex-shrink-0 bg-muted rounded-md overflow-hidden"
                 >
                   <Image
