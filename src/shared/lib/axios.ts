@@ -52,13 +52,21 @@ const fetchAdapter = async (
             ...(config as any).next,
           }
         : {
-            revalidate: 60, // Cache GET requests for 60 seconds
+            revalidate: 0, // Cache GET requests for 60 seconds
             ...(config as any).next,
           },
   };
 
   try {
     const response = await fetch(fullUrl, fetchOptions);
+
+    // Log response for debugging
+    console.log("📡 Fetch response:", {
+      url: fullUrl,
+      status: response.status,
+      ok: response.ok,
+      contentType: response.headers.get("content-type"),
+    });
 
     // Check if response is ok (status in range 200-299)
     if (!response.ok) {

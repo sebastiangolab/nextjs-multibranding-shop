@@ -183,17 +183,21 @@ export async function createWoocommerceOrderByMetadata(
       shipping_method: orderData.shipping_lines[0]?.method_title,
     });
 
-    const { data } = await axiosWCApi.post<WooCommerceOrderResponse>(
+    const response = await axiosWCApi.post<WooCommerceOrderResponse>(
       "/orders",
       orderData,
     );
 
-    console.log("✅ WooCommerce API Response:", {
-      hasData: !!data,
-      orderId: data?.id,
-      status: data?.status,
-      total: data?.total,
+    console.log("✅ WooCommerce API Full Response:", {
+      hasData: !!response.data,
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+      dataKeys: response.data ? Object.keys(response.data) : [],
+      fullData: JSON.stringify(response.data, null, 2),
     });
+
+    const { data } = response;
 
     if (data && data.id) {
       // Update PaymentIntent metadata with order ID (for idempotency)
