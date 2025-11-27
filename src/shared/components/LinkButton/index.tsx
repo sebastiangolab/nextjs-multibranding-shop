@@ -16,7 +16,7 @@ export const LinkButton = ({
 }: LinkButtonProps) => {
   return (
     <Button {...buttonProps} asChild>
-      <Link href={href} prefetch={prefetch}>
+      <Link href={href} prefetch={false}>
         {children}
       </Link>
     </Button>

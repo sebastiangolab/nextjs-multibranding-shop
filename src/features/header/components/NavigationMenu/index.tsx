@@ -52,7 +52,7 @@ export const NavigationMenu = ({ menuDataItems }: NavigationMenuProps) => {
                 className={navigationMenuTriggerStyle()}
                 asChild
               >
-                <Link href={menuItem.url}>{menuItem.title}</Link>
+                <Link href={menuItem.url} prefetch={false}>{menuItem.title}</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           );

@@ -180,7 +180,7 @@ export const CartTable = ({ products }: CartTableProps) => {
 
               <div className="flex-1 min-w-0">
                 {/* Product name */}
-                <Link href={`/p/${product.slug}`}>
+                <Link href={`/p/${product.slug}`} prefetch={false}>
                   <h3 className="font-medium text-foreground line-clamp-2 mb-2">
                     {product.name}
                   </h3>

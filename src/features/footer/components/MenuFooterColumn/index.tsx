@@ -15,6 +15,7 @@ const MenuFooterColumn = ({ menuData }: MenuFooterColumnProps) => {
           <Link
             key={item.id}
             href={item.url}
+            prefetch={false}
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             {item.title}
