@@ -1,6 +1,5 @@
 "use server";
 
-import { unstable_cache } from "next/cache";
 import { normalizeMenuItems } from "@shared/helpers/menuHelpers";
 import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
 import { MenuResponseData } from "@shared/types";
@@ -14,7 +13,7 @@ interface FooterResponseData {
   };
 }
 
-const fetchFooterData = async (): Promise<FooterData | null> => {
+export const getFooterData = async (): Promise<FooterData | null> => {
   try {
     // Fetch footer settings and menus in parallel
     const [
@@ -59,12 +58,3 @@ const fetchFooterData = async (): Promise<FooterData | null> => {
     return null;
   }
 };
-
-export const getFooterData = unstable_cache(
-  async () => fetchFooterData(),
-  ["footer-data"],
-  {
-    revalidate: 3600, // 1 hour
-    tags: ["footer", "menu"],
-  }
-);

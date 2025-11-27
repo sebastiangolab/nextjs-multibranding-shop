@@ -1,6 +1,5 @@
 "use server";
 
-import { unstable_cache } from "next/cache";
 import { normalizeMenuItems } from "@shared/helpers/menuHelpers";
 import { axiosWpAcfApi, axiosWpCustomApi } from "@shared/lib/axios";
 import { Image, MenuResponseData } from "@shared/types";
@@ -13,7 +12,7 @@ interface HeaderResponseData {
   };
 }
 
-const fetchHeaderData = async (): Promise<HeaderData | null> => {
+export const getHeaderData = async (): Promise<HeaderData | null> => {
   try {
     // Fetch header settings and main menu in parallel
     const [{ data: headerData }, { data: menuData }] = await Promise.all([
@@ -36,12 +35,3 @@ const fetchHeaderData = async (): Promise<HeaderData | null> => {
     return null;
   }
 };
-
-export const getHeaderData = unstable_cache(
-  async () => fetchHeaderData(),
-  ["header-data"],
-  {
-    revalidate: 3600, // 1 hour
-    tags: ["header", "menu"],
-  }
-);

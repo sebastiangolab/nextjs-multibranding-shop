@@ -13,14 +13,29 @@ interface NextFetchRequestConfig {
 
 // Custom fetch adapter for Next.js caching support
 const fetchAdapter = async (
-  config: AxiosRequestConfig,
+  config: AxiosRequestConfig
 ): Promise<AxiosResponse> => {
-  const url = axios.getUri(config);
-  const fullUrl = config.baseURL ? `${config.baseURL}${url}` : url;
+  // Build full URL with baseURL and path
+  const baseURL = (config.baseURL || "").replace(/\/$/, ""); // Remove trailing slash
+  const url = (config.url || "").replace(/^\//, ""); // Remove leading slash
+  let fullUrl = url ? `${baseURL}/${url}` : baseURL;
 
-  // Build query params
-  const params = new URLSearchParams(config.params);
-  const urlWithParams = params.toString() ? `${fullUrl}?${params}` : fullUrl;
+  // Add query params if they exist
+  if (config.params) {
+    const params = new URLSearchParams();
+
+    Object.entries(config.params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        params.append(key, String(value));
+      }
+    });
+
+    const queryString = params.toString();
+
+    if (queryString) {
+      fullUrl += (fullUrl.includes("?") ? "&" : "?") + queryString;
+    }
+  }
 
   // Prepare fetch options
   const fetchOptions: NextFetchRequestConfig = {
@@ -34,22 +49,49 @@ const fetchAdapter = async (
     },
   };
 
-  const response = await fetch(urlWithParams, fetchOptions);
+  try {
+    const response = await fetch(fullUrl, fetchOptions);
 
-  const data = response.headers
-    .get("content-type")
-    ?.includes("application/json")
-    ? await response.json()
-    : await response.text();
+    // Check if response is ok (status in range 200-299)
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error("🔴 HTTP Error:", response.status, errorData);
 
-  // Convert fetch Response to Axios Response format
-  return {
-    data,
-    status: response.status,
-    statusText: response.statusText,
-    headers: Object.fromEntries(response.headers.entries()),
-    config,
-  } as AxiosResponse;
+      // Throw error similar to axios behavior
+      const error: any = new Error(
+        `Request failed with status ${response.status}`
+      );
+
+      error.response = {
+        data: errorData,
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries()),
+        config,
+      };
+
+      throw error;
+    }
+
+    const data = response.headers
+      .get("content-type")
+      ?.includes("application/json")
+      ? await response.json()
+      : await response.text();
+
+    // Convert fetch Response to Axios Response format
+    return {
+      data,
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries(response.headers.entries()),
+      config,
+    } as AxiosResponse;
+  } catch (error) {
+    console.error("🔴 Fetch adapter error:", error, fullUrl);
+
+    throw error;
+  }
 };
 
 export const axiosWpAcfApi = axios.create({

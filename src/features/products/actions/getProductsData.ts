@@ -22,19 +22,16 @@ export const getProductsData = async (
   params: ProductsRequestParams
 ): Promise<ProductsDataActionResult | null> => {
   try {
-    const response = await axiosWCApi<ProductData[]>(
-      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wc/v3/products`,
-      {
-        params: {
-          include: params.includeIds?.join(","),
-          search: params.phrase,
-          page: params.page,
-          per_page: params.page
-            ? DEFAULT_PRODUCTS_COUNT_PER_PAGE
-            : params.perPage,
-        },
-      }
-    );
+    const response = await axiosWCApi<ProductData[]>("/products", {
+      params: {
+        include: params.includeIds?.join(","),
+        search: params.phrase,
+        page: params.page,
+        per_page: params.page
+          ? DEFAULT_PRODUCTS_COUNT_PER_PAGE
+          : params.perPage,
+      },
+    });
 
     const totalProducts = parseInt(response.headers["x-wp-total"] || "0");
     const totalPages = parseInt(response.headers["x-wp-totalpages"] || "1");
@@ -44,7 +41,7 @@ export const getProductsData = async (
     // Sort products by includeIds order if provided
     if (params.includeIds && params.includeIds.length > 0) {
       const idIndexMap = new Map(
-        params.includeIds.map((id, index) => [id, index]),
+        params.includeIds.map((id, index) => [id, index])
       );
 
       products = products.sort((a, b) => {
