@@ -44,7 +44,7 @@ const fetchAdapter = async (
     body: config.data ? JSON.stringify(config.data) : undefined,
     // Next.js cache options
     next: {
-      revalidate: 0,
+      revalidate: 60, // Revalidate every 60 seconds
       ...(config as any).next,
     },
   };
