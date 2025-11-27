@@ -47,9 +47,9 @@ export const brand1Config: BrandConfig = {
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #f25a6c;
-  --font-sans: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, system-ui, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', serif;
-  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --font-sans: 'Comic Sans MS', var(--font-comic-neue), cursive, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Georgia', serif;
+  --font-mono: var(--font-fira-code), 'Courier New', monospace;
   --radius: 0.75rem;
   --shadow-x: 0px;
   --shadow-y: 0.5rem;
@@ -102,9 +102,9 @@ export const brand1Config: BrandConfig = {
   --sidebar-accent-foreground: #f1f5f9;
   --sidebar-border: #1e293b;
   --sidebar-ring: #ec939d;
-  --font-sans: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, system-ui, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', serif;
-  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --font-sans: 'Comic Sans MS', var(--font-comic-neue), cursive, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Georgia', serif;
+  --font-mono: var(--font-fira-code), 'Courier New', monospace;
   --radius: 0.75rem;
   --shadow-x: 0px;
   --shadow-y: 0.5rem;

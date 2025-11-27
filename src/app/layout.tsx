@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { Fira_Code, Lora, Playfair_Display } from "next/font/google";
+import {
+  Comic_Neue,
+  Fira_Code,
+  Lora,
+  Playfair_Display,
+} from "next/font/google";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
@@ -28,6 +33,13 @@ const firaCode = Fira_Code({
   display: "swap",
 });
 
+const comicNeue = Comic_Neue({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-comic-neue",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,7 +51,7 @@ export default function RootLayout({
     <html
       lang="pl"
       suppressHydrationWarning
-      className={`${lora.variable} ${playfair.variable} ${firaCode.variable}`}
+      className={`${lora.variable} ${playfair.variable} ${firaCode.variable} ${comicNeue.variable}`}
     >
       <head>
         <link rel="dns-prefetch" href="https://tweakcn.com" />
