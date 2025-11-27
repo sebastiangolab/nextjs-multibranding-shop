@@ -42,7 +42,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
   };
 
   return (
-    <Link href={`/p/${slug}`}>
+    <Link href={`/p/${slug}`} prefetch={false}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0 cursor-pointer h-full">
         <div className="aspect-1/1 bg-muted relative overflow-hidden">
           {images && images[0] ? (

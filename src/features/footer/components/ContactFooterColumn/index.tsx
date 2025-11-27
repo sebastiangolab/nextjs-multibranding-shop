@@ -61,7 +61,7 @@ const ContactFooterColumn = ({
         ) : null}
 
         {/* Contact Form */}
-        <Link href={"/contact"} className={commonLinksStyles}>
+        <Link href={"/contact"} className={commonLinksStyles} prefetch={false}>
           <MessageSquare className="size-4" />
           Formularz kontaktowy
         </Link>

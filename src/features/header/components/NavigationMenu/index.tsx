@@ -34,7 +34,9 @@ export const NavigationMenu = ({ menuDataItems }: NavigationMenuProps) => {
                     <li>
                       {menuItem.childrens.map((item) => (
                         <NavigationMenuLink key={item.id} asChild>
-                          <Link href={item.url}>{item.title}</Link>
+                          <Link href={item.url} prefetch={false}>
+                            {item.title}
+                          </Link>
                         </NavigationMenuLink>
                       ))}
                     </li>
