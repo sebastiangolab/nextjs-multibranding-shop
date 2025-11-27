@@ -6,7 +6,6 @@ import {
   Playfair_Display,
 } from "next/font/google";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
-import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
 import { Providers } from "./providers";
@@ -71,8 +70,6 @@ export default function RootLayout({
       <body>
         <Providers>
           <div>{children}</div>
-
-          <Footer />
 
           <AddToCartModal />
           <Toaster />

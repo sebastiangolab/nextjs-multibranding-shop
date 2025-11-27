@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Footer } from "@/features/footer";
+import { Header } from "@/features/header";
 import {
   generateNotFoundPageMetadata,
   generateProductMetadata,
@@ -32,7 +34,13 @@ export async function generateMetadata({
 }
 
 const SingleProductPage = async ({ params }: SingleProductPageProps) => {
-  return <SingleProductView params={params} />;
+  return (
+    <>
+      <Header />
+      <SingleProductView params={params} />
+      <Footer />
+    </>
+  );
 };
 
 export default SingleProductPage;

@@ -1,5 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
+import { Footer } from "@/features/footer";
+import { Header } from "@/features/header";
 import { generateSearchMetadata } from "@/features/seo";
 import SearchView from "@views/search";
 
@@ -16,7 +18,13 @@ export async function generateMetadata({
 }
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-  return <SearchView searchParams={searchParams} />;
+  return (
+    <>
+      <Header />
+      <SearchView searchParams={searchParams} />
+      <Footer />
+    </>
+  );
 };
 
 export default SearchPage;

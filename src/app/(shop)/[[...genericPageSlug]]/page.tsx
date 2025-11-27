@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Footer } from "@/features/footer";
+import { Header } from "@/features/header";
 import {
   generateGenericPageMetadata,
   generateNotFoundPageMetadata,
@@ -24,7 +26,13 @@ export async function generateMetadata({
 }
 
 const GenericPage = async ({ params }: GenericPageViewProps) => {
-  return <GenericPageView params={params} />;
+  return (
+    <>
+      <Header />
+      <GenericPageView params={params} />
+      <Footer />
+    </>
+  );
 };
 
 export default GenericPage;

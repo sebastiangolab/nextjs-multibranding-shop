@@ -1,5 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
+import { Footer } from "@/features/footer";
+import { Header } from "@/features/header";
 import {
   generateCategoryMetadata,
   generateNotFoundPageMetadata,
@@ -30,7 +32,13 @@ export async function generateMetadata({
 }
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
-  return <CategoryView params={params} />;
+  return (
+    <>
+      <Header />
+      <CategoryView params={params} />
+      <Footer />
+    </>
+  );
 };
 
 export default CategoryPage;

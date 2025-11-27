@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { CheckoutStep } from "@/features/checkout";
+import { Footer } from "@/features/footer";
 import { CheckoutHeader } from "@/features/header";
 import CartView from "@/views/cart";
 
@@ -19,6 +20,8 @@ const CartPage = () => {
       <CheckoutHeader currentStep={CheckoutStep.CART} />
 
       <CartView />
+
+      <Footer />
     </>
   );
 };

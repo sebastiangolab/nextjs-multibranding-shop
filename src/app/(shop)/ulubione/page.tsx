@@ -1,6 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
+import { Footer } from "@/features/footer";
+import { Header } from "@/features/header";
 import FavoritesView from "@views/favorites";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,7 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const FavoritesPage = () => {
-  return <FavoritesView />;
+  return (
+    <>
+      <Header />
+      <FavoritesView />
+      <Footer />
+    </>
+  );
 };
 
 export default FavoritesPage;
