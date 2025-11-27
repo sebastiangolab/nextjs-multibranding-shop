@@ -67,7 +67,7 @@ const CheckoutHeaderClient = ({
                         step.id === currentStep
                           ? "bg-primary text-primary-foreground"
                           : step.id < currentStep
-                            ? "bg-green-600 text-white"
+                            ? "bg-primary/80 text-primary-foreground"
                             : "bg-muted text-muted-foreground"
                       }
                     `}
@@ -82,7 +82,7 @@ const CheckoutHeaderClient = ({
                         step.id === currentStep
                           ? "text-primary"
                           : step.id < currentStep
-                            ? "text-green-600"
+                            ? "text-primary/80"
                             : "text-muted-foreground"
                       }
                     `}
@@ -95,7 +95,7 @@ const CheckoutHeaderClient = ({
                   <div
                     className={`
                       w-8 lg:w-12 h-0.5 mx-2
-                      ${step.id < currentStep ? "bg-green-600" : "bg-muted"}
+                      ${step.id < currentStep ? "bg-primary/80" : "bg-muted"}
                     `}
                   />
                 )}
@@ -135,7 +135,7 @@ const CheckoutHeaderClient = ({
                     step.id === currentStep
                       ? "bg-primary"
                       : step.id < currentStep
-                        ? "bg-green-600"
+                        ? "bg-primary/80"
                         : "bg-muted"
                   }
                 `}
