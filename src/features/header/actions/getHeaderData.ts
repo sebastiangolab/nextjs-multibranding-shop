@@ -20,11 +20,6 @@ export const getHeaderData = async (): Promise<HeaderData | null> => {
       axiosWpCustomApi<MenuResponseData>("/menu/main_menu"),
     ]);
 
-    console.log("✅ Fetched header data successfully.", {
-      headerData,
-      menuData,
-    });
-
     const normalizedMenuDataItems = normalizeMenuItems(menuData.items);
 
     return {

@@ -42,9 +42,9 @@ const fetchAdapter = async (
     method: config.method?.toUpperCase() || "GET",
     headers: config.headers as Record<string, string>,
     body: config.data ? JSON.stringify(config.data) : undefined,
-    // Next.js cache options - default 60s revalidation
+    // Next.js cache options
     next: {
-      revalidate: 60,
+      revalidate: 0,
       ...(config as any).next,
     },
   };
