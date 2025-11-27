@@ -47,9 +47,9 @@ export const brand2Config: BrandConfig = {
   --sidebar-accent-foreground: #1c1e1d;
   --sidebar-border: #e0e0e0;
   --sidebar-ring: #aecf77;
-  --font-sans: 'Lora', serif;
-  --font-serif: 'Playfair Display', serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-sans: var(--font-lora), serif;
+  --font-serif: var(--font-playfair), serif;
+  --font-mono: var(--font-fira-code), monospace;
   --radius: 0.5rem;
   --shadow-x: 0px;
   --shadow-y: 4px;
@@ -102,9 +102,9 @@ export const brand2Config: BrandConfig = {
   --sidebar-accent-foreground: #e0e2df;
   --sidebar-border: #3a3c3a;
   --sidebar-ring: #d0e59d;
-  --font-sans: 'Lora', serif;
-  --font-serif: 'Playfair Display', serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-sans: var(--font-lora), serif;
+  --font-serif: var(--font-playfair), serif;
+  --font-mono: var(--font-fira-code), monospace;
   --radius: 0.5rem;
   --shadow-x: 0px;
   --shadow-y: 6px;

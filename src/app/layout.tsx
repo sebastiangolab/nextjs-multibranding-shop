@@ -1,10 +1,32 @@
 import { ReactNode } from "react";
+import { Fira_Code, Lora, Playfair_Display } from "next/font/google";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
 import { Footer } from "@features/footer";
 import AddToCartModal from "@shared/components/AddToCartModal";
 import { Toaster } from "@shared/shadcn/ui/sonner";
 import { Providers } from "./providers";
 import "@shared/styles/globals.css";
+
+const lora = Lora({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-lora",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-fira-code",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -14,19 +36,13 @@ export default function RootLayout({
   const { themeCss } = getBrandConfig();
 
   return (
-    <html lang="pl" suppressHydrationWarning>
+    <html
+      lang="pl"
+      suppressHydrationWarning
+      className={`${lora.variable} ${playfair.variable} ${firaCode.variable}`}
+    >
       <head>
         <link rel="dns-prefetch" href="https://tweakcn.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
 
         {/* Script that gives access to read the page in tweakcn.com editor */}
         <script
