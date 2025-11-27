@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     // Store ALL order data in metadata for webhook processing
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Amount should be in cents
+      amount: Math.round(amount * 100), // Amount should be in cents (integer only)
       currency: "pln",
       automatic_payment_methods: {
         enabled: true,

@@ -52,7 +52,7 @@ const fetchAdapter = async (
             ...(config as any).next,
           }
         : {
-            revalidate: 60, // Cache GET requests for 60 seconds
+            revalidate: 0, // Cache GET requests for 60 seconds
             ...(config as any).next,
           },
   };
