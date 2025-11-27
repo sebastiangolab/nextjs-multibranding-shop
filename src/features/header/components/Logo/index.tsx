@@ -26,7 +26,7 @@ const Logo = ({ logoData, logoDarkData }: LogoProps): ReactElement => {
         alt={alt}
         width={width}
         height={height}
-        className="max-h-11"
+        className="max-h-11 max-w[150px]"
         priority
         fetchPriority="high"
       />

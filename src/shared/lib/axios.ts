@@ -42,11 +42,19 @@ const fetchAdapter = async (
     method: config.method?.toUpperCase() || "GET",
     headers: config.headers as Record<string, string>,
     body: config.data ? JSON.stringify(config.data) : undefined,
-    // Next.js cache options
-    next: {
-      revalidate: 60, // Revalidate every 60 seconds
-      ...(config as any).next,
-    },
+    // Next.js cache options - disable cache for mutations (POST, PUT, DELETE)
+    next:
+      config.method?.toUpperCase() === "POST" ||
+      config.method?.toUpperCase() === "PUT" ||
+      config.method?.toUpperCase() === "DELETE"
+        ? {
+            revalidate: 0, // No cache for mutations
+            ...(config as any).next,
+          }
+        : {
+            revalidate: 60, // Cache GET requests for 60 seconds
+            ...(config as any).next,
+          },
   };
 
   try {

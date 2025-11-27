@@ -173,10 +173,27 @@ export async function createWoocommerceOrderByMetadata(
 
   // Create order in WooCommerce
   try {
+    console.log("📤 Creating WooCommerce order with data:", {
+      payment_method: orderData.payment_method,
+      transaction_id: orderData.transaction_id,
+      status: orderData.status,
+      set_paid: orderData.set_paid,
+      customer_email: orderData.billing.email,
+      total_items: orderData.line_items.length,
+      shipping_method: orderData.shipping_lines[0]?.method_title,
+    });
+
     const { data } = await axiosWCApi.post<WooCommerceOrderResponse>(
       "/orders",
       orderData,
     );
+
+    console.log("✅ WooCommerce API Response:", {
+      hasData: !!data,
+      orderId: data?.id,
+      status: data?.status,
+      total: data?.total,
+    });
 
     if (data && data.id) {
       // Update PaymentIntent metadata with order ID (for idempotency)
@@ -191,9 +208,16 @@ export async function createWoocommerceOrderByMetadata(
       } catch (error) {
         console.error("Failed to update PaymentIntent metadata:", error);
       }
+
+      return { success: true, orderId: data.id };
     }
 
-    return { success: true, orderId: data.id };
+    // If no data.id returned
+    console.error("❌ WooCommerce returned no order ID:", data);
+    return {
+      success: false,
+      error: "WooCommerce did not return an order ID",
+    };
   } catch (error) {
     console.error("❌ Failed to create WooCommerce order:", error);
 
