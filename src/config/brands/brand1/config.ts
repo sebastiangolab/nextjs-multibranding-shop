@@ -31,8 +31,8 @@ export const brand1Config: BrandConfig = {
       --accent-foreground: #0f172a;
       --destructive: #ef4444;
       --destructive-foreground: #fafafa;
-      --border: #e2e8f0;
-      --input: #e2e8f0;
+      --border: #787878;
+      --input: #787878;
       --ring: #f25a6c;
       --chart-1: #f25a6c;
       --chart-2: #ffe14d;
@@ -87,7 +87,7 @@ export const brand1Config: BrandConfig = {
       --destructive: #c10007;
       --destructive-foreground: #f1f5f9;
       --border: #404040;
-      --input: #1e293b;
+      --input: #7d7d7d;
       --ring: #ec939d;
       --chart-1: #ec939d;
       --chart-2: #e8d67d;
