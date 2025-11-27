@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  getProductsData,
   ProductData,
   ProductsGrid,
   ProductsGridSkeleton,
@@ -10,6 +9,7 @@ import {
 import BasicContainer from "@shared/components/BasicContainer";
 import { Button } from "@shared/shadcn/ui/button";
 import { useFavoritesStore } from "@shared/store/favoritesStore";
+import { getFavoriteProducts } from "./actions/getFavoriteProducts";
 
 const FavoritesView = () => {
   const { clearFavorites, productsIds } = useFavoritesStore();
@@ -29,9 +29,7 @@ const FavoritesView = () => {
         return;
       }
 
-      const productsData = await getProductsData({
-        includeIds: productsIds,
-      });
+      const productsData = await getFavoriteProducts(productsIds);
 
       setDisplayedProducts(productsData?.products || []);
       setIsLoading(false);
@@ -52,7 +50,7 @@ const FavoritesView = () => {
 
     // Filter products that are still in favorites
     setDisplayedProducts((prev) =>
-      prev.filter((product) => productsIds.includes(product.id))
+      prev.filter((product) => productsIds.includes(product.id)),
     );
   }, [productsIds, initialLoad, displayedProducts.length]);
 
