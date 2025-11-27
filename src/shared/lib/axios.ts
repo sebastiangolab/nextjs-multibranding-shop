@@ -125,5 +125,4 @@ export const axiosWCApi = axios.create({
 
 export const axiosStripeApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe`,
-  adapter: fetchAdapter,
 });
