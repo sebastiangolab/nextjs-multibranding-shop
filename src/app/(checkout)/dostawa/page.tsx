@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
-import { CheckoutStep } from "@/features/checkout";
+import { CheckoutGuard, CheckoutStep } from "@/features/checkout";
 import { CheckoutHeader } from "@/features/header";
 import DeliveryView from "@/views/delivery";
 
@@ -17,7 +17,10 @@ const DeliveryPage = () => {
   return (
     <>
       <CheckoutHeader currentStep={CheckoutStep.DELIVERY} />
-      <DeliveryView />
+
+      <CheckoutGuard requireCart={true}>
+        <DeliveryView />
+      </CheckoutGuard>
     </>
   );
 };

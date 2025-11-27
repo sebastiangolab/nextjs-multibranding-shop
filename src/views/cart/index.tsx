@@ -34,33 +34,41 @@ const CartView = () => {
     updateSummaryProductsPrice(productsTotalPrice);
   }, [productsTotalPrice, updateSummaryProductsPrice]);
 
+  const showLoader =
+    isProductsLoading || (!isProductsSuccess && isProductsFetching);
+  const showContent = isProductsSuccess && !showLoader;
+
   return (
     <BasicContainer className="py-8">
       <h1 className="text-3xl font-bold mb-8">Koszyk</h1>
 
+      {showLoader ? (
+        <div className="flex items-center justify-center min-h-[400px]">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        </div>
+      ) : null}
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 relative">
-          {isProductsFetching && !isProductsLoading && (
+          {isProductsFetching && showContent ? (
             <div className="absolute inset-0 bg-background/50 z-10 flex items-center justify-center rounded-lg">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
-          )}
-
-          {isProductsSuccess ? (
-            <CartTable products={productsWithQuantity} />
           ) : null}
+
+          {showContent ? <CartTable products={productsWithQuantity} /> : null}
         </div>
 
-        {isProductsSuccess ? (
-          <div>
+        <div>
+          {showContent ? (
             <CheckoutSummary
               step={CheckoutStep.CART}
               isLoading={isProductsLoading || isProductsFetching}
               buttonOnClick={handleProceedToDelivery}
               isDisabled={cartItemsQuantity === 0}
             />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </div>
     </BasicContainer>
   );

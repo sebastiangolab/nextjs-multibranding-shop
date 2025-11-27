@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
-import { CheckoutStep } from "@/features/checkout";
+import { CheckoutGuard, CheckoutStep } from "@/features/checkout";
 import { CheckoutHeader } from "@/features/header";
 import { PaymentView } from "@/views/payment";
 
@@ -17,7 +17,10 @@ export default function PaymentPage() {
   return (
     <>
       <CheckoutHeader currentStep={CheckoutStep.PAYMENT} />
-      <PaymentView />
+
+      <CheckoutGuard requireCart={true} requireDeliveryData={true}>
+        <PaymentView />
+      </CheckoutGuard>
     </>
   );
 }

@@ -5,6 +5,7 @@
 // Components ----------------------------------------------
 
 export { default as CheckoutSummary } from "./components/CheckoutSummary";
+export { CheckoutGuard } from "./components/CheckoutGuard";
 
 // Hooks ----------------------------------------------
 
