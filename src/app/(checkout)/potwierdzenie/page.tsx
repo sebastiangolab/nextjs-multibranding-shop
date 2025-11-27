@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getBrandConfig } from "@/config/brands/getBrandConfig";
-import { CheckoutGuard } from "@/features/checkout";
 import { Header } from "@/features/header";
 import { ConfirmationView } from "@/views/confirmation";
 
@@ -18,13 +17,7 @@ export default function ConfirmationPage() {
     <>
       <Header />
 
-      <CheckoutGuard
-        requireCart={true}
-        requireDeliveryData={true}
-        requirePaymentData={true}
-      >
-        <ConfirmationView />
-      </CheckoutGuard>
+      <ConfirmationView />
     </>
   );
 }
