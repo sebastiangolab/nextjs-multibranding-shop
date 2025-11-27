@@ -1,6 +1,6 @@
 "use server";
 
-import { axiosWCApi } from "@/shared/lib/axios";
+import { axiosStandardWCApi } from "@/shared/lib/axios";
 
 interface UpdateOrderStatusResult {
   success: boolean;
@@ -12,7 +12,7 @@ export async function updateWooCommerceOrderStatus(
   status: "pending" | "processing" | "on-hold" | "completed" | "failed",
 ): Promise<UpdateOrderStatusResult> {
   try {
-    await axiosWCApi.put(`/orders/${orderId}`, {
+    await axiosStandardWCApi.put(`/orders/${orderId}`, {
       status,
     });
 

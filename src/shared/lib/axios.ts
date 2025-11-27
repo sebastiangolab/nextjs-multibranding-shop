@@ -131,6 +131,16 @@ export const axiosWCApi = axios.create({
   adapter: fetchAdapter,
 });
 
+// Server-side only, secret keys included - without fetch adapter
+export const axiosStandardWCApi = axios.create({
+  baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wc/v3`,
+  params: {
+    consumer_key: process.env.WC_CONSUMER_KEY,
+    consumer_secret: process.env.WC_SECRET_KEY,
+  },
+});
+
+
 export const axiosStripeApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe`,
 });

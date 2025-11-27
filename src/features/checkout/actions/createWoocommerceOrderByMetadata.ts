@@ -1,7 +1,7 @@
 "use server";
 
 import Stripe from "stripe";
-import { axiosWCApi } from "@/shared/lib/axios";
+import { axiosStandardWCApi } from "@/shared/lib/axios";
 import { updateWooCommerceOrderStatus } from "./updateWooCommerceOrderStatus";
 
 interface OrderLineItem {
@@ -173,7 +173,7 @@ export async function createWoocommerceOrderByMetadata(
 
   // Create order in WooCommerce
   try {
-    const response = await axiosWCApi.post<WooCommerceOrderResponse>(
+    const response = await axiosStandardWCApi.post<WooCommerceOrderResponse>(
       "/orders",
       orderData,
     );
