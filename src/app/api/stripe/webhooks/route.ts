@@ -2,9 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createWoocommerceOrderByMetadata } from "@/features/checkout";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+// Validate environment variables
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error("STRIPE_SECRET_KEY is not defined");
+}
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+if (!process.env.STRIPE_WEBHOOK_SECRET) {
+  throw new Error("STRIPE_WEBHOOK_SECRET is not defined");
+}
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -37,7 +45,11 @@ export async function POST(req: NextRequest) {
             `❌ Failed to create order for payment ${paymentIntent.id}:`,
             result.error,
           );
-          break;
+
+          return NextResponse.json(
+            { error: "Failed to create order", details: result.error },
+            { status: 500 },
+          );
         }
 
         console.log(
@@ -46,7 +58,11 @@ export async function POST(req: NextRequest) {
         break;
       } catch (error) {
         console.error("Error processing succeeded payment:", error);
-        break;
+
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 },
+        );
       }
     }
 
@@ -62,13 +78,28 @@ export async function POST(req: NextRequest) {
           false, // Payment not confirmed
         );
 
-        if (result.success) {
-          console.log(
-            `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`,
+        if (!result.success) {
+          console.error(
+            `❌ Failed to create failed order for payment ${failedPayment.id}:`,
+            result.error,
+          );
+
+          return NextResponse.json(
+            { error: "Failed to create order", details: result.error },
+            { status: 500 },
           );
         }
+
+        console.log(
+          `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`,
+        );
       } catch (error) {
         console.error("Error processing failed payment:", error);
+
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 },
+        );
       }
 
       break;
@@ -86,13 +117,28 @@ export async function POST(req: NextRequest) {
           false, // Payment not yet confirmed
         );
 
-        if (result.success) {
-          console.log(
-            `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`,
+        if (!result.success) {
+          console.error(
+            `❌ Failed to create on-hold order for payment ${processingPayment.id}:`,
+            result.error,
+          );
+
+          return NextResponse.json(
+            { error: "Failed to create order", details: result.error },
+            { status: 500 },
           );
         }
+
+        console.log(
+          `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`,
+        );
       } catch (error) {
         console.error("Error processing payment in progress:", error);
+
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 },
+        );
       }
       break;
     }

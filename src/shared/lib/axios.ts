@@ -52,7 +52,7 @@ const fetchAdapter = async (
             ...(config as any).next,
           }
         : {
-            revalidate: 0, // Cache GET requests for 60 seconds
+            revalidate: 60, // Cache GET requests for 60 seconds
             ...(config as any).next,
           },
   };
@@ -112,7 +112,7 @@ const fetchAdapter = async (
 
 export const axiosWpAcfApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2`,
-  adapter: fetchAdapter,
+  // adapter: fetchAdapter,
 });
 
 export const axiosWpCustomApi = axios.create({
@@ -121,12 +121,12 @@ export const axiosWpCustomApi = axios.create({
     acf_format: "standard",
     _embed: true,
   },
-  adapter: fetchAdapter,
+  // adapter: fetchAdapter,
 });
 
 export const axiosWcCustomApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/custom/v1`,
-  adapter: fetchAdapter,
+  // adapter: fetchAdapter,
 });
 
 // Server-side only, secret keys included
@@ -136,7 +136,7 @@ export const axiosWCApi = axios.create({
     consumer_key: process.env.WC_CONSUMER_KEY,
     consumer_secret: process.env.WC_SECRET_KEY,
   },
-  adapter: fetchAdapter,
+  // adapter: fetchAdapter,
 });
 
 export const axiosStripeApi = axios.create({
