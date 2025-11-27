@@ -126,4 +126,4 @@ See [ENV_CONFIGURATION_GUIDE.md](./ENV_CONFIGURATION_GUIDE.md) and [QUICK_START.
 
 ## Contact
 
-Sebastian Gołąb - sebagolab97@gmail.com 
+Sebastian Gołąb - sebagolab97@gmail.com

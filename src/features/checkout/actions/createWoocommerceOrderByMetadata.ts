@@ -69,30 +69,30 @@ export async function createWoocommerceOrderByMetadata(
   stripe: Stripe,
   paymentIntent: Stripe.PaymentIntent,
   orderStatus: "processing" | "pending" | "on-hold" | "failed" | "completed",
-  setPaid: boolean
+  setPaid: boolean,
 ): Promise<CreateOrderResult> {
   const metadata = paymentIntent.metadata;
 
   // Check if already processed - update status instead of creating new order
   if (metadata.order_processed === "true" && metadata.woo_order_id) {
     console.log(
-      `⚠️ Order already exists: ${metadata.woo_order_id}, updating status to ${orderStatus}`
+      `⚠️ Order already exists: ${metadata.woo_order_id}, updating status to ${orderStatus}`,
     );
 
     // Update existing order status
     const updateResult = await updateWooCommerceOrderStatus(
       parseInt(metadata.woo_order_id),
-      orderStatus
+      orderStatus,
     );
 
     if (updateResult.success) {
       console.log(
-        `✅ Order ${metadata.woo_order_id} status updated to ${orderStatus}`
+        `✅ Order ${metadata.woo_order_id} status updated to ${orderStatus}`,
       );
     } else {
       console.error(
         `❌ Failed to update order ${metadata.woo_order_id}:`,
-        updateResult.error
+        updateResult.error,
       );
     }
 
@@ -175,7 +175,7 @@ export async function createWoocommerceOrderByMetadata(
   try {
     const { data } = await axiosWCApi.post<WooCommerceOrderResponse>(
       "/orders",
-      orderData
+      orderData,
     );
 
     if (data && data.id) {

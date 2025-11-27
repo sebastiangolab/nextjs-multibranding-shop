@@ -13,7 +13,7 @@ interface NextFetchRequestConfig {
 
 // Custom fetch adapter for Next.js caching support
 const fetchAdapter = async (
-  config: AxiosRequestConfig
+  config: AxiosRequestConfig,
 ): Promise<AxiosResponse> => {
   // Build full URL with baseURL and path
   const baseURL = (config.baseURL || "").replace(/\/$/, ""); // Remove trailing slash
@@ -59,7 +59,7 @@ const fetchAdapter = async (
 
       // Throw error similar to axios behavior
       const error: any = new Error(
-        `Request failed with status ${response.status}`
+        `Request failed with status ${response.status}`,
       );
 
       error.response = {

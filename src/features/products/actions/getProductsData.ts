@@ -19,7 +19,7 @@ interface ProductsDataActionResult {
 const DEFAULT_PRODUCTS_COUNT_PER_PAGE = 24;
 
 export const getProductsData = async (
-  params: ProductsRequestParams
+  params: ProductsRequestParams,
 ): Promise<ProductsDataActionResult | null> => {
   try {
     const response = await axiosWCApi<ProductData[]>("/products", {
@@ -41,7 +41,7 @@ export const getProductsData = async (
     // Sort products by includeIds order if provided
     if (params.includeIds && params.includeIds.length > 0) {
       const idIndexMap = new Map(
-        params.includeIds.map((id, index) => [id, index])
+        params.includeIds.map((id, index) => [id, index]),
       );
 
       products = products.sort((a, b) => {

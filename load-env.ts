@@ -24,12 +24,12 @@ export function loadBrandEnv() {
   if (isServerless) {
     // In serverless environments, env vars are injected by the platform
     console.log(
-      "✅ [SERVERLESS MODE] Using platform-injected environment variables"
+      "✅ [SERVERLESS MODE] Using platform-injected environment variables",
     );
 
     if (!process.env.NEXT_PUBLIC_BRAND) {
       console.warn(
-        "⚠️  Warning: NEXT_PUBLIC_BRAND not set in serverless environment"
+        "⚠️  Warning: NEXT_PUBLIC_BRAND not set in serverless environment",
       );
     }
 

@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
         }
 
         console.log(
-          `✅ Order ${result.orderId} created successfully for payment ${paymentIntent.id}`
+          `✅ Order ${result.orderId} created successfully for payment ${paymentIntent.id}`,
         );
         break;
       } catch (error) {
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
         if (result.success) {
           console.log(
-            `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`
+            `❌ Failed order ${result.orderId} created for payment ${failedPayment.id}`,
           );
         }
       } catch (error) {
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
 
         if (result.success) {
           console.log(
-            `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`
+            `⏳ Order ${result.orderId} created (on-hold) for payment ${processingPayment.id}`,
           );
         }
       } catch (error) {

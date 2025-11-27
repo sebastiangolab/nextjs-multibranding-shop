@@ -7,7 +7,7 @@ interface FavoriteProductsResult {
 }
 
 export const getFavoriteProducts = async (
-  productIds: number[]
+  productIds: number[],
 ): Promise<FavoriteProductsResult | null> => {
   if (!productIds || productIds.length === 0) {
     return { products: [] };
