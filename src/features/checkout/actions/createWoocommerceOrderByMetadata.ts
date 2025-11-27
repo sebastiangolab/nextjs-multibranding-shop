@@ -173,29 +173,10 @@ export async function createWoocommerceOrderByMetadata(
 
   // Create order in WooCommerce
   try {
-    console.log("📤 Creating WooCommerce order with data:", {
-      payment_method: orderData.payment_method,
-      transaction_id: orderData.transaction_id,
-      status: orderData.status,
-      set_paid: orderData.set_paid,
-      customer_email: orderData.billing.email,
-      total_items: orderData.line_items.length,
-      shipping_method: orderData.shipping_lines[0]?.method_title,
-    });
-
     const response = await axiosWCApi.post<WooCommerceOrderResponse>(
       "/orders",
       orderData,
     );
-
-    console.log("✅ WooCommerce API Full Response:", {
-      hasData: !!response.data,
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-      dataKeys: response.data ? Object.keys(response.data) : [],
-      fullData: JSON.stringify(response.data, null, 2),
-    });
 
     const { data } = response;
 

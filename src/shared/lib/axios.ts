@@ -60,14 +60,6 @@ const fetchAdapter = async (
   try {
     const response = await fetch(fullUrl, fetchOptions);
 
-    // Log response for debugging
-    console.log("📡 Fetch response:", {
-      url: fullUrl,
-      status: response.status,
-      ok: response.ok,
-      contentType: response.headers.get("content-type"),
-    });
-
     // Check if response is ok (status in range 200-299)
     if (!response.ok) {
       const errorData = await response.text();
@@ -112,7 +104,7 @@ const fetchAdapter = async (
 
 export const axiosWpAcfApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2`,
-  // adapter: fetchAdapter,
+  adapter: fetchAdapter,
 });
 
 export const axiosWpCustomApi = axios.create({
@@ -121,12 +113,12 @@ export const axiosWpCustomApi = axios.create({
     acf_format: "standard",
     _embed: true,
   },
-  // adapter: fetchAdapter,
+  adapter: fetchAdapter,
 });
 
 export const axiosWcCustomApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/custom/v1`,
-  // adapter: fetchAdapter,
+  adapter: fetchAdapter,
 });
 
 // Server-side only, secret keys included
@@ -136,7 +128,7 @@ export const axiosWCApi = axios.create({
     consumer_key: process.env.WC_CONSUMER_KEY,
     consumer_secret: process.env.WC_SECRET_KEY,
   },
-  // adapter: fetchAdapter,
+  adapter: fetchAdapter,
 });
 
 export const axiosStripeApi = axios.create({

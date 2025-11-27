@@ -15,15 +15,11 @@ interface CategoryPageProps {
 const CategoryView = async ({ params }: CategoryPageProps) => {
   const { categorySlug } = await params;
 
-  console.log("Category slug:", categorySlug);
-
   if (!categorySlug || categorySlug.length === 0) {
     notFound();
   }
 
   const categoryData = await getProductsCategoryData(categorySlug);
-
-  console.log("Category data:", categoryData);
 
   if (!categoryData) {
     notFound();
